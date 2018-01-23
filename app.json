@@ -1,0 +1,48 @@
+{
+  "pages":[
+    "pages/zj/zj",
+    "pages/zj/arc_context/index",
+    "pages/home/home",
+    "pages/logs/logs",
+    "pages/dz/dz",
+    "pages/me/me",
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#3c9ae8",
+    "navigationBarTitleText": "职工培训平台",
+    "navigationBarTextStyle":"#fffff"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#d30b0b",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/nav_home_pri.png",
+        "iconPath": "images/nav_home.png",
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/nav_dz_pri.png",
+        "iconPath": "images/nav_dz.png",
+        "pagePath": "pages/dz/dz",
+        "text": "党政"
+      },
+      {
+        "selectedIconPath": "images/nav_zj_pri.png",
+        "iconPath": "images/nav_zj.png",
+        "pagePath": "pages/zj/zj",
+        "text": "职教"
+      },
+      {
+        "selectedIconPath": "images/nav_me_pri.png",
+        "iconPath": "images/nav_me.png",
+        "pagePath": "pages/me/me",
+        "text": "我"
+      }
+    ]
+  }
+}

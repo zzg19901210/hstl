@@ -1,0 +1,22 @@
+page{
+    background: #ebebeb;
+}
+.header{
+    width:100%;
+    height:200px;
+    background: #3c9ae8;
+    color:#ffffff;
+    margin-bottom: 25rpx;
+}
+.header .content{
+    padding-top:30px;
+    text-align: center;
+}
+.header .content image{
+    width:80px;
+    height:80px;
+    border-radius: 80px;
+}
+.header .content .nickname{
+    padding-top:15px;
+}

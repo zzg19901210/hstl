@@ -1,0 +1,46 @@
+<!-- <view class="header" hidden="{{hideHeader}}">
+  <view>下拉刷新中……</view>
+  <view>{{refreshTime}}</view>
+</view> -->
+<view>
+
+  <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+    <block wx:for="{{cat_list}}">
+      <view class="tab-item{{index==currentTab?' active':''}}" data-current="{{index}}" bindtap="swichNav">{{item.title}}</view>
+    </block>
+    <!-- <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">职场</view>
+        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">育儿</view>
+        <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">纠纷</view>
+        <view class="tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="swichNav">青葱</view>
+        <view class="tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="swichNav">全部</view>
+        <view class="tab-item {{currentTab==7?'active':''}}" data-current="7" bindtap="swichNav">其他</view>  -->
+  </scroll-view>
+  <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
+      <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
+        <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
+        <navigator url="/pages/zj/arc_context/index?arc_title={{arch.title}}" >
+          <view class="item-ans">
+            <view class="avatar" >
+              <image class="img" src="http://lr-tyss.oss-cn-beijing.aliyuncs.com/images/20170926103435poZx_fymesmq8261958.jpg.jpg?Expires=1821753276&OSSAccessKeyId=LTAIFbqUjkQDxNhF&Signature=u1qpy2VHtd5zKvOVvueErDtNv6k%3D"></image>
+            </view>
+            <view class="expertInfo">
+              <view class="name">{{arch.title}}</view>
+              <view class="tag">{{arch.writer}}  {{arch.click}}学习</view>
+            </view>
+          </view>
+          </navigator>
+        </block>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<!-- <view class="bottom" hidden="{{hideBottom}}">
+  <view>{{loadMoreData}}</view>
+  <view>{{refreshTime}}</view>
+</view> -->

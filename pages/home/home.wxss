@@ -1,0 +1,33 @@
+
+.weui-grids {
+  position: relative;
+  overflow: hidden;
+  margin-top: 25rpx;
+}
+
+.weui-grid:active {
+  background-color: #ECECEC;
+}
+.weui-grid__icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+}
+.weui-grid__icon image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.weui-grid__icon + .weui-grid__label {
+  margin-top: 15px;
+}
+.weui-grid__label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color: #000000;
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

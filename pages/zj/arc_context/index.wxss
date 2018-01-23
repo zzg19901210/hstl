@@ -1,0 +1,12 @@
+@import "/plus/wxParse/wxParse.wxss";
+
+.art_title{
+  width:100%;
+  text-align: center;
+  margin-bottom:15rpx; 
+  margin-top: 15rpx;
+}
+.art_context{
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
