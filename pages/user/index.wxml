@@ -4,3 +4,49 @@
     <view class="nickname">{{userInfo.nickName}}</view>
   </view>
 </view>
+
+
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_input weui-cell_vcode">
+    <view class="weui-cell__hd">
+      <view class="weui-label">手机号</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" placeholder="请输入手机号" type="number" bindinput='phoneinput' maxlength="11" />
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+    <view class="weui-cell__hd">
+      <view class="weui-label">验证码</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" type="number" placeholder="请输入验证码" bindinput="codeinput" maxlength="6" />
+    </view>
+    <view class="weui-cell__ft">
+      <view class='weui-vcode-btn' bindtap="changeCode" disabled="{{codeDis}}">
+        <text hidden="{{flag != true || phoneCode == '获取验证码'}}">重发</text>{{phoneCode}}
+        <text hidden="{{phoneCode == '获取验证码'}}">S</text>
+      </view>
+    </view>
+  </view>
+  <view class="login-top1">
+
+  </view>
+
+</view>
+
+<checkbox-group bindchange="bindAgreeChange">
+  <label class="weui-agree" for="weuiAgree">
+    <view class="weui-agree__text">
+      <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+      <view class="weui-agree__checkbox-icon">
+        <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+      </view>
+      阅读并同意
+      <navigator url="" class="weui-agree__link">《相关条款》</navigator>
+    </view>
+  </label>
+</checkbox-group>
+<view class="weui-btn-area">
+  <button class="weui-btn" type="primary" bindtap="btnBindPhone">绑定信息</button>
+</view>

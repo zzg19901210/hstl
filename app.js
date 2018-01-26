@@ -2,14 +2,36 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log("code:"+res.code)
+        var that=this;
+        wx.request({
+          url: this.globalData.serverUrl+'/app/wechartSns/login.json',
+          header: {
+            'context-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+          },
+          data: {
+            code:res.code
+          },
+          success: function (res) {
+            that.globalData.myGlobalUserId =1;
+          },
+          fail:function(res){
+            wx.showToast({
+              title: '获取用户失败啦',
+              icon:'none'
+            })
+          }
+        });
+
       }
     })
     // 获取用户信息
@@ -35,9 +57,14 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl:"https://www.beijiangci.cn/hstl"
+    // serverUrl:"https://www.beijiangci.cn/hstl",
+    serverUrl: "https://ccc.hstl.isport.nm.cn",
+    myGlobalUserId:null
   }
-  
+ 
 })
+
+
+
 
 
