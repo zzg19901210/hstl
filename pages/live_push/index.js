@@ -19,7 +19,7 @@ Page({
     whiteness: 3.0,
     backgroundMute: true,
     hide: false,
-    debug: true
+    debug: false
 
   },
 
@@ -234,7 +234,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    this.setData({
+      title: options.title,
+      pushUrl: options.pushUrl +"?vhost=push.isport.nm.cn"
+    })
+    wx.setNavigationBarTitle({
+      title: options.title,
+      success: function (res) {
+        // success
+      }
+    });
 
   },
 

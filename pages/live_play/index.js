@@ -9,7 +9,7 @@ Page({
     videoContext: {},
 
     fullScreen: false,
-    playUrl: "http://push.isport.nm.cn/imfc/test.m3u8",
+    playUrl: "",
     orientation: "vertical",
     objectFit: "contain",
     muted: false,
@@ -169,7 +169,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    this.setData({
+      title: options.title,
+      playUrl: "rtmp://"+options.domain_name+"/"+options.app_name_stream_name
+    })
+    wx.setNavigationBarTitle({
+      title: options.title,
+      success: function (res) {
+        // success
+      }
+    });
 
   },
 

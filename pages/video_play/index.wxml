@@ -1,0 +1,28 @@
+<!--pages/video_play/index.wxml-->
+<video class="video" id="myVideo" src="{{video_url}}" autoplay="true"
+  danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+<view class='context'>
+  <view class='title'>
+    {{title}}
+  </view>
+  <view class='user_info'>
+    <image src="http://img1.touxiang.cn/uploads/20130730/30-062138_355.jpg"></image>
+    <text>{{nickname}}</text>
+  </view>
+  <view class='hr'>
+  </view>
+  <view class='list_title'>
+    <view class='icon'></view>
+    <text>相关阅读</text>
+  </view>
+  <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+    <view class='list_context'>
+      <view class='text_context'>
+        <text class='c_title'>{{cont.title}}</text>
+        <text class='c_context'>{{cont.desc}}</text>
+      </view>
+      <image src="{{cont.ali_picurl}}"></image>
+    </view>
+     <view class='hr'></view>
+  </block>
+</view>

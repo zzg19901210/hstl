@@ -1,6 +1,10 @@
 {
   "pages":[
-    "pages/play/index",
+    "pages/user/index",
+    "pages/live_list/index",
+    "pages/video_list/index",
+    "pages/video_play/index",
+    "pages/live_play/index",
     "pages/live_push/index",
     "pages/zj/zj",
     "pages/zj/arc_context/index",
@@ -18,7 +22,7 @@
   },
   "tabBar": {
     "color": "#a9b7b7",
-    "selectedColor": "#d30b0b",
+    "selectedColor": "#3c9ae8",
     "borderStyle": "white",
     "list": [
       {

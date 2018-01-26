@@ -3,7 +3,7 @@
 {
   width: 60rpx; 
   height: 60rpx; 
-  margin-left:calc(100% / 10 - 30rpx); 
-  margin-right:calc(100% / 10 - 30rpx);
+  margin-left:calc(100% / 8 - 30rpx); 
+  margin-right:calc(100% / 8 - 30rpx);
   display:inline-block;
 }

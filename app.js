@@ -37,4 +37,7 @@ App({
     userInfo: null,
     serverUrl:"https://www.beijiangci.cn/hstl"
   }
+  
 })
+
+

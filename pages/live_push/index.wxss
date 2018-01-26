@@ -4,7 +4,11 @@
 {
   width: 60rpx; 
   height: 60rpx; 
-  margin-left:calc(100% / 16 - 30rpx); 
-  margin-right:calc(100% / 16 - 30rpx);
+  margin-left:calc(100% / 11 - 30rpx); 
+  margin-right:calc(100% / 11 - 30rpx);
   display:inline-block;
+}
+.play{
+  height: 120rpx;
+  width: 120rpx;
 }
