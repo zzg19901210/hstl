@@ -19,8 +19,9 @@
     <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
       <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
         <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-          <navigator url="/pages/video_play/index?title={{arch.title}}&video_url={{arch.palyUrl}}">
-            <view class='item'>
+           <navigator url="/pages/video_play/index?title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}"> 
+            <!-- <view class='item' bindtap='btnItem' bindtap='btnItem' data-arch='{{arch}}'> -->
+              <view class='item'>
               <view class="item-video" style='background-image:url({{arch.aliImageUrl}})'>
                 <view class='bg' style='background-image:url(../../images/bg.png)'>
                   <text class='title'>{{arch.title}}</text>
@@ -30,12 +31,12 @@
                 </view>
               </view>
                <view class='fotter'>
-                  <image src='http://lr-tyss.oss-cn-beijing.aliyuncs.com/images/20170926103435poZx_fymesmq8261958.jpg.jpg?Expires=1821753276&OSSAccessKeyId=LTAIFbqUjkQDxNhF&Signature=u1qpy2VHtd5zKvOVvueErDtNv6k%3D'></image>
-                  <text class='nickname'>{{arch.source}}</text>
+                  <image src='{{arch.headPortrait}}'></image>
+                  <text class='nickname'>{{arch.nickname}}</text>
                   <text class='click'>{{arch.click}}次播放</text>
                 </view>
             </view>
-          </navigator>
+           </navigator> 
         </block>
       </scroll-view>
     </swiper-item>

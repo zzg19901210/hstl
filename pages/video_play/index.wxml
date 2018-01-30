@@ -6,7 +6,7 @@
     {{title}}
   </view>
   <view class='user_info'>
-    <image src="http://img1.touxiang.cn/uploads/20130730/30-062138_355.jpg"></image>
+    <image src="{{headPortrait}}"  binderror='errorFunction'></image>
     <text>{{nickname}}</text>
   </view>
   <view class='hr'>

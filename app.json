@@ -1,25 +1,25 @@
 {
-  "pages":[
-    "pages/video_list/index",
+  "pages": [
     "pages/zj/zj",
-    "pages/live_list/index",
+    "pages/video_list/index",
     "pages/user/index",
+    "pages/home/home",
+    "pages/live_list/index",
     "pages/404/index",
     "pages/video_play/index",
     "pages/live_play/index",
     "pages/live_push/index",
     "pages/zj/arc_context/index",
-    "pages/home/home",
     "pages/logs/logs",
     "pages/dz/dz",
     "pages/me/me",
     "pages/index/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3c9ae8",
     "navigationBarTitleText": "首页",
-    "navigationBarTextStyle":"#fffff"
+    "navigationBarTextStyle": "#fffff"
   },
   "tabBar": {
     "color": "#a9b7b7",

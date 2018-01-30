@@ -1,8 +1,12 @@
 
 const app = getApp();
+const url = app.globalData.serverUrl + "/categoryInfoAction/getAllOrdinaryCat.json";
+const learnUrl = app.globalData.serverUrl +"archivesUserAction/learn.json";
 var WxParse = require('../../../plus/wxParse/wxParse.js');
 Page({
   data: {
+    aId:'0',
+    article:''
   },
   onLoad: function (options) {
     var that = this;
@@ -18,12 +22,44 @@ Page({
     /**
      * html解析示例
      */
-    var article = '<p>博阿斯:国安已有施密特烙印 会有针对性布置</p><p>来源:新浪彩票发布时间:2017-9-22 9:10:37栏目:赛事信息标签:</p><p><span class="remind">摘要:</span><br/>中超第26轮今晚将率先打响两场比赛，分别是上海上港客场对阵北京国安，广州恒大客场出战重庆力帆。 <br/><span class="remind">内容:</span><br/></p><p><img src="http://n.sinaimg.cn/sports/transform/20170921/OEF_-fymfcih2024044.jpg" alt="博阿斯出席赛前发布会"/><span class="img_descr">博阿斯出席赛前发布会</span></p><p>　　中超第26轮今晚将率先打响两场比赛，分别是上海上港客场对阵北京国安，广州恒大客场出战重庆力帆。由于上轮联赛结束后，恒大的领先优势缩小到了6分，在还剩5场比赛的情况下，似乎又让第二名上港队看到了一丝希望。</p><p>　　21日下午，上港队乘坐高铁抵达北京，并且直接赶到国安主场工人体育场进行了踩场训练。此前，主帅博阿斯曾表示由于下周中有亚冠半决赛首回合的比赛，这次的北京之行可能会有一定程度的轮换，这次球队的五名外援包括卡瓦略也全都随队抵达了北京。但在联赛积分榜上又追近恒大的情况下，上港队还会这么做吗？</p><p>　　对此主教练博阿斯表示球队虽然困难很大，还是有机会冲击榜首，而且下周亚冠前球员们有充足的时间恢复和准备，体能完全不是问题。但有意思的是，博阿斯还是透露了球队存在轮换的可能性，“关于阵容安排，明天再看看，可能会和上一场有所不同，有必要的话，我们还是会做一些改变。”</p><p>　　另外，博阿斯大大夸赞了一番对手的新帅施密特，“对方更换了主教练，发生了很多改变。施密特是非常非常优秀的教练，他的战术打法和理念是要求前场逼抢，踢攻势足球，他在勒沃库森和萨尔斯堡红牛的时候也是这样。他的球队进攻理念非常明显，而且反击非常有威胁，北京国安已经打上了他特有的烙印。我们当然知道施密特的这些特点，所以会有针对性布置。”</p><p>　　主场作战的北京国安在换帅后打出一波连胜之后，最近也陷入了低迷。上一个主场4：4被最后一名的延边富德逼平，上一轮客场又是1：2不敌阵容不整的广州富力，北京国安新帅施密特上任以来遇到了最困难的阶段。</p><p>　　赛前，施密特希望球队能够通过这场主场和上港队的比赛迅速走出低谷，“很高兴回到主场，上一轮在广州的比赛我们所有人都不满意。球队表现得不是很团结，战术执行力缺乏。本周，我们在主场遇上了强大的对手，很期待这场比赛，希望球队拿出比之前要更好的表现。”</p><p>　　对于上港队的超强攻击力，施密特还是十分忌惮的，“整个联赛中上港和恒大是非常突出的。他们中前场个人能力很强，拥有胡尔克这样的球员。想要完全做好防守，就必须在战术执行力方面加强配合。我们整个团队必须要拿出最好的表现，才能取得胜利。这一周，球队也是一支在围绕团队配合展开积极的备战。每个队员在防守过程中，都要承担起自己那一部分的责任，充分完成好自己的工作，打出一个整体。”</p><p class="author"><span class="remind">作者:</span>58‘，11-科雷亚</p>';
+    
 
-
-    WxParse.wxParse('article', 'html', article, that, 5);
-
+  
   }
-
-
 })
+//加载文章详情页面
+var loadArch=function(that){
+  wx.request({
+    url: url,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      aId:that.aId
+    },
+    success: function (res) {
+      WxParse.wxParse('article', 'html', article, that, 5);
+
+    }
+  });
+}
+//用户记录
+var learnUser=function(that){
+  wx.request({
+    url: learnUrl,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      aId: that.data.aId,
+      operationType: '1',
+      source: '3',
+      userId: app.globalData.myGlobalUserId,
+    },
+    success: function (res) {
+
+    }
+  });
+}

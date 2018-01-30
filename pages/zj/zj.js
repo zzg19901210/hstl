@@ -100,6 +100,9 @@ Page({
     page = 1;
     loadContxt(this, this.data.cat_list[this.data.currentTab].id, page);
     console.log("上拉加载");
+  },
+  errorFunction:function(event){
+    console.log("进入小程序详情页");
   }
 
 })

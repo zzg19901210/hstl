@@ -22,7 +22,17 @@ App({
             code:res.code
           },
           success: function (res) {
-            that.globalData.myGlobalUserId =1;
+          
+            // if("2"==res.data.msg){
+            //   that.globalData.myGlobalUserId = 0;
+            //   that.globalData.wechar_user=res.data.obj;
+            //   wx.navigateTo({
+            //     url: '../../pages/user/index'
+            //   });
+            // }else{
+            //   that.globalData.myGlobalUserId = res.data.obj.id;
+            // }
+            
           },
           fail:function(res){
             wx.showToast({
@@ -57,9 +67,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    // serverUrl:"https://www.beijiangci.cn/hstl",
-    serverUrl: "https://ccc.hstl.isport.nm.cn",
-    myGlobalUserId:null
+    serverUrl:"https://www.beijiangci.cn/hstl",
+    myGlobalUserId:null,
+    wecharUser: { openid: '未获取上openid',session_key: '323232', unionid:'1232132'}
+
   }
  
 })

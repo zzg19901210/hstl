@@ -1,20 +1,21 @@
 // pages/user/index.js
 const app = getApp()
-const sendCode = app.globalData.serverUrl + "/studyLiveInfoAction/getAllLiveInfo.json";
+const sendCode = app.globalData.serverUrl + "/smsManagerAction/sendRegisterSMSCode.json";
 const bindUser = app.globalData.serverUrl + "/studyLiveInfoAction/getAllLiveInfo.json";
-var validateUrl="";
+var validateUrl = "";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isAgree:false,
+    isAgree: false,
     phoneCode: "获取验证码",
     telephone: "",
     codePhone: "",
-    flag : false,
-    codeDis: false
+    flag: false,
+    codeDis: false,
+    serverCode: ""
   },
 
   /**
@@ -47,15 +48,14 @@ Page({
         }
       })
     }
-  },
-  changeCode() {
+  }, changeCode() {
     var _this = this
     let telephone = this.data.telephone
     if (telephone.length != 11 || isNaN(telephone)) {
       wx.showToast({
         title: '请输入有效的手机号码',
         icon: "none",
-        duration:2000
+        duration: 2000
       })
       // setTimeout(function () {
       //   wx.hideToast()
@@ -69,7 +69,7 @@ Page({
     wx.request({
       url: sendCode,
       data: {
-        phone: this.data.telephone
+        username: this.data.telephone
       },
       header: {
         'context-type': 'application/x-www-form-urlencoded',
@@ -81,14 +81,16 @@ Page({
           _this.setData({
             codeDis: false
           });
-         
+
           setTimeout(function () {
             wx.hideToast()
           }, 2000);
         } else {
           _this.setData({
-            phoneCode: 60
+            phoneCode: 60,
+            serverCode: res.data.data.code
           })
+          console.log(res.data.data.code);
           let time = setInterval(() => {
             let phoneCode = _this.data.phoneCode
             phoneCode--
@@ -110,16 +112,16 @@ Page({
   },
   phoneinput(e) {
     console.log(e)
-      let value = e.detail.value
-      console.log(value)
-      this.setData({
+    let value = e.detail.value
+    console.log(value)
+    this.setData({
       telephone: value
     })
   },
   codeinput(e) {
     let value = e.detail.value
-      console.log(value)
-      this.setData({
+    console.log(value)
+    this.setData({
       codePhone: value
     })
   },
@@ -128,7 +130,7 @@ Page({
       isAgree: !!e.detail.value.length
     });
   },
-  btnBindPhone:function(e){
+  btnBindPhone: function (e) {
     let telephone = this.data.telephone
     if (telephone.length != 11 || isNaN(telephone)) {
       wx.showToast({
@@ -138,7 +140,7 @@ Page({
       })
       return
     }
-    let codephone=this.data.codePhone;
+    let codephone = this.data.codePhone;
     if (codephone.length != 6 || isNaN(codephone)) {
       wx.showToast({
         title: '请输入有效的验证码',
@@ -147,21 +149,26 @@ Page({
       })
       return
     }
+   
+    console.log(app.globalData.wecharUser.openid);
     wx.request({
       url: bindUser,
       data: {
-        phone: this.data.telephone
+        phoneNo: this.data.telephone,
+        code: this.data.codePhone,
+        type: '2',
+        weixinProjectId:app.globalData.wecharUser.openid
       },
       header: {
         'context-type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json'
       },
       success: function (res) {
-        if(true){
+        if (true) {
           wx.switchTab({
             url: '../home/home'
           })
-        }else{
+        } else {
           wx.showToast({
             title: '绑定失败！没有该用户！',
             icon: "none",
@@ -174,7 +181,7 @@ Page({
 
 });
 
-var validateUser=function(that){
- 
+var validateUser = function (that) {
+
 
 }

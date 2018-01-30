@@ -19,10 +19,10 @@
     <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
       <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
         <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-        <navigator url="/pages/zj/arc_context/index?arc_title={{arch.title}}" >
+        <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}" >
           <view class="item-ans">
             <view class="avatar" >
-              <image class="img" src="http://lr-tyss.oss-cn-beijing.aliyuncs.com/images/20170926103435poZx_fymesmq8261958.jpg.jpg?Expires=1821753276&OSSAccessKeyId=LTAIFbqUjkQDxNhF&Signature=u1qpy2VHtd5zKvOVvueErDtNv6k%3D"></image>
+              <image class="img" src="{{arch.picAliUrl}}" binderror='errorFunction'></image>
             </view>
             <view class="expertInfo">
               <view class="name">{{arch.title}}</view>

@@ -1,5 +1,6 @@
 const app = getApp();
 const url = app.globalData.serverUrl + "/vodCategoryAction/getOrdinaryVodCategory.json";
+const dz_url = app.globalData.serverUrl + "/vodCategoryAction/getPartyVodCategory.json";
 const context_url = app.globalData.serverUrl + "/vodInfoAction/getVodInfoListByType.json";
 var page = 1;
 const page_size = 10;
@@ -11,7 +12,8 @@ Page({
     cat_list: [],
     list: [],
     hidden: true,
-    page: 1
+    page: 1,
+    ywType:"1"
 
   },
   // 滚动切换标签样式
@@ -48,9 +50,13 @@ Page({
       })
     }
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
     
+    console.log(options.ywType)
+    that.setData({
+      ywType:options.ywType
+    });
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
@@ -95,14 +101,26 @@ Page({
     page = 1;
     loadContxt(this, this.data.cat_list[this.data.currentTab].id, page);
     console.log("上拉加载");
+  }, btnItem:function(e){
+    var arch = e.currentTarget.dataset.arch;
+    console.log(arch.title);
+    wx.navigateTo({
+      url: '/pages/video_play/index?dataObj=' + encodeURIComponent(JSON.stringify(arch))
+    });
   }
 
 })
 
 var loadMore = function (that) {
   loadding(that);
+  var temUrl="";
+  if(that.data.ywType=="2"){
+    temUrl = dz_url;
+  }else{
+    temUrl = url;
+  }
   wx.request({
-    url: url,
+    url: temUrl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -157,7 +175,7 @@ var loadContxt = function (that, catId, page) {
         list = that.data.list
 
       }
-      if (res.data.list.length === 0) {
+      if (res.data.rows.length === 0) {
         stopLoding(that);
         wx.showToast({
           title: '没有更多数据了',
@@ -166,8 +184,8 @@ var loadContxt = function (that, catId, page) {
         console.log("没有更多数据了");
 
       } else {
-        for (var i = 0; i < res.data.list.length; i++) {
-          list.push(res.data.list[i]);
+        for (var i = 0; i < res.data.rows.length; i++) {
+          list.push(res.data.rows[i]);
         }
         //设置数据
         // that.setData({
