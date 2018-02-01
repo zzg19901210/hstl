@@ -1,0 +1,21 @@
+<view class="header">
+  <view class="title">
+    <image src="/images/head.png"></image>
+    <text class="nickname">Sikalng、</text>
+    <image src="/images/time.png"></image>
+    <text class="nickname">05:24</text>
+  </view>
+  <view class='context'>
+    <view class='c_title'>模拟考试第一次</view>
+    <view class='c_other'>
+      <text>已做(15)题/总分100分/当前题目(5)分</text>
+    </view>
+  </view>
+</view>
+<view class='problem'>
+  <text>15题：举例asp.net页面之间传递的几种方式</text>
+  <view class='hr'></view>
+  <view class="daan">
+    
+  </view>
+</view>

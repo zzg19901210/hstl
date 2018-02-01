@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/study/index",
     "pages/zj/zj",
     "pages/video_list/index",
     "pages/user/index",
