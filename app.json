@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/study/index",
     "pages/zj/zj",
     "pages/video_list/index",
     "pages/user/index",
-    "pages/home/home",
     "pages/live_list/index",
     "pages/404/index",
     "pages/video_play/index",
