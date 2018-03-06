@@ -9,25 +9,20 @@ Page({
     ],
     imageWidth: wx.getSystemInfoSync().windowWidth,
     routers: [
-      {
-        name: '视频录制',
-        url: '/pages/splz/index',
-        icon: '/images/home_icon/lz.png'
-      },
+      // {
+      //   name: '视频录制',
+      //   url: '/pages/splz/index',
+      //   icon: '/images/home_icon/lz.png'
+      // },
       {
         name: '政治理论视频学习',
-        url: '/pages/video_list/index?ywType=2',
+        url: '/pages/video_list/index?ywType=2&type=2',
         icon: '/images/home_icon/dz.png'
       },
       {
         name: '业务视频学习',
-        url: '/pages/video_list/index?ywType=1',
+        url: '/pages/video_list/index?ywType=1&type=2',
         icon: '/images/home_icon/zj.png'
-      },
-      {
-        name: '成绩查看',
-        url: '',
-        icon: '/images/home_icon/zx.png'
       },
       {
         name: '在线考试',
@@ -35,26 +30,38 @@ Page({
         icon: '/images/home_icon/zxdt.png'
       },
       {
+        name: '成绩查看',
+        url: '',
+        icon: '/images/home_icon/zx.png'
+      },
+      {
+        name: '施工考试',
+        url: '',
+        icon: '/images/home_icon/zxdt.png'
+      },
+      {
+        name: '施工成绩查看',
+        url: '',
+        icon: '/images/home_icon/zx.png'
+      },
+      {
         name: '我要直播',
         url: '/pages/live_list/index',
+        icon: '/images/home_icon/zb.png'
+      },
+      {
+        name: '业务视频审录',
+        url: '/pages/video_list/index?ywType=1&type=1',
+        icon: '/images/home_icon/zb.png'
+      },
+      {
+        name: '政治理论视频审录',
+        url: '/pages/video_list/index?ywType=2&type=1',
         icon: '/images/home_icon/zb.png'
       }
     ]
 
-
   }, onLoad: function (){
-    wx.request({
-      url: '/cmsServerAction/allCat.json', //仅为示例，并非真实的接口地址
-      data: {
-        x: '',
-        y: ''
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    });
+    
   }
 })               

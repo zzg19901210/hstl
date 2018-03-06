@@ -13,7 +13,8 @@ Page({
     list: [],
     hidden: true,
     page: 1,
-    ywType:"1"
+    ywType:"1",
+    xxtype:"1"
 
   },
   // 滚动切换标签样式
@@ -53,10 +54,45 @@ Page({
   onLoad: function (options) {
     var that = this;
     
-    console.log(options.ywType)
+    console.log(options.type)
     that.setData({
-      ywType:options.ywType
+      ywType:options.ywType,
+      xxtype:options.type
     });
+    if("1"==options.type){
+      if ("2" == options.ywType){
+        wx.setNavigationBarTitle({
+          title: "政治理论-视频审阅",
+          success: function (res) {
+            // success
+          }
+        });
+      }else{
+        wx.setNavigationBarTitle({
+          title: "业务-视频审阅",
+          success: function (res) {
+            // success
+          }
+        });
+      }
+     
+    }else{
+      if ("2" == options.ywType) {
+        wx.setNavigationBarTitle({
+          title: "政治理论-视频学习",
+          success: function (res) {
+            // success
+          }
+        });
+      } else {
+        wx.setNavigationBarTitle({
+          title: "业务-视频学习",
+          success: function (res) {
+            // success
+          }
+        });
+      }
+    }
     //  高度自适应
     wx.getSystemInfo({
       success: function (res) {
@@ -162,7 +198,8 @@ var loadContxt = function (that, catId, page) {
     data: {
       limit: page_size,
       vodCatId: catId,
-      offset: page
+      offset: page,
+      vodType:that.data.xxtype
     },
     success: function (res) {
       //console.info(that.data.list);
