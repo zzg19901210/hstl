@@ -1,12 +1,11 @@
 <!--pages/video_play/index.wxml-->
-<video class="video" id="myVideo" src="{{video_url}}" autoplay="true"
-  danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+<video class="video" id="myVideo" src="{{video_url}}" autoplay="true" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
 <view class='context'>
   <view class='title'>
     {{title}}
   </view>
   <view class='user_info'>
-    <image src="{{headPortrait}}"  binderror='errorFunction'></image>
+    <image src="{{headPortrait}}" binderror='errorFunction'></image>
     <text>{{nickname}}</text>
   </view>
   <view class='hr'>
@@ -16,13 +15,15 @@
     <text>相关阅读</text>
   </view>
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-    <view class='list_context'>
-      <view class='text_context'>
-        <text class='c_title'>{{cont.title}}</text>
-        <text class='c_context'>{{cont.desc}}</text>
+    <navigator redirect="true" url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}">
+      <view class='list_context'>
+        <view class='text_context'>
+          <text class='c_title'>{{cont.title}}</text>
+          <text class='c_context'>{{cont.nickname}}</text>
+        </view>
+        <image src="{{cont.aliImageUrl}}"></image>
       </view>
-      <image src="{{cont.ali_picurl}}"></image>
-    </view>
-     <view class='hr'></view>
+      <view class='hr'></view>
+    </navigator>
   </block>
 </view>
