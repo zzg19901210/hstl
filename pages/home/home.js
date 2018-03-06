@@ -1,10 +1,11 @@
 Page({
   data: {
     movies: [
-      { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'},
-      { url: 'http://img04.tooopen.com/images/20130617/tooopen_21241404.jpg' },
-      { url: 'http://img04.tooopen.com/images/20130701/tooopen_20083555.jpg' },
-      { url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg' }
+      { url: '/images/banner/a.jpg'},
+      { url: '/images/banner/b.jpg' },
+      { url: '/images/banner/c.jpg' },
+      { url: '/images/banner/e.jpg' },
+      { url: '/images/banner/d.jpg' }
     ],
     imageWidth: wx.getSystemInfoSync().windowWidth,
     routers: [

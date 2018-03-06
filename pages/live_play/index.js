@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    playing: true,
+    playing: false,
     videoContext: {},
-
     fullScreen: false,
     playUrl: "",
     orientation: "vertical",
@@ -172,8 +171,11 @@ Page({
     var that = this;
     this.setData({
       title: options.title,
-      playUrl: "rtmp://"+options.domain_name+"/"+options.app_name_stream_name
+      playUrl: "rtmp://" + options.domain_name + "/" + options.app_name + "/" +options.stream_name
+      // playUrl: "rtmp://live.hkstv.hk.lxdns.com/live/hks"
     })
+    this.data.videoContext.play();
+   
     wx.setNavigationBarTitle({
       title: options.title,
       success: function (res) {

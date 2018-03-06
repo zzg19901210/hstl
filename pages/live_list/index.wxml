@@ -19,7 +19,6 @@
       </view>
     </navigator>
      <navigator url="/pages/live_push/index?title={{live.title}}&pushUrl={{live.pushUrl}}&domainName={{live.domainName}}" wx:else>
-
       <view class='item'>
         <view class="item-video" style='background-image:url({{live.aliImageUrl}})'>
           <view class='bg' style='background-image:url(../../images/bg.png)'>
