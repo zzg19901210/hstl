@@ -1,6 +1,6 @@
 <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="live" wx:key="*this">
-    <navigator url="/pages/live_play/index?title={{live.title}}&domain_name={{live.domainName}}&app_name={{live.appName}}&stream_name={{live.streamName}}" wx:if="{{live.state==2}}">
+    <navigator url="/pages/live_play/index?liveId={{live.id}}&title={{live.title}}&domain_name={{live.domainName}}&app_name={{live.appName}}&stream_name={{live.streamName}}" wx:if="{{live.state==2}}">
 
       <view class='item'>
         <view class="item-video" style='background-image:url({{live.aliImageUrl}})'>
@@ -12,13 +12,13 @@
           </view>
         </view>
         <view class='fotter'>
-          <image src='http://lr-tyss.oss-cn-beijing.aliyuncs.com/images/20170926103435poZx_fymesmq8261958.jpg.jpg?Expires=1821753276&OSSAccessKeyId=LTAIFbqUjkQDxNhF&Signature=u1qpy2VHtd5zKvOVvueErDtNv6k%3D'></image>
-          <text class='nickname'>{{live.source}}</text>
+          <image src='{{live.headPortrait}}'></image>
+          <text class='nickname'>{{live.nickname}}</text>
           <text class='click'>{{live.click}}正在直播</text>
         </view>
       </view>
     </navigator>
-     <navigator url="/pages/live_push/index?title={{live.title}}&pushUrl={{live.pushUrl}}&domainName={{live.domainName}}" wx:else>
+     <navigator url="/pages/live_push/index?liveId={{live.id}}&title={{live.title}}&pushUrl={{live.pushUrl}}&domainName={{live.domainName}}" wx:else>
       <view class='item'>
         <view class="item-video" style='background-image:url({{live.aliImageUrl}})'>
           <view class='bg' style='background-image:url(../../images/bg.png)'>
@@ -29,8 +29,8 @@
           </view>
         </view>
         <view class='fotter'>
-          <image src='http://lr-tyss.oss-cn-beijing.aliyuncs.com/images/20170926103435poZx_fymesmq8261958.jpg.jpg?Expires=1821753276&OSSAccessKeyId=LTAIFbqUjkQDxNhF&Signature=u1qpy2VHtd5zKvOVvueErDtNv6k%3D'></image>
-          <text class='nickname'>{{live.source}}</text>
+          <image src='{{live.headPortrait}}'></image>
+          <text class='nickname'>{{live.nickname}}</text>
           <text class='click'>{{live.click}}未开始直播</text>
         </view>
       </view>

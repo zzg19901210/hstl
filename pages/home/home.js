@@ -11,11 +11,11 @@ Page({
     routers: [
       {
         name: '视频录制',
-        url: '',
+        url: '/pages/splz/index',
         icon: '/images/home_icon/lz.png'
       },
       {
-        name: '党政视频学习',
+        name: '政治理论视频学习',
         url: '/pages/video_list/index?ywType=2',
         icon: '/images/home_icon/dz.png'
       },

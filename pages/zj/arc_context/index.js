@@ -1,7 +1,9 @@
 
 const app = getApp();
-const url = app.globalData.serverUrl + "/categoryInfoAction/getAllOrdinaryCat.json";
-const learnUrl = app.globalData.serverUrl +"archivesUserAction/learn.json";
+
+const learnUrl = app.globalData.serverUrl +"/archivesUserAction/learn.json";
+//获取单个
+const arch_get = app.globalData.serverUrl + "/archivesInfoAction/getArticleById.json";
 var WxParse = require('../../../plus/wxParse/wxParse.js');
 Page({
   data: {
@@ -11,7 +13,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     this.setData({
-      title: options.arc_title
+      title: options.arc_title,
+      aId: options.aId
     })
     wx.setNavigationBarTitle({
       title: options.arc_title,
@@ -22,22 +25,29 @@ Page({
     /**
      * html解析示例
      */
+    loadArch(this);
+    
   }
 })
 //加载文章详情页面
 var loadArch=function(that){
+  wx.showLoading({
+    title: '加载中...',
+  });
+
   wx.request({
-    url: url,
+    url: arch_get,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
     data: {
-      aId:that.aId
+      id: that.data.aId,
     },
     success: function (res) {
-      WxParse.wxParse('article', 'html', article, that, 5);
-
+      WxParse.wxParse('article', 'html', res.data.list[0].body, that, 5);
+      // learnUser(that);
+      wx.hideLoading();
     }
   });
 }
@@ -56,7 +66,7 @@ var learnUser=function(that){
       userId: app.globalData.myGlobalUserId,
     },
     success: function (res) {
-
+      wx.hideLoading();
     }
   });
 }

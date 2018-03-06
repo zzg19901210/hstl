@@ -68,8 +68,8 @@ App({
   globalData: {
     userInfo: null,
     serverUrl:"https://www.beijiangci.cn/hstl",
-    myGlobalUserId:null,
-    wecharUser: { openid: '未获取上openid',session_key: '323232', unionid:'1232132'}
+    myGlobalUserId:1,
+    wechar_user: { openid: '未获取上openid',session_key: '323232', unionid:'1232132'}
 
   }
  

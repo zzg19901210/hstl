@@ -11,7 +11,5 @@
 	"libVersion": "1.9.1",
 	"appid": "wxe701e867de4bbdbd",
 	"projectname": "hstl",
-	"condition": {
-		
-	}
+	"condition": {}
 }

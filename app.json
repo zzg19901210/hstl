@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/splz/index",
     "pages/study/index",
     "pages/zj/zj",
     "pages/video_list/index",

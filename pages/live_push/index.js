@@ -1,5 +1,8 @@
 
 // pages/push/push.js
+
+const app = getApp()
+
 Page({
 
   /**
@@ -19,7 +22,8 @@ Page({
     whiteness: 3.0,
     backgroundMute: true,
     hide: false,
-    debug: false
+    debug: false,
+    liveId:0
 
   },
 
@@ -114,9 +118,11 @@ Page({
       playing: !this.data.playing,
     })
     if (this.data.playing) {
+      updateLive(this,2);
       this.data.cameraContext.start();
       console.log("camera start");
     } else {
+      updateLive(this, 1);
       this.data.cameraContext.stop();
       console.log("camera stop");
     }
@@ -222,6 +228,7 @@ Page({
       backgroundMute: false,
       debug: false
     })
+    updateLive(this,"1");
     this.data.cameraContext.stop();
   },
 
@@ -237,7 +244,8 @@ Page({
     var that = this;
     this.setData({
       title: options.title,
-      pushUrl: options.pushUrl +"?vhost=push.isport.nm.cn"
+      pushUrl: options.pushUrl +"?vhost=push.isport.nm.cn",
+      liveId:options.liveId
     })
     wx.setNavigationBarTitle({
       title: options.title,
@@ -319,3 +327,23 @@ Page({
     }
   }
 })
+
+const url = app.globalData.serverUrl + "/studyLiveInfoAction/updateLiveInfo.json";
+var updateLive = function (that,state) {
+  wx.request({
+    url: url,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      id: that.data.liveId,
+      state: state,
+      userId: app.globalData.myGlobalUserId,
+    },
+    success: function (res) {
+     
+
+    }
+  });
+};
