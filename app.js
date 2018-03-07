@@ -10,7 +10,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("code:"+res.code)
+        // console.log("code:"+res.code)
         var that=this;
         wx.request({
           url: this.globalData.serverUrl+'/app/wechartSns/login.json',
@@ -21,17 +21,18 @@ App({
           data: {
             code:res.code
           },
-          success: function (res) {
-          
-            // if("2"==res.data.msg){
-            //   that.globalData.myGlobalUserId = 0;
-            //   that.globalData.wechar_user=res.data.obj;
-            //   wx.navigateTo({
-            //     url: '../../pages/user/index'
-            //   });
-            // }else{
-            //   that.globalData.myGlobalUserId = res.data.obj.id;
-            // }
+          success: function (data) {
+            // console.log(data.data.data.obj);
+            if ("2" == data.data.data.msg){
+              that.globalData.myGlobalUserId = 0;
+              that.globalData.wechar_user = data.data.data.obj;
+              wx.navigateTo({
+                url: '../../pages/user/index'
+              });
+            }else{
+              that.globalData.myGlobalUserId = data.data.data.obj.id;
+              that.globalData.myUserInfo = data.data.data.obj;
+            }
             
           },
           fail:function(res){
@@ -68,7 +69,7 @@ App({
   globalData: {
     userInfo: null,
     serverUrl:"https://www.beijiangci.cn/hstl",
-    myGlobalUserId:1,
+    myGlobalUserId:null,
     myUserInfo: null,
     wechar_user: { openid: '未获取上openid',session_key: '323232', unionid:'1232132'}
 

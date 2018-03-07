@@ -73,6 +73,7 @@ page{
 .list_context .text_context .c_title{
   width: 100%;
   display: block;
+  height: 105rpx;
 }
 .list_context .text_context .c_context{
   font-size: 12px;
