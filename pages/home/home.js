@@ -37,12 +37,12 @@ Page({
       {
         name: '施工考试',
         url: '',
-        icon: '/images/home_icon/zxdt.png'
+        icon: '/images/home_icon/shigong.png'
       },
       {
         name: '施工成绩查看',
         url: '',
-        icon: '/images/home_icon/zx.png'
+        icon: '/images/home_icon/sgcjcx.png'
       },
       {
         name: '我要直播',
@@ -52,12 +52,12 @@ Page({
       {
         name: '业务视频审录',
         url: '/pages/video_list/index?ywType=1&type=1',
-        icon: '/images/home_icon/zb.png'
+        icon: '/images/home_icon/lz.png'
       },
       {
         name: '政治理论视频审录',
         url: '/pages/video_list/index?ywType=2&type=1',
-        icon: '/images/home_icon/zb.png'
+        icon: '/images/home_icon/dzlz.png'
       }
     ]
 
