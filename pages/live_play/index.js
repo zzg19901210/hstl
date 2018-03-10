@@ -1,4 +1,7 @@
 // pages/play/play.js
+
+const app = getApp();
+const setlive_url = app.globalData.serverUrl +"/liveUserAction/setLog.json";
 Page({
 
   /**
@@ -14,6 +17,8 @@ Page({
     muted: false,
     backgroundMuted: false,
     debug: false,
+    liveId:1,
+    liveUserId:1
   },
 
   onScanQR: function () {
@@ -171,11 +176,13 @@ Page({
     var that = this;
     this.setData({
       title: options.title,
-      playUrl: "rtmp://" + options.domain_name + "/" + options.app_name + "/" +options.stream_name
+      playUrl: "rtmp://" + options.domain_name + "/" + options.app_name + "/" +options.stream_name,
+      liveId:options.liveId,
+      liveUserId:options.userId,
       // playUrl: "rtmp://live.hkstv.hk.lxdns.com/live/hks"
     })
-    this.data.videoContext.play();
-   
+    // this.data.videoContext.play();
+    playLog(this);
     wx.setNavigationBarTitle({
       title: options.title,
       success: function (res) {
@@ -250,3 +257,24 @@ Page({
     }
   }
 })
+var playLog = function (that) {
+  wx.showLoading({
+    title: '请稍等...',
+  })
+  wx.request({
+    url: setlive_url,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      liveId: that.data.liveId,
+      liveUserId: that.data.liveUserId,
+      source:'4',
+      enterUserId: app.globalData.myGlobalUserId
+    },
+    success: function (res) {
+      wx.hideLoading();
+    }
+  });
+}

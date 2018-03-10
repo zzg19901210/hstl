@@ -1,6 +1,6 @@
 <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="live" wx:key="*this">
-    <navigator url="/pages/live_play/index?liveId={{live.id}}&title={{live.title}}&domain_name={{live.domainName}}&app_name={{live.appName}}&stream_name={{live.streamName}}" wx:if="{{live.state==2}}">
+    <navigator url="/pages/live_play/index?liveId={{live.id}}&userId={{live.userId}}&title={{live.title}}&domain_name={{live.domainName}}&app_name={{live.appName}}&stream_name={{live.streamName}}" wx:if="{{live.state==2}}">
 
       <view class='item'>
         <view class="item-video" style='background-image:url({{live.aliImageUrl}})'>

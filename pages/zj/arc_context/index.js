@@ -46,8 +46,8 @@ var loadArch=function(that){
     },
     success: function (res) {
       WxParse.wxParse('article', 'html', res.data.list[0].body, that, 5);
-      // learnUser(that);
-      wx.hideLoading();
+      learnUser(that);
+      // wx.hideLoading();
     }
   });
 }
