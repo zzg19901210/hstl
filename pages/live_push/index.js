@@ -216,6 +216,7 @@ Page({
   },
 
   stop: function () {
+    //停止推流
     this.setData({
       playing: false,
       //pushUrl: "rtmp://2157.livepush.myqcloud.com/live/2157_wx_live_test1?bizid=2157&txSecret=7b0391fa4d9956a54d1a8238bc358372&txTime=5A071E7F",
@@ -233,6 +234,7 @@ Page({
   },
 
   createContext: function () {
+    //设置推流初始化模块
     this.setData({
       cameraContext: wx.createLivePusherContext('camera-push')
     })
@@ -293,7 +295,8 @@ Page({
   onUnload: function () {
     console.log("onLoad onUnload");
     this.stop();
-
+    //停止推流
+   
     wx.setKeepScreenOn({
       keepScreenOn: false,
     })
