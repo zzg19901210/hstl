@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/achievement/index",
     "pages/home/home",
     "pages/splz/index",
     "pages/study/index",
