@@ -1,6 +1,7 @@
 // pages/achievement/index.js
 
 const app = getApp();
+
 const context_url = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
 
 var cur_page = 1;
@@ -42,12 +43,12 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: "我的成绩",
+      title: "施工考试",
       success: function (res) {
         // success
       }
     });
-    var date = new Date();
+    // var date = new Date();
     // this.setData({
     //   refreshTime: date.toLocaleTimeString(),
     //   hideHeader: false,

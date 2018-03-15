@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/examination/context/index",
+    "pages/examination/index",
     "pages/achievement/index",
     "pages/home/home",
     "pages/splz/index",

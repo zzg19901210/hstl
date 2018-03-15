@@ -11,11 +11,11 @@
           <text class='c_title'>{{cont.title}}</text>
           <view class='score'>
             <text class='total'>总分数：{{cont.totalScore}}分</text>
-            <text class='activity'>本次成绩：{{cont.activityScore}}分</text>
+            <text class='activity'>总题目：{{cont.activityScore}}分</text>
           </view>
           <view class='qurstion'>
-            <text class='total'>总题数：{{cont.totalQuestion}}题</text>
-            <text class='correct'>正确题数量：{{cont.correctQurstion}}题</text>
+            <text class='total'>{{cont.totalQuestion}}</text>
+            <text class='correct'>结束时间{{cont.correctQurstion}}</text>
           </view>
         </view>
       </view>
