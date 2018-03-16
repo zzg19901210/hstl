@@ -1,0 +1,20 @@
+<view class="info">
+  <view class='user'>
+    <image src='{{disabuseInfo.headProt}}'></image>
+    <text>{{disabuseInfo.nickname}}</text>
+  </view>
+  <view class='title'>{{disabuseInfo.title}}</view>
+
+  <view class='context'>
+    <view class='context_title'>
+      <view class='icon'></view>
+      <text>问题描述</text>
+    </view>
+    <view class='neirong'>
+      {{disabuseInfo.context}}
+    </view>
+  </view>
+  <view>
+    <image src='{{disabuseInfo.picUrl[0]}}'></image>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+/* pages/achievement/index.wxss */
+@import '/style/loading.wxss';
+
+page{
+  background-color: #ecf0f1;
+}
+.item{
+  background-color: #ffffff;
+}
+.list_context{
+  border-bottom: 1px solid #ecf0f1;
+  height: 160rpx;
+  width: 98%;
+  padding-left: 15rpx;
+}
+.list_context > image{
+  padding-top: 10rpx;
+  width: 200rpx;
+  float: left;
+  height: 140rpx;
+}
+.list_context  .c_title{
+  width: 50%;
+  float: left;
+  display: block;
+  overflow: hidden;
+  line-height: 60rpx;
+  height: 60rpx;
+  padding-left: 45rpx;
+  font-size: 30rpx;
+  margin-top: 10rpx;
+}
+.list_context .user{
+  float: left;
+  width: 60%;
+  padding-left: 45rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.list_context .user > image{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50rpx;
+  float: left;
+  
+}
+.list_context .user .correct{
+  float: left;
+  width: 80rpx;
+  font-size: 25rpx;
+  color: #95a5a6;
+  
+  padding-left: 45rpx;
+}
+
+.scoll-h {
+  height: 100%;
+}
+

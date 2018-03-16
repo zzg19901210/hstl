@@ -1,0 +1,33 @@
+<view class="header" hidden="{{hideHeader}}">
+  <view class="weui-loading"></view>
+  <text>下拉刷新  </text>
+  <text>{{refreshTime}}</text>
+</view>
+ <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+    <!-- <navigator url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}"> -->
+      <view class='item'>
+        <view class='list_context'>
+          <image src='{{cont.pic_url}}'></image>
+          <text class='c_title'>{{cont.title}}</text>
+          <view class='user'>
+
+            <image src='{{cont.headProct}}'></image>
+            <text class='correct'>{{cont.nickname}}</text>
+            
+          </view>
+        </view>
+      </view>
+    <!-- </navigator> -->
+  </block>
+</scroll-view> 
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<view class="bottom" hidden="{{hideBottom}}">
+  <view class="weui-loading" hidden='{{hideBottom_loading}}'></view>
+  <text>{{loadMoreData}}</text>
+  <text>{{refreshTime}}</text>
+</view>

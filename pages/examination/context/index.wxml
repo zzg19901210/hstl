@@ -1,9 +1,12 @@
-<view class="header">
+
+<!-- <view class="header">
+  <view class='content'>
+      <image src="/images/timer.png"></image>
+      <view class="nickname">10 分 59 秒</view>
+  </view>
   <view class="content">
     <image src="{{userInfo.avatarUrl}}"></image>
     <view class="nickname">{{userInfo.nickName}}</view>
   </view>
-</view>
-<view class="wxParse">
-    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
-</view>
+</view> -->
+<web-view src="{{webUrl}}"></web-view>

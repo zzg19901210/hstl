@@ -1,7 +1,8 @@
 // pages/examination/context/index.js
 
 const app = getApp();
-const context_url = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
+const sg_url = app.globalData.serverUrl + "/studyQuestionAction/getWorkQuestionInfo.json";
+const zj_url = app.globalData.serverUrl + "/";
 
 Page({
 
@@ -12,7 +13,8 @@ Page({
     examinationContext:{
       body: '<input type="radio" name="question5" value="0"> A、110 < input type=“hidden” name=“userId” value=“USERIDKEY“ > '
     },
-    userInfo: app.globalData.userInfo
+    webUrl: app.globalData.serverUrl+'/login.html?id=3',
+    userInfo: app.globalData.myUserInfo
   },
 
   /**
@@ -30,7 +32,9 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } 
+    }
+    var article = '<div>我是HTML代码</div>';
+    WxParse.wxParse('article', 'html','<input type="radio" name="question5" value="0"> A、110 < input type=“hidden” name=“userId” value=“USERIDKEY“ >', this, 5); 
   }
 
   
@@ -38,7 +42,7 @@ Page({
 
 var loadContxt = function (that) {
   wx.request({
-    url: context_url,
+    url: sg_url,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -50,6 +54,7 @@ var loadContxt = function (that) {
       that.setData({
         list: list
       });
+      
     }
   });
 }

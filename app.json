@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/examination/context/index",
+    "pages/disabuse/reply/reply",
+    "pages/disabuse/disabuse",
     "pages/examination/index",
+    "pages/examination/context/index",
     "pages/achievement/index",
     "pages/home/home",
     "pages/splz/index",
