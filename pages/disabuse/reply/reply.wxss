@@ -2,6 +2,7 @@
   width: 98%;
   padding-left: 15rpx;
   background-color: #fff;
+
 }
 .info .user{
   float: right;
@@ -13,7 +14,7 @@
 .info .user > image{
   width: 80rpx;
   height: 80rpx;
-  border-radius: 90rpx;
+  border-radius: 80rpx;
   display: block;
 }
 .info .user >text {
@@ -22,12 +23,19 @@
   color: #95a5a6
 }
 .info .title{
-  height: 130rpx;
-  line-height: 130rpx;
+  line-height: 65rpx;
+  padding-left: 10rpx;
+  width: 80%;
+}
+.info .titleother{
+  font-size: 25rpx;
+  color: #95a5a6;
   padding-left: 30rpx;
+  line-height: 50rpx;
+  width: 80%;
 }
 .info .context{
-  
+  padding-top: 25rpx;
 }
 .info .context .context_title{
   height: 40rpx;
@@ -41,9 +49,85 @@
   margin-top: 5rpx;
 }
 .info .context .context_title > text{
-  font-size: 13px;
-  padding-left: 20rpx;
+  font-size: 28rpx;
+  padding-left: 30rpx;
   color: #95a5a6;
   height: 100%;
   line-height: 40rpx;
+}
+.info .context .neirong{
+  padding: 15rpx 25rpx 10rpx 20rpx;
+  font-size: 25rpx;
+  line-height: 50rpx;
+
+}
+.info .imageslist{
+  width: 100%;
+  background-color: #fff;
+}
+.info .imageslist > image{
+  width: 220rpx;
+  height: 220rpx;
+  padding-left:  15rpx;
+  padding-bottom:  15rpx;
+}
+.specialist{
+  padding-left: 15rpx;
+  background: #fff;
+}
+
+.specialist  .context_title{
+
+  border-top: 1px solid #ecf0f1;
+  height: 50rpx;
+  line-height: 50rpx;
+  width: 98%;
+  font-size: 25rpx;
+  padding-top: 25rpx;
+}
+.specialist  .context_title .icon{
+  width: 10rpx;
+  background-color: #00cec9;
+  float: left;
+  height: 90%;
+  margin-top: 5rpx;
+}
+.specialist  .context_title > text{
+  font-size: 28rpx;
+  padding-left: 30rpx;
+  color: #95a5a6;
+  height: 100%;
+  line-height: 40rpx;
+}
+.specialist .item{
+  padding:15rpx 0 15rpx 0;
+  width: 98%;
+  border-bottom: 1px solid #ecf0f1;
+  
+}
+.specialist .user{
+  float: left;
+  width: 100rpx;
+  padding-right: 5rpx;
+  padding-left: 5rpx;
+  text-align: center;
+  position: relative;
+  margin-top: 10%;
+}
+
+.specialist .item .user > image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+  display: block;
+}
+.specialist .item .user >text {
+  font-size: 25rpx;
+  width: 90rpx;
+  color: #95a5a6
+}
+.specialist .item .context{
+  width: 80%;
+  padding-left: 120rpx;
+  font-size: 25rpx;
 }

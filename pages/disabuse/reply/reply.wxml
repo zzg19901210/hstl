@@ -4,7 +4,9 @@
     <text>{{disabuseInfo.nickname}}</text>
   </view>
   <view class='title'>{{disabuseInfo.title}}</view>
-
+  <view class='titleother'>
+    <text>发布时间：{{disabuseInfo.publicTime}}</text>
+  </view>
   <view class='context'>
     <view class='context_title'>
       <view class='icon'></view>
@@ -14,7 +16,26 @@
       {{disabuseInfo.context}}
     </view>
   </view>
-  <view>
-    <image src='{{disabuseInfo.picUrl[0]}}'></image>
+  <view class='imageslist'>
+    <block wx:for="{{disabuseInfo.picUrl}}" wx:for-item="image" wx:key="*this">
+      <image src='{{image}}'></image>
+    </block>
   </view>
+</view>
+
+<view class='specialist'>
+  <view class='context_title'>
+    <view class='icon'></view>
+    <text>专家答疑</text>
+  </view>
+  <view class='item' wx:for="{{userList}}" wx:for-item="user" wx:key="*this">
+    <view class='user'>
+      <image src='{{user.headProt}}'></image>
+      <text>{{user.nickname}}</text>
+    </view>
+    <view class='context'>
+      {{user.context}}
+    </view>
+  </view>
+  
 </view>

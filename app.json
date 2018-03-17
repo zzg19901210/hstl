@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/disabuse/new/new",
     "pages/disabuse/reply/reply",
     "pages/disabuse/disabuse",
     "pages/examination/index",

@@ -1,0 +1,4 @@
+/* pages/disabuse/new/new.wxss */
+.page{
+  /* padding: 15rpx 5rpx 0 5rpx; */
+}
