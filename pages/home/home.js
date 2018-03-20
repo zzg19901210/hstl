@@ -26,22 +26,22 @@ Page({
       },
       {
         name: '在线考试',
-        url: '',
+        url: '/pages/examination/context/index?kslx=1',
         icon: '/images/home_icon/zxdt.png'
       },
       {
         name: '成绩查看',
-        url: '',
+        url: '/pages/achievement/index?cjlx=1',
         icon: '/images/home_icon/zx.png'
       },
       {
         name: '施工考试',
-        url: '',
+        url: '/pages/examination/index',
         icon: '/images/home_icon/shigong.png'
       },
       {
         name: '施工成绩查看',
-        url: '',
+        url: '/pages/achievement/index?cjlx=2',
         icon: '/images/home_icon/sgcjcx.png'
       },
       {
@@ -58,6 +58,16 @@ Page({
         name: '政治理论视频审录',
         url: '/pages/video_list/index?ywType=2&type=1',
         icon: '/images/home_icon/dzlz.png'
+      },
+      {
+        name: '答疑解惑',
+        url: '/pages/disabuse/disabuse',
+        icon: '/images/home_icon/dyjh.png'
+      },
+      {
+        name: '专家信息',
+        url: '/pages/disabuse/disabuse',
+        icon: '/images/home_icon/zjjd.png'
       }
     ]
 

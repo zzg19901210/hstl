@@ -1,9 +1,8 @@
 // pages/achievement/index.js
 
 const app = getApp();
-const context_url = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
-
-var cur_page = 1;
+const sg_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListByWork.json";
+const zj_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListByZj.json";
 const page_size = 10;
 
 Page({
@@ -19,21 +18,24 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
-    list: [{
-      title: '2018-3-12',
-      titleDesc: '20:14',
-      totalScore: '100',
-      activityScore: '60',
-      totalQuestion: '50',
-      correctQurstion: '10'
-    }, {
-      title: '2018-3-15',
-      titleDesc: '20:14',
-      totalScore: '100',
-      activityScore: '60',
-      totalQuestion: '50',
-      correctQurstion: '10'
-    }]
+    requestUrl:zj_context_url,
+    list: [
+    //   {
+    //   title: '2018-3-12',
+    //   titleDesc: '20:14',
+    //   totalScore: '100',
+    //   activityScore: '60',
+    //   totalQuestion: '50',
+    //   correctQurstion: '10'
+    // }, {
+    //   title: '2018-3-15',
+    //   titleDesc: '20:14',
+    //   totalScore: '100',
+    //   activityScore: '60',
+    //   totalQuestion: '50',
+    //   correctQurstion: '10'
+    // }
+    ]
 
   },
 
@@ -41,18 +43,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var title ="职教-我的成绩";
+    if(options.cjlx=="1"){
+      title = "职教-我的成绩";
+      this.setData({
+        requestUrl: zj_context_url
+      });
+    }else{
+      title = "施工-我的成绩";
+      this.setData({
+        requestUrl: sg_context_url
+      });
+    }
     wx.setNavigationBarTitle({
-      title: "我的成绩",
+      title: title,
       success: function (res) {
         // success
       }
     });
-    var date = new Date();
-    // this.setData({
-    //   refreshTime: date.toLocaleTimeString(),
-    //   hideHeader: false,
-    //   currentPage: 1
-    // });
+   
     loadContxt(this);
   },
   onPullDownRefresh: function () {
@@ -124,9 +133,10 @@ var loadding = function (that) {
 
 var loadContxt = function (that) {
   loadding(that);
+  
   var page = that.data.currentPage;
   wx.request({
-    url: context_url,
+      url: that.data.requestUrl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -169,6 +179,16 @@ var loadContxt = function (that) {
         stopLoding(that);
       }
      
+    },fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '加载失败',
+        showCancel: false
+      })
+    },
+    complete: function () {
+      stopLoding(that); //隐藏Toast
     }
   });
 }

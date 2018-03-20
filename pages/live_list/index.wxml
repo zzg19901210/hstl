@@ -1,5 +1,6 @@
 <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="live" wx:key="*this">
+  
     <navigator url="/pages/live_play/index?liveId={{live.id}}&userId={{live.userId}}&title={{live.title}}&domain_name={{live.domainName}}&app_name={{live.appName}}&stream_name={{live.streamName}}" wx:if="{{live.state==2}}">
 
       <view class='item'>
@@ -18,8 +19,8 @@
         </view>
       </view>
     </navigator>
-     <navigator url="/pages/live_push/index?liveId={{live.id}}&title={{live.title}}&pushUrl={{live.pushUrl}}&domainName={{live.domainName}}" wx:else>
-      <view class='item'>
+     <!-- <navigator url="/pages/live_push/index?liveId={{live.id}}&title={{live.title}}&pushUrl={{live.pushUrl}}&domainName={{live.domainName}}" wx:else> -->
+      <view class='item' bindtap='onLive' wx:else>
         <view class="item-video" style='background-image:url({{live.aliImageUrl}})'>
           <view class='bg' style='background-image:url(../../images/bg.png)'>
             <text class='title'>{{live.title}}</text>
@@ -34,6 +35,6 @@
           <text class='click'>{{live.click}}未开始直播</text>
         </view>
       </view>
-    </navigator>
+    <!-- </navigator> -->
   </block>
 </scroll-view>

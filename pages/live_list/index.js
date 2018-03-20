@@ -17,6 +17,14 @@ Page({
    */
   onLoad: function (options) {
     loadLive(this);
+  },
+  onLive:function(e){
+    wx.showModal({
+      title: '提示信息',
+      content: '尚未开始直播',
+      showCancel:false,
+      confirmColor:'#3c9ae8'
+    })
   }
 });
 var loadLive=function(that){

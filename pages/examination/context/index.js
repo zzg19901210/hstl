@@ -1,8 +1,8 @@
 // pages/examination/context/index.js
-
+//获取职教考试和施工考试详情
 const app = getApp();
-const sg_url = app.globalData.serverUrl + "/studyQuestionAction/getWorkQuestionInfo.json";
-const zj_url = app.globalData.serverUrl + "/";
+const sg_url = app.globalData.serverUrl + "/web/question/question_work_model.html";
+const zj_url = app.globalData.serverUrl + "/web/question/question_set_model.html";
 
 Page({
 
@@ -11,36 +11,43 @@ Page({
    */
   data: {
     examinationContext:{
-      body: '<input type="radio" name="question5" value="0"> A、110 < input type=“hidden” name=“userId” value=“USERIDKEY“ > '
+     
     },
-    webUrl: app.globalData.serverUrl+'/login.html?id=3',
-    userInfo: app.globalData.myUserInfo
+    webUrl: zj_url,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  
+    var htmlUrl =sg_url;
+    var title = "职教考试";
+    if("1"==options.kslx){
+      title ="职教考试"
+      htmlUrl = htmlUrl + "?departmentId=" + app.globalData.myUserInfo.departmentId + "&userId=" + app.globalData.myGlobalUserId + "&workType=" + app.globalData.myUserInfo.workType;
+    }else{
+      title ="施工考试"
+      htmlUrl = htmlUrl + "?workId=" + options.wordId + "&userId=" + app.globalData.myGlobalUserId;
+    }
+    console.log(htmlUrl);
+    this.setData({
+      webUrl:htmlUrl
+    });
     wx.setNavigationBarTitle({
       title: "施工考试",
       success: function (res) {
         // success
       }
     });
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    }
-    var article = '<div>我是HTML代码</div>';
-    WxParse.wxParse('article', 'html','<input type="radio" name="question5" value="0"> A、110 < input type=“hidden” name=“userId” value=“USERIDKEY“ >', this, 5); 
+
   }
 
   
 })
 
 var loadContxt = function (that) {
+
   wx.request({
     url: sg_url,
     header: {

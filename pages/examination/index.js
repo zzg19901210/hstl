@@ -1,8 +1,8 @@
-// pages/achievement/index.js
+//施工套题列表
 
 const app = getApp();
 
-const context_url = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
+const context_url = app.globalData.serverUrl + "/studyQuestionAction/getWorkQuestionList.json";
 
 var cur_page = 1;
 const page_size = 10;
@@ -20,21 +20,24 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
-    list: [{
-      title: '2018-3-12',
-      titleDesc: '20:14',
-      totalScore: '100',
-      activityScore: '60',
-      totalQuestion: '50',
-      correctQurstion: '10'
-    }, {
-      title: '2018-3-15',
-      titleDesc: '20:14',
-      totalScore: '100',
-      activityScore: '60',
-      totalQuestion: '50',
-      correctQurstion: '10'
-    }]
+    list: [
+    //   {
+    //   title: '2018-3-12',
+    //   titleDesc: '20:14',
+    //   totalScore: '100',
+    //   activityScore: '60',
+    //   totalQuestion: '50',
+    //   correctQurstion: '10'
+    // },
+    //  {
+    //   title: '2018-3-15',
+    //   titleDesc: '20:14',
+    //   totalScore: '100',
+    //   activityScore: '60',
+    //   totalQuestion: '50',
+    //   correctQurstion: '10'
+    // }
+    ]
 
   },
 

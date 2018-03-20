@@ -1,6 +1,6 @@
 
 const app = getApp();
-const context_url = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
+const context_url = app.globalData.serverUrl + "/studyDisabuseInfoAction/getDisabuseInfoList.json";
 
 var cur_page = 1;
 const page_size = 10;
@@ -19,6 +19,7 @@ Page({
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
     list: [{
+      id:1,
       title: '关于使用啦啦的问题',
       headProct:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
       nickname: '张三',

@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/disabuse/new/new",
     "pages/disabuse/reply/reply",
     "pages/disabuse/disabuse",
     "pages/examination/index",
     "pages/examination/context/index",
     "pages/achievement/index",
-    "pages/home/home",
     "pages/splz/index",
     "pages/study/index",
     "pages/zj/zj",
