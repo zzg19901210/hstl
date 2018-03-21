@@ -57,3 +57,14 @@ page{
   height: 100%;
 }
 
+.btn-add{
+  position: fixed;
+  bottom: 10rpx;
+  width: 96%;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+
+}
+.btn-add button{
+  background-color: #3c9ae8;
+}

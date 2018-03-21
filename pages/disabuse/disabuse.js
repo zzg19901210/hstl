@@ -44,7 +44,7 @@ Page({
     //   hideHeader: false,
     //   currentPage: 1
     // });
-    // loadContxt(this);
+    loadContxt(this);
   },
   onPullDownRefresh: function () {
 
@@ -95,6 +95,11 @@ Page({
   },
   errorFunction: function (event) {
     console.log("进入小程序详情页");
+  },
+  onAdd:function (event){
+    wx.navigateTo({
+      url: 'new/new'
+    })
   }
 })
 

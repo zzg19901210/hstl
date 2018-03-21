@@ -11,7 +11,7 @@
     <view class="weui-cell">
       <view class="weui-cell__bd">
         <textarea class="weui-textarea" placeholder="请输入问题描述" bindinput='contextinput'  style="height: 3.3em" />
-        <view class="weui-textarea-counter">0/200</view>
+        <view class="weui-textarea-counter">{{context.length}}/200</view>
       </view>
     </view>
     <view class="weui-cell">
@@ -41,6 +41,6 @@
     </view>
   </view>
 
-  <button class="weui-btn" bindtap="onSubmit" style='background-color: #3c9ae8;' type="primary">提问</button>
+  <button class="weui-btn" bindtap="onSubmit" style='background-color: #3c9ae8;' type="primary">提交问题</button>
 
 </view>

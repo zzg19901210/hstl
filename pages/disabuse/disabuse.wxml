@@ -31,3 +31,7 @@
   <text>{{loadMoreData}}</text>
   <text>{{refreshTime}}</text>
 </view>
+
+<view class='btn-add'>
+    <button class="weui-btn" type="primary" bindtap='onAdd'>提问</button>
+</view>

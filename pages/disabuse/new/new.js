@@ -1,7 +1,7 @@
 // pages/disabuse/new/new.js
 const app = getApp();
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
-const save_url = app.globalData.serverUrl + "/save.json";
+const save_url = app.globalData.serverUrl + "/studyDisabuseInfoAction/createDisabuseInfo.json";
 Page({
 
   /**
@@ -44,8 +44,6 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-
-
         upload(that, res.tempFilePaths);
       }
     })
@@ -57,12 +55,8 @@ Page({
     })
   },
   onSubmit: function (e) {
+    saveSubmit(this);
 
-    wx.showToast({
-      title: '提问成功',
-      icon: 'success',
-      duration: 2000
-    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -78,7 +72,7 @@ Page({
 })
 
 
-var upload =function (that, path) {
+var upload = function (that, path) {
 
   for (var i = 0; i < path.length; i++) {
     wx.showToast({
@@ -107,7 +101,7 @@ var upload =function (that, path) {
           })
           return;
         }
-        var data =  JSON.parse(res.data);
+        var data = JSON.parse(res.data);
         // console.log(that.data.tempFile);
         console.log(data.data.list[0].uri);
         that.setData({
@@ -130,14 +124,18 @@ var upload =function (that, path) {
 
 }
 
-var saveSubmit=function (that){
-  wx.showToast({
+//保存信息
+var saveSubmit = function (that) {
+  wx.showLoading({
     icon: "loading",
-    title: "正在上传"
+    title: "正在提交..."
   });
-  that.setData({
-    tempFile: path[i]
-  });
+
+  //验证表单
+  if (yezheng(that)){
+    wx.hideLoading();
+    return;
+  }
   wx.request({
     url: save_url,
     header: {
@@ -146,35 +144,60 @@ var saveSubmit=function (that){
     },
     data: {
       title: that.data.title,
-      context:that.data.context
+      bodyDsec: that.data.context,
+      picUrl: that.data.files.toString(),
+      status: '1',
+      userId: app.globalData.myGlobalUserId,
+      departmentId: app.globalData.myUserInfo.departmentId
     },
     success: function (res) {
-      console.log(res);
-      if (res.statusCode != 200) {
-        wx.showModal({
-          title: '提示',
-          content: '上传失败',
-          showCancel: false
-        })
-        return;
-      }
-      var data = JSON.parse(res.data);
-      // console.log(that.data.tempFile);
-      console.log(data.data.list[0].uri);
-      that.setData({
-        files: that.data.files.concat(data.data.list[0].uri)
+      // console.log(res);
+      wx.navigateBack(1);
+
+      wx.showModal({
+        title: '提示',
+        content: '添加成功',
+        showCancel: false
       });
     },
     fail: function (e) {
       console.log(e);
       wx.showModal({
         title: '提示',
-        content: '上传失败',
+        content: '添加失败',
         showCancel: false
       })
     },
     complete: function () {
-      wx.hideToast();  //隐藏Toast
+      wx.hideLoading();  //隐藏Toast
     }
   });
+
+}
+var yezheng=function (that){
+  if (that.data.title.length < 1) {
+    wx.showToast({
+      title: '请输入问题描述',
+      duration: 1000,
+      icon: 'none'
+    });
+    return true;
+  }
+  if(that.data.context.length<1){
+    wx.showToast({
+      title: '请输入问题描述',
+      duration:1000,
+      icon:'none'
+    });
+    return true;
+  }
+  if (that.data.files.length < 1) {
+    wx.showToast({
+      title: '请输入问题描述',
+      duration: 1000,
+      icon: 'none'
+    });
+    return true;
+  }
+  return false;
 }
