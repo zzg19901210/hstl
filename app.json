@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/disabuse/disabuse",
     "pages/disabuse/replyNew/new",
     "pages/disabuse/new/new",
-    "pages/home/home",
     "pages/disabuse/reply/reply",
     "pages/examination/index",
     "pages/examination/context/index",
