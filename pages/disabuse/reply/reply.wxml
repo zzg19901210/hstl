@@ -1,11 +1,11 @@
 <view class="info">
   <view class='user'>
-    <image src='{{disabuseInfo.headProt}}'></image>
+    <image src='{{disabuseInfo.headPortrait}}'></image>
     <text>{{disabuseInfo.nickname}}</text>
   </view>
   <view class='title'>{{disabuseInfo.title}}</view>
   <view class='titleother'>
-    <text>发布时间：{{disabuseInfo.publicTime}}</text>
+    <text>发布时间：{{disabuseInfo.createTime}}</text>
   </view>
   <view class='context'>
     <view class='context_title'>
@@ -13,12 +13,12 @@
       <text>问题描述</text>
     </view>
     <view class='neirong'>
-      {{disabuseInfo.context}}
+      {{disabuseInfo.bodyDsec}}
     </view>
   </view>
   <view class='imageslist'>
-    <block wx:for="{{disabuseInfo.picUrl}}" wx:for-item="image" wx:key="*this">
-      <image src='{{image}}'></image>
+    <block wx:for="{{disabuseInfo.pic}}" wx:for-item="image" wx:key="*this">
+      <image src='{{image}}' bindtap='previewImage' id="{{image}}" ></image>
     </block>
   </view>
 </view>
@@ -37,7 +37,7 @@
       {{user.context}}
     </view>
   </view>
-  
+  <view class='nonepinglun'>暂无评论</view>
 </view>
 
 <view class='btn-add'>

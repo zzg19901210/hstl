@@ -8,7 +8,7 @@
      <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}"> 
       <view class='item'>
         <view class='list_context'>
-          <image src='{{cont.pic_url}}'></image>
+          <image src='{{cont.pic[0]}}'></image>
           <text class='c_title'>{{cont.title}}</text>
           <view class='user'>
             <image src='{{cont.headPortrait}}'></image>

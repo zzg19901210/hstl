@@ -1,0 +1,5 @@
+.title{
+  font-size: 35rpx;
+  line-height: 70rpx;
+   padding: 15rpx 15rpx 15rpx 15rpx;
+}

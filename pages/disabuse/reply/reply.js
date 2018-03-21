@@ -11,18 +11,13 @@ Page({
   data: {
     disabuseId:1,
     disabuseInfo: {
-      nickname: '张三',
-      headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
-      title: '关于无法加载垃圾分类大家来的',
-      publicTime:'2017-08-01 22:12:10',
-      context:'按故障的持续时问可将故障分为永久故障、瞬时故障和间歇故障。永久故障由元器件的不可逆变化所引发，其永久地改变元器件的原有逻辑．直到采取措施消除故障为止；瞬时故障的持续时间不超过一个指定的值．并f1只引起元器件当前参数值的变化，而不会导致不可逆的变化；间歇故障是可重复出现的故障，主要由元件参数的变化、不正确的设计和工艺方面的原因所引发。',
-      picUrl: ['http://img1.imgtn.bdimg.com/it/u=3594169831,4167680482&fm=27&gp=0.jpg', 'http://img1.ph.126.net/MSl2suFUW5LoQ9svzZxeEQ==/6597136836867473083.jpg', 'http://img0.ph.126.net/MZYgy-cIPpokPNOdJiOHWQ==/6597755861912590989.jpg','http://img0.ph.126.net/MZYgy-cIPpokPNOdJiOHWQ==/6597755861912590989.jpg']
+     
     },
     userList:[{
-      nickname: '张三',
-      headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
-      context: 'fjdlkajfldajflkdjalkjfo32uojfdlksajfkldsjaklfjdlkasjfkldjsaklfjjfdlksjflkdjsalkfjdklsj',
-      picUrl: ['http://img1.imgtn.bdimg.com/it/u=3594169831,4167680482&fm=27&gp=0.jpg', 'http://img1.ph.126.net/MSl2suFUW5LoQ9svzZxeEQ==/6597136836867473083.jpg', 'http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ec2066cd5d2c11dfcadcb7600b4e08a5/a8ec8a13632762d079fa0591aaec08fa503dc6dc.jpg','http://img0.ph.126.net/MZYgy-cIPpokPNOdJiOHWQ==/6597755861912590989.jpg']
+      // nickname: '张三',
+      // headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
+      // context: '我们有时设置一个对象盒子时候避免对象没有内容时候不能撑开，但内容多少不能确定所以又不能固定高度，这个时候我们就会需要css来设置min-height最小高度撑高对象盒子。当内容少时候最小高度能将内容显示出，如果内容多余最小高度能装下时候，对象也会再随内容增多而增高。',
+      // picUrl: ['http://img1.imgtn.bdimg.com/it/u=3594169831,4167680482&fm=27&gp=0.jpg', 'http://img1.ph.126.net/MSl2suFUW5LoQ9svzZxeEQ==/6597136836867473083.jpg', 'http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ec2066cd5d2c11dfcadcb7600b4e08a5/a8ec8a13632762d079fa0591aaec08fa503dc6dc.jpg','http://img0.ph.126.net/MZYgy-cIPpokPNOdJiOHWQ==/6597755861912590989.jpg']
     }]
   },
 
@@ -41,6 +36,17 @@ Page({
       }
     });
   },
+  onAdd: function (event) {
+    wx.navigateTo({
+      url: '/pages/disabuse/replyNew/new?disabuseId=' + this.data.disabuseId + '&title=' + this.data.disabuseInfo.title
+    })
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.disabuseInfo.pic // 需要预览的图片http链接列表
+    })
+  }
 
   
 });
@@ -52,7 +58,7 @@ var getDisabuseInfo = function (that) {
   });
 
   wx.request({
-    url: disabuseReplyListUrl,
+    url: disabuseInfoUrl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -61,7 +67,11 @@ var getDisabuseInfo = function (that) {
       id: that.data.disabuseId,
     },
     success: function (res) {
-
+      console.log(res.data);
+      var obj = res.data.data.obj;
+      that.setData({
+        disabuseInfo:obj
+      });
     },
     fail: function (e) {
     
@@ -81,7 +91,7 @@ var getReplyList=function(that){
   });
 
   wx.request({
-    url: disabuseInfoUrl,
+    url: disabuseReplyListUrl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -90,7 +100,12 @@ var getReplyList=function(that){
       disabuseId: that.data.disabuseId,
     },
     success: function (res) {
-
+      if (res.data.rows.length<1){
+        
+      }
+      that.setData({
+        userList:res.data.rows
+      });
     },
     fail: function (e) {
 

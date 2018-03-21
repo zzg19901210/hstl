@@ -22,7 +22,7 @@ App({
             code:res.code
           },
           success: function (data) {
-            // console.log(data.data.data.obj);
+            console.log(data.data.data.obj);
             if ("2" == data.data.data.msg){
               that.globalData.myGlobalUserId = 0;
               that.globalData.wechar_user = data.data.data.obj;

@@ -103,6 +103,7 @@
   padding:15rpx 0 15rpx 0;
   width: 98%;
   border-bottom: 1px solid #ecf0f1;
+  min-height: 150rpx;
   
 }
 .specialist .user{
@@ -112,7 +113,6 @@
   padding-left: 5rpx;
   text-align: center;
   position: relative;
-  margin-top: 10%;
 }
 
 .specialist .item .user > image{
@@ -120,6 +120,11 @@
   height: 80rpx;
   border-radius: 80rpx;
   display: block;
+}
+.specialist .nonepinglun{
+  height: 100rpx;
+  text-align:center;
+  font-size: 25rpx;
 }
 .specialist .item .user >text {
   font-size: 25rpx;

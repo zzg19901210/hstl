@@ -147,6 +147,7 @@ var saveSubmit = function (that) {
       bodyDsec: that.data.context,
       picUrl: that.data.files.toString(),
       status: '1',
+      workType: app.globalData.myGlobalUserId,
       userId: app.globalData.myGlobalUserId,
       departmentId: app.globalData.myUserInfo.departmentId
     },
@@ -193,7 +194,7 @@ var yezheng=function (that){
   }
   if (that.data.files.length < 1) {
     wx.showToast({
-      title: '请选择图片描述',
+      title: '请选择图片介绍',
       duration: 1000,
       icon: 'none'
     });
