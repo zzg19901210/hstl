@@ -5,16 +5,14 @@
 </view>
  <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-     <navigator url="/pages/disabuse/reply/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}"> 
+     <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}"> 
       <view class='item'>
         <view class='list_context'>
           <image src='{{cont.pic_url}}'></image>
           <text class='c_title'>{{cont.title}}</text>
           <view class='user'>
-
-            <image src='{{cont.headProct}}'></image>
+            <image src='{{cont.headPortrait}}'></image>
             <text class='correct'>{{cont.nickname}}</text>
-            
           </view>
         </view>
       </view>
@@ -31,7 +29,6 @@
   <text>{{loadMoreData}}</text>
   <text>{{refreshTime}}</text>
 </view>
-
 <view class='btn-add'>
     <button class="weui-btn" type="primary" bindtap='onAdd'>提问</button>
 </view>

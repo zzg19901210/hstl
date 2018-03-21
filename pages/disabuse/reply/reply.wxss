@@ -7,8 +7,8 @@
 .info .user{
   float: right;
   width: 100rpx;
-  padding-right: 5rpx;
-  padding-left: 5rpx;
+  padding: 15rpx 0 0 5rpx;
+  
   text-align: center;
 }
 .info .user > image{
@@ -130,4 +130,15 @@
   width: 80%;
   padding-left: 120rpx;
   font-size: 25rpx;
+}
+.btn-add{
+  position: fixed;
+  bottom: 10rpx;
+  width: 96%;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+
+}
+.btn-add button{
+  background-color: #3c9ae8;
 }

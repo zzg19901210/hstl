@@ -132,7 +132,7 @@ var saveSubmit = function (that) {
   });
 
   //验证表单
-  if (yezheng(that)){
+  if (yezheng(that)) {
     wx.hideLoading();
     return;
   }
@@ -174,7 +174,7 @@ var saveSubmit = function (that) {
   });
 
 }
-var yezheng=function (that){
+var yezheng = function (that) {
   if (that.data.title.length < 1) {
     wx.showToast({
       title: '请输入问题描述',
@@ -183,17 +183,17 @@ var yezheng=function (that){
     });
     return true;
   }
-  if(that.data.context.length<1){
+  if (that.data.context.length < 1) {
     wx.showToast({
       title: '请输入问题描述',
-      duration:1000,
-      icon:'none'
+      duration: 1000,
+      icon: 'none'
     });
     return true;
   }
   if (that.data.files.length < 1) {
     wx.showToast({
-      title: '请选择图片描述',
+      title: '请输入问题描述',
       duration: 1000,
       icon: 'none'
     });

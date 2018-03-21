@@ -1,10 +1,15 @@
 // pages/disabuse/reply/reply.js
+
+const app = getApp();
+const disabuseInfoUrl = app.globalData.serverUrl + "/studyDisabuseInfoAction/disabuseInfo.json";
+const disabuseReplyListUrl = app.globalData.serverUrl + "/studyDisabuseInfoAction/disabuseReplyList.json";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    disabuseId:1,
     disabuseInfo: {
       nickname: '张三',
       headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
@@ -25,8 +30,73 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      disabuseId: options.disabuseId
+    });
+    getDisabuseInfo(this);
+    wx.setNavigationBarTitle({
+      title: "答疑详情",
+      success: function (res) {
+        // success
+      }
+    });
   },
 
   
-})
+});
+//获取详细信息
+var getDisabuseInfo = function (that) {
+  wx.showLoading({
+    icon: "loading",
+    title: "请稍等..."
+  });
+
+  wx.request({
+    url: disabuseReplyListUrl,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      id: that.data.disabuseId,
+    },
+    success: function (res) {
+
+    },
+    fail: function (e) {
+    
+    },
+    complete: function () {
+      wx.hideLoading();  //隐藏Toast
+      getReplyList(that);
+    }
+  });
+
+}
+
+var getReplyList=function(that){
+  wx.showLoading({
+    icon: "loading",
+    title: "请稍等..."
+  });
+
+  wx.request({
+    url: disabuseInfoUrl,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      disabuseId: that.data.disabuseId,
+    },
+    success: function (res) {
+
+    },
+    fail: function (e) {
+
+    },
+    complete: function () {
+      wx.hideLoading();  //隐藏Toast
+    }
+  });
+}

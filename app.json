@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/disabuse/new/new",
     "pages/disabuse/disabuse",
+    "pages/disabuse/new/new",
     "pages/home/home",
     "pages/disabuse/reply/reply",
     "pages/examination/index",
@@ -21,7 +21,8 @@
     "pages/logs/logs",
     "pages/dz/dz",
     "pages/me/me",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/disabuse/replyNew/new"
   ],
   "window": {
     "backgroundTextStyle": "light",

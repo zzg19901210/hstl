@@ -39,3 +39,7 @@
   </view>
   
 </view>
+
+<view class='btn-add'>
+    <button class="weui-btn" type="primary" bindtap='onAdd'>我要回复</button>
+</view>
