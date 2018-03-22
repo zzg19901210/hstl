@@ -1,0 +1,17 @@
+
+@import '/style/loading.wxss';
+
+page{
+  background-color: #ecf0f1;
+}
+
+.item{
+  background-color: #ffffff;
+}
+.list_context{
+  border-bottom: 1px solid #ecf0f1;
+  height: 160rpx;
+  width: 98%;
+  padding-left: 15rpx;
+}
+

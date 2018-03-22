@@ -30,14 +30,19 @@
   </view>
   <view class='item' wx:for="{{userList}}" wx:for-item="user" wx:key="*this">
     <view class='user'>
-      <image src='{{user.headProt}}'></image>
-      <text>{{user.nickname}}</text>
+      <image src='{{user.headPortrait}}'></image>
+    </view>
+    <view class='nickname'>
+      {{user.nickname}}
     </view>
     <view class='context'>
       {{user.context}}
     </view>
+    <view class='createTime'>
+      {{user.createTime}}
+    </view>
   </view>
-  <view class='nonepinglun'>暂无评论</view>
+  <view class='nonepinglun'  wx:if="{{userList.length <1 }}">暂无评论</view>
 </view>
 
 <view class='btn-add'>

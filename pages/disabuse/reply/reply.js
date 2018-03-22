@@ -9,11 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    disabuseId:1,
+    disabuseId: 1,
     disabuseInfo: {
-     
+
     },
-    userList:[{
+    userList: [{
       // nickname: '张三',
       // headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
       // context: '我们有时设置一个对象盒子时候避免对象没有内容时候不能撑开，但内容多少不能确定所以又不能固定高度，这个时候我们就会需要css来设置min-height最小高度撑高对象盒子。当内容少时候最小高度能将内容显示出，如果内容多余最小高度能装下时候，对象也会再随内容增多而增高。',
@@ -48,7 +48,7 @@ Page({
     })
   }
 
-  
+
 });
 //获取详细信息
 var getDisabuseInfo = function (that) {
@@ -70,11 +70,11 @@ var getDisabuseInfo = function (that) {
       console.log(res.data);
       var obj = res.data.data.obj;
       that.setData({
-        disabuseInfo:obj
+        disabuseInfo: obj
       });
     },
     fail: function (e) {
-    
+
     },
     complete: function () {
       wx.hideLoading();  //隐藏Toast
@@ -84,7 +84,7 @@ var getDisabuseInfo = function (that) {
 
 }
 
-var getReplyList=function(that){
+var getReplyList = function (that) {
   wx.showLoading({
     icon: "loading",
     title: "请稍等..."
@@ -100,11 +100,11 @@ var getReplyList=function(that){
       disabuseId: that.data.disabuseId,
     },
     success: function (res) {
-      if (res.data.rows.length<1){
-        
+      if (res.data.rows.length < 1) {
+
       }
       that.setData({
-        userList:res.data.rows
+        userList: res.data.rows
       });
     },
     fail: function (e) {
@@ -115,3 +115,45 @@ var getReplyList=function(that){
     }
   });
 }
+
+function getDateDiff(dateTimeStamp) {
+  var result;
+  var minute = 1000 * 60;
+  var hour = minute * 60;
+  var day = hour * 24;
+  var halfamonth = day * 15;
+  var month = day * 30;
+  var now = new Date().getTime();
+  var diffValue = now - dateTimeStamp;
+  if (diffValue < 0) {
+    return;
+  }
+  var monthC = diffValue / month;
+  var weekC = diffValue / (7 * day);
+  var dayC = diffValue / day;
+  var hourC = diffValue / hour;
+  var minC = diffValue / minute;
+  if (monthC >= 1) {
+    if (monthC <= 12)
+      result = "" + parseInt(monthC) + "月前";
+    else {
+      result = "" + parseInt(monthC / 12) + "年前";
+    }
+  }
+  else if (weekC >= 1) {
+    result = "" + parseInt(weekC) + "周前";
+  }
+  else if (dayC >= 1) {
+    result = "" + parseInt(dayC) + "天前";
+  }
+  else if (hourC >= 1) {
+    result = "" + parseInt(hourC) + "小时前";
+  }
+  else if (minC >= 1) {
+    result = "" + parseInt(minC) + "分钟前";
+  } else {
+    result = "刚刚";
+  }
+
+  return result;
+};

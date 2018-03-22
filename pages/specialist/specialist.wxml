@@ -1,0 +1,27 @@
+<view class="header" hidden="{{hideHeader}}">
+  <view class="weui-loading"></view>
+  <text>下拉刷新  </text>
+  <text>{{refreshTime}}</text>
+</view>
+ <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+     <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}"> 
+      <view class='item'>
+        <view class='list_context'>
+          <image src='{{cont.pic[0]}}'></image>
+          
+        </view>
+      </view>
+     </navigator> 
+  </block>
+</scroll-view> 
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<view class="bottom" hidden="{{hideBottom}}">
+  <view class="weui-loading" hidden='{{hideBottom_loading}}'></view>
+  <text>{{loadMoreData}}</text>
+  <text>{{refreshTime}}</text>
+</view>

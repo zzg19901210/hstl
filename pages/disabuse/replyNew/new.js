@@ -69,7 +69,7 @@ var saveSubmit = function (that) {
     },
     success: function (res) {
       // console.log(res);
-      if (200 == res.statusCode){
+      if ("200" == res.statusCode){
         wx.navigateBack(1);
 
         wx.showModal({
@@ -80,7 +80,7 @@ var saveSubmit = function (that) {
       }
       wx.showModal({
         title: '提示',
-        content: '回复失败' + res.statusCode,
+        content: '回复失败:错误代码 ' + res.statusCode,
         showCancel: false
       })
       return ;
