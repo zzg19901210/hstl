@@ -5,14 +5,16 @@
 </view>
  <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-     <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}"> 
+     <!-- <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}">  -->
       <view class='item'>
         <view class='list_context'>
-          <image src='{{cont.pic[0]}}'></image>
-          
+          <image src='{{cont.headPortrait}}'></image>
+          <view class='context'>
+              {{cont.nickname}}
+          </view>
         </view>
       </view>
-     </navigator> 
+     <!-- </navigator>  -->
   </block>
 </scroll-view> 
 <view class="body-view">

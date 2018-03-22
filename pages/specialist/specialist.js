@@ -1,7 +1,7 @@
 // pages/specialist/specialist.js
 
 const app = getApp();
-const getSpecialistUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/app/getSpecialist.json";
+const getSpecialistUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/getSpecialist.json";
 const page_size=10;
 Page({
 
@@ -19,7 +19,10 @@ Page({
     loadMoreData: '加载更多……',
     list: [{
       id: 1,
-      title: '关于使用啦啦的问题',
+      headPortrait: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
+      nickname: '张三'
+    },{
+      id: 1,
       headPortrait: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
       nickname: '张三'
     }]
@@ -69,7 +72,7 @@ Page({
       currentPage: tempCurrentPage,
       hideBottom: false
     })
-    loadContxt(this, cur_page);
+    loadContxt(this);
 
   },
   scroll: function (event) {

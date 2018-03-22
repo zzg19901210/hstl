@@ -1,0 +1,24 @@
+<view class="header">
+   <image src="{{headPortrait}}" bindtap='chooseImage'></image>
+</view>
+<view class='page_bd'>
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="editUser/editUser" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+     
+      <view class="weui-cell__bd">姓名</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{myUserInfo.nickname}}</view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+     
+      <view class="weui-cell__bd">联系电话</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{myUserInfo.phoneNo}}</view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+     
+      <view class="weui-cell__bd">个人介绍</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{myUserInfo.userDesc}}</view>
+    </navigator>
+  </view>
+
+  
+</view>

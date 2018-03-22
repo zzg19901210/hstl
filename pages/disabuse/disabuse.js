@@ -72,7 +72,7 @@ Page({
       currentPage: tempCurrentPage,
       hideBottom: false
     })
-    loadContxt(this, cur_page);
+    loadContxt(this);
 
   },
   scroll: function (event) {

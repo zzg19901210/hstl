@@ -10,8 +10,22 @@ page{
 }
 .list_context{
   border-bottom: 1px solid #ecf0f1;
-  height: 160rpx;
-  width: 98%;
-  padding-left: 15rpx;
+  height: 130rpx;
+  width: 96%;
+  margin-left: 15rpx;
+  line-height: 130rpx;
+}
+.list_context > image{
+  margin: 0 auto;
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100rpx;
+  vertical-align: middle;
+  display: inline-block;
+}
+.list_context .context{
+  display: inline-block;
+  width: 80%;
+  margin-left: 20rpx;
 }
 

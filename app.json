@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/specialist/specialist",
+    "pages/me/me",
+    "pages/me/editUser/editUser",
     "pages/home/home",
+    "pages/specialist/specialist",
     "pages/disabuse/disabuse",
     "pages/disabuse/replyNew/new",
     "pages/disabuse/new/new",
@@ -22,7 +24,6 @@
     "pages/zj/arc_context/index",
     "pages/logs/logs",
     "pages/dz/dz",
-    "pages/me/me",
     "pages/index/index"
   ],
   "window": {
