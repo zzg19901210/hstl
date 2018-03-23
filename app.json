@@ -4,6 +4,7 @@
     "pages/me/editUser/editUser",
     "pages/home/home",
     "pages/specialist/specialist",
+    "pages/home/home",
     "pages/disabuse/disabuse",
     "pages/disabuse/replyNew/new",
     "pages/disabuse/new/new",
