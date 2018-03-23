@@ -1,8 +1,8 @@
-// pages/me/liveList/list.js
+
 
 const app = getApp();
-const url = app.globalData.serverUrl + "/liveUserAction/getListByUserId.json";
-const page_size=10;
+const url = app.globalData.serverUrl + "/vodUserAction/getByUserId.json";
+const page_size = 10;
 Page({
 
   /**
@@ -21,7 +21,7 @@ Page({
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
     list: [
-      
+
     ]
 
   },
@@ -30,17 +30,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     wx.setNavigationBarTitle({
-      title: '我的直播记录',
+      title: '我的视频记录',
       success: function (res) {
         // success
       }
     });
 
-   
+
   },
-  onShow:function(e){
+  onShow: function (e) {
     loadContxt(this);
   },
   onPullDownRefresh: function () {
@@ -123,7 +123,7 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
-      userId: app.globalData.myGlobalUserId
+      // userId: app.globalData.myGlobalUserId
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -145,7 +145,7 @@ var loadContxt = function (that) {
           hideBottom: true,
           allPages: page + 2
         });
-        if (res.data.list.length === 0) {
+        if (res.data.rows.length === 0) {
           stopLoding(that);
           wx.showToast({
             title: '没有更多数据了',

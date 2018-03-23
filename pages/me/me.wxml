@@ -17,21 +17,21 @@
   </view>
   <view class="weui-cells__title"></view>
   <view class="weui-cells weui-cells_after-title">
-    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="vodList/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
         <image src="/images/home_icon/lz.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
       </view>
       <view class="weui-cell__bd">视频记录</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
-    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="arcList/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
         <image src="/images/home_icon/zj.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
       </view>
       <view class="weui-cell__bd">资料记录 </view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
-    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="liveList/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
         <image src="/images/home_icon/zb.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
       </view>

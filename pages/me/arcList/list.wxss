@@ -27,6 +27,7 @@ page{
   padding-left: 155rpx;
 }
 .list_context .text_context .c_title{
+
   display: block;
   line-height: 60rpx;
   margin-top: 5rpx;
@@ -46,5 +47,5 @@ page{
 }
 .list_context .context .left{
   float: left;
-  width: 60%;
+  width: 40%;
 }

@@ -1,0 +1,40 @@
+<view class="header" hidden="{{hideHeader}}">
+  <view class="weui-loading"></view>
+  <text>下拉刷新  </text>
+  <text>{{refreshTime}}</text>
+</view>
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+    <navigator url="/pages/zj/arc_context/index?aId={{cont.id}}&arc_title={{cont.title}}">
+      <view class='item'>
+        <view class='list_context'>
+
+          <image src='{{cont.pic_ali[0]}}'></image>
+          <view class='text_context'>
+            <text class='c_title'>{{cont.title}}</text>
+            <view class='context'>
+
+              <text class='left' wx:if="{{cont.source  == 1}}">来源：苹果客户端</text>
+              <text class='left' wx:elif="{{cont.source  == 2}}">来源：Android 客户端</text>
+              <text class='left' wx:elif="{{cont.source  == 3}}">来源：微信网页</text>
+              <text class='left' wx:elif="{{cont.source  == 4}}">来源：微信小程序</text>
+              <text class='left' wx:else>来源：其他</text>
+              <text>{{cont.writer}}</text>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </navigator>
+  </block>
+</scroll-view>
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<view class="bottom" hidden="{{hideBottom}}">
+  <view class="weui-loading" hidden='{{hideBottom_loading}}'></view>
+  <text>{{loadMoreData}}</text>
+  <text>{{refreshTime}}</text>
+</view>

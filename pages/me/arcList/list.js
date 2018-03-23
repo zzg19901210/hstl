@@ -1,8 +1,8 @@
-// pages/me/liveList/list.js
-
+// pages/me/arcList/list.js
+//获取用户文章浏览信息
 const app = getApp();
-const url = app.globalData.serverUrl + "/liveUserAction/getListByUserId.json";
-const page_size=10;
+const url = app.globalData.serverUrl + "/archivesUserAction/getLearnByUserId.json";
+const page_size = 10;
 Page({
 
   /**
@@ -21,7 +21,7 @@ Page({
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
     list: [
-      
+
     ]
 
   },
@@ -30,17 +30,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     wx.setNavigationBarTitle({
-      title: '我的直播记录',
+      title: '我的资料浏览记录',
       success: function (res) {
         // success
       }
     });
 
-   
+
   },
-  onShow:function(e){
+  onShow: function (e) {
     loadContxt(this);
   },
   onPullDownRefresh: function () {
@@ -123,7 +123,7 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
-      userId: app.globalData.myGlobalUserId
+      // userId: app.globalData.myGlobalUserId
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -131,21 +131,21 @@ var loadContxt = function (that) {
       if (page === 1) {
         list = []
         that.setData({
-          list: res.data.list,
+          list: res.data.rows,
           hideHeader: true
         });
         stopLoding(that);
       } else {
         list = that.data.list
-        for (var i = 0; i < res.data.list.length; i++) {
-          list.push(res.data.list[i]);
+        for (var i = 0; i < res.data.rows.length; i++) {
+          list.push(res.data.rows[i]);
         }
         that.setData({
           list: list,
           hideBottom: true,
           allPages: page + 2
         });
-        if (res.data.list.length === 0) {
+        if (res.data.rows.length === 0) {
           stopLoding(that);
           wx.showToast({
             title: '没有更多数据了',

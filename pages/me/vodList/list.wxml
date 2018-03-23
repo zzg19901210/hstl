@@ -14,10 +14,10 @@
           <text class='c_title'>{{cont.title}}</text>
           <view class='context'>
             <text class='left'>{{cont.createTime}}</text>
-            <text wx:if="{{cont.source  == 1}}">来源：苹果客户端</text>
-            <text wx:elif="{{cont.source  == 2}}">来源：Android 客户端</text>
-            <text wx:elif="{{cont.source  == 3}}">来源：微信网页</text>
-            <text wx:elif="{{cont.source  == 4}}">来源：微信小程序</text>
+            <text wx:if="{{cont.source  == 1}}">来源：Android客户端</text>
+            <text wx:elif="{{cont.source  == 2}}">来源：苹果客户端</text>
+            <text wx:elif="{{cont.source  == 3}}">来源：微信客户端</text>
+            <text wx:elif="{{cont.source  == 4}}">来源：后台</text>
             <text wx:else>来源：其他</text>
           </view>
         </view>

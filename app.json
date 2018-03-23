@@ -1,11 +1,13 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/me/arcList/list",
+    "pages/me/vodList/list",
     "pages/me/liveList/list",
     "pages/me/me",
     "pages/me/editUser/editArea/editArea",
     "pages/me/editUser/editText/editText",
     "pages/me/editUser/editUser",
-    "pages/home/home",
     "pages/specialist/specialist",
     "pages/disabuse/disabuse",
     "pages/disabuse/replyNew/new",
