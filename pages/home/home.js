@@ -66,7 +66,7 @@ Page({
       },
       {
         name: '专家信息',
-        url: '/pages/disabuse/disabuse',
+        url: '/pages/specialist/specialist',
         icon: '/images/home_icon/zjjd.png'
       }
     ]

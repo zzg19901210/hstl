@@ -51,7 +51,7 @@ Page({
   onLoad: function () {
     var that = this;
     wx.setNavigationBarTitle({
-      title: '职教培训',
+      title: '党政资料信息',
       success: function (res) {
         // success
       }

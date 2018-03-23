@@ -1,6 +1,6 @@
 <view class="header">
   <view class="content">
-    <image src="{{myUserInfo.headPortrait}}" ></image>
+    <image src="{{myUserInfo.headPortrait}}"></image>
     <view class="nickname">{{myUserInfo.nickname}}</view>
   </view>
 </view>
@@ -13,21 +13,49 @@
       <view class="weui-cell__bd">资料修改</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
+
+  </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
     <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
-        <image src="/images/xuexizhuangkuang.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+        <image src="/images/home_icon/lz.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
       </view>
-      <view class="weui-cell__bd">学习状况</view>
+      <view class="weui-cell__bd">视频记录</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="/images/home_icon/zj.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">资料记录 </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="/images/home_icon/zb.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">直播记录</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
     <navigator url="/pages/achievement/index?cjlx=1" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
-        <image src="/images/me_chengji.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+        <image src="/images/home_icon/zx.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
       </view>
       <view class="weui-cell__bd">我的成绩</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
+    <navigator url="/pages/achievement/index?cjlx=2" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="/images/home_icon/sgcjcx.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">施工成绩</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
   </view>
 
-  
+
 </view>

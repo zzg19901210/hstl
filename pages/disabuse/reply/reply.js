@@ -36,6 +36,9 @@ Page({
       }
     });
   },
+  onShow:function(e){
+    getReplyList(this);
+  },
   onAdd: function (event) {
     wx.navigateTo({
       url: '/pages/disabuse/replyNew/new?disabuseId=' + this.data.disabuseId + '&title=' + this.data.disabuseInfo.title

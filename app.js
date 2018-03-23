@@ -23,11 +23,11 @@ App({
           },
           success: function (data) {
             console.log(data.data.data.obj);
-            if ("2" == data.data.data.msg){
+            if ("2" == data.data.msg){
               that.globalData.myGlobalUserId = 0;
               that.globalData.wechar_user = data.data.data.obj;
-              wx.navigateTo({
-                url: '../../pages/user/index'
+              wx.redirectTo({
+                url: '../../pages/user/index',
               });
             }else{
               that.globalData.myGlobalUserId = data.data.data.obj.id;

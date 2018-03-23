@@ -48,6 +48,11 @@ Page({
     });
 
   },
+  onShow:function(){
+    this.setData({
+      myUserInfo: app.globalData.myUserInfo
+    });
+  },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

@@ -25,17 +25,17 @@ Page({
     var title = "职教考试";
     if("1"==options.kslx){
       title ="职教考试"
-      htmlUrl = htmlUrl + "?departmentId=" + app.globalData.myUserInfo.departmentId + "&userId=" + app.globalData.myGlobalUserId + "&workType=" + app.globalData.myUserInfo.workType;
+      htmlUrl = zj_url + "?departmentId=" + app.globalData.myUserInfo.departmentId + "&userId=" + app.globalData.myGlobalUserId + "&workType=" + app.globalData.myUserInfo.workType;
     }else{
       title ="施工考试"
-      htmlUrl = htmlUrl + "?workId=" + options.wordId + "&userId=" + app.globalData.myGlobalUserId;
+      htmlUrl = sg_url + "?workId=" + options.wordId + "&userId=" + app.globalData.myGlobalUserId;
     }
     console.log(htmlUrl);
     this.setData({
       webUrl:htmlUrl
     });
     wx.setNavigationBarTitle({
-      title: "施工考试",
+      title: title,
       success: function (res) {
         // success
       }

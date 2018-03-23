@@ -49,6 +49,7 @@ Page({
       })
     }
   }, changeCode() {
+    //获取验证码
     var _this = this
     let telephone = this.data.telephone
     if (telephone.length != 11 || isNaN(telephone)) {
@@ -69,7 +70,7 @@ Page({
     wx.request({
       url: sendCode,
       data: {
-        username: this.data.telephone
+        mobile: this.data.telephone
       },
       header: {
         'context-type': 'application/x-www-form-urlencoded',
@@ -111,6 +112,7 @@ Page({
 
   },
   phoneinput(e) {
+    //手机输入
     console.log(e)
     let value = e.detail.value
     console.log(value)
@@ -126,11 +128,14 @@ Page({
     })
   },
   bindAgreeChange: function (e) {
+    //绑定同意条款
     this.setData({
       isAgree: !!e.detail.value.length
     });
+    
   },
   btnBindPhone: function (e) {
+    //保存绑定手机信息
     let telephone = this.data.telephone
     if (telephone.length != 11 || isNaN(telephone)) {
       wx.showToast({

@@ -1,0 +1,14 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="{{editText}}" bindinput='titleinput' />
+      </view>
+    </view>
+  </view>
+
+  <button class="weui-btn" bindtap="onSubmit" style='background-color: #3c9ae8;' type="primary">修改</button>
+
+</view>

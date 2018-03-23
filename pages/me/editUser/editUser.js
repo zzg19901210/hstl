@@ -3,7 +3,7 @@
 const app = getApp()
 
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
-const save_url = app.globalData.serverUrl + "/common/upload/saveUserInfo.json";
+const save_url = app.globalData.serverUrl + "/sysuserController/updateUserInfo.json";
 Page({
 
   /**
@@ -40,6 +40,12 @@ Page({
       }
     })
   },
+  onShow:function(e){
+    this.setData({
+      myUserInfo: app.globalData.myUserInfo,
+      headPortrait: app.globalData.myUserInfo.headPortrait
+    });
+  }
 })
 var upload = function (that, path) {
 
@@ -74,6 +80,7 @@ var upload = function (that, path) {
       that.setData({
         headPortrait: data.data.list[0].uri
       });
+      saveTouxiang();
     },
     fail: function (e) {
       console.log(e);
