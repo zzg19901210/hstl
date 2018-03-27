@@ -44,8 +44,12 @@ page{
   line-height: 50rpx;
   height: 50rpx;
   color: #95a5a6;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list_context .context .left{
   float: left;
-  width: 40%;
+  width: 60%;
 }

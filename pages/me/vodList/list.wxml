@@ -5,7 +5,7 @@
 </view>
 <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-    <!-- <navigator url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}"> -->
+     <navigator url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}"> 
     <view class='item'>
       <view class='list_context'>
 
@@ -24,7 +24,7 @@
 
       </view>
     </view>
-    <!-- </navigator> -->
+     </navigator> 
   </block>
 </scroll-view>
 <view class="body-view">
