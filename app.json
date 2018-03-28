@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/me/bindUser/user",
     "pages/home/home",
+    "pages/me/bindUser/user",
     "pages/me/arcList/list",
     "pages/me/vodList/list",
     "pages/me/liveList/list",
