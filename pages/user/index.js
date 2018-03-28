@@ -1,7 +1,7 @@
 // pages/user/index.js
 const app = getApp()
 const sendCode = app.globalData.serverUrl + "/smsManagerAction/sendRegisterSMSCode.json";
-const bindUser = app.globalData.serverUrl + "/studyLiveInfoAction/getAllLiveInfo.json";
+const bindUser = app.globalData.serverUrl + "/sysuserController/bindUserByPhone.json";
 var validateUrl = "";
 Page({
 

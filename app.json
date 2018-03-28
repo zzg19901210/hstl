@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/me/bindUser/user",
     "pages/home/home",
     "pages/me/arcList/list",
     "pages/me/vodList/list",
