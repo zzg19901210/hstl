@@ -13,9 +13,9 @@ Page({
    */
   onLoad: function (options) {
 
-    // var url = "http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstlTest&scope=snsapi_base&userId=" + this.globalData.myGlobalUserId;
-    // this.setData({
-    //   wechar_url:url
-    // });
+    var url = "http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstlTest&scope=snsapi_base&userId=" + this.globalData.myGlobalUserId;
+    this.setData({
+      wechar_url:url
+    });
   }
 })
