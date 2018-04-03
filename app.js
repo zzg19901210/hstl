@@ -25,6 +25,7 @@ App({
             console.log(data.data.data.obj);
             if ("2" == data.data.msg){
               that.globalData.myGlobalUserId = 0;
+              console.log(data.data.data.obj);
               that.globalData.wechar_user = data.data.data.obj;
               wx.redirectTo({
                 url: '../../pages/user/index',

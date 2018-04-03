@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/study/index",
+    "pages/splz/index",
     "pages/home/home",
     "pages/me/bindUser/user",
     "pages/me/arcList/list",
@@ -17,8 +19,6 @@
     "pages/examination/index",
     "pages/examination/context/index",
     "pages/achievement/index",
-    "pages/splz/index",
-    "pages/study/index",
     "pages/zj/zj",
     "pages/video_list/index",
     "pages/user/index",

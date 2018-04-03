@@ -1,21 +1,36 @@
-<view class="header">
-  <view class="title">
-    <image src="/images/head.png"></image>
-    <text class="nickname">Sikalng、</text>
-    <image src="/images/time.png"></image>
-    <text class="nickname">05:24</text>
+<view class='header'>
+  <view class="contxt">
+    <image src="{{myUserInfo.headPortrait}}"></image>
+    <view class="nickname">{{myUserInfo.nickname}}</view>
   </view>
-  <view class='context'>
-    <view class='c_title'>模拟考试第一次</view>
-    <view class='c_other'>
-      <text>已做(15)题/总分100分/当前题目(5)分</text>
-    </view>
+  <view class='timer'>
+    <view>总题数：10</view>
+    <view>已完成：0</view>
+    <view>{{clock}}</view>
+  </view>
+  <camera device-position="front" flash="off" binderror="error" style=""></camera>
+
+</view>
+
+<view class='start-ks'>
+  <button class='btn-startKs' bindtap="startKs" hidden='{{hidStart}}'>开始考试</button>
+</view>
+<view class='body-context' hidden='{{!hidStart}}' >
+  <view class="weui-cells__title" >1、我国的火警报警电话是( )？[8分]</view>
+  <view class="weui-cells weui-cells_after-title">
+  
+    <radio-group bindchange="radioChange">
+      <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+        <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+        <view class="weui-cell__bd">{{item.name}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+          <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+        </view>
+      </label>
+    </radio-group>
+
   </view>
 </view>
-<view class='problem'>
-  <text>15题：举例asp.net页面之间传递的几种方式</text>
-  <view class='hr'></view>
-  <view class="daan">
-    
-  </view>
-</view>
+<button class='button' bindtap="next" hidden='{{!hidStart}}'>下一题</button>
+
+<button type="primary" bindtap="next" hidden='{{!hidStart}}'>完成考试</button>

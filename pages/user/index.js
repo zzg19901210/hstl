@@ -78,35 +78,43 @@ Page({
       },
       success: function (res) {
         // let data = res.data
-        if (false) {
-          _this.setData({
-            codeDis: false
-          });
-
-          setTimeout(function () {
-            wx.hideToast()
-          }, 2000);
-        } else {
-          _this.setData({
-            phoneCode: 60,
-            serverCode: res.data.data.code
+        if (res.data.status=="0"){
+          wx.showToast({
+            title: '获取验证码失败，该手机不在系统中！',
+            icon:'none'
           })
-          console.log(res.data.data.code);
-          let time = setInterval(() => {
-            let phoneCode = _this.data.phoneCode
-            phoneCode--
+        }else{
+          if (false) {
             _this.setData({
-              phoneCode: phoneCode
+              codeDis: false
+            });
+
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000);
+          } else {
+            _this.setData({
+              phoneCode: 60,
+              serverCode: res.data.data.code
             })
-            if (phoneCode == 0) {
-              clearInterval(time)
+            console.log(res.data.data.code);
+            let time = setInterval(() => {
+              let phoneCode = _this.data.phoneCode
+              phoneCode--
               _this.setData({
-                phoneCode: "获取验证码",
-                flag: true
+                phoneCode: phoneCode
               })
-            }
-          }, 1000)
+              if (phoneCode == 0) {
+                clearInterval(time)
+                _this.setData({
+                  phoneCode: "获取验证码",
+                  flag: true
+                })
+              }
+            }, 1000)
+          }
         }
+        
       }
     })
 
@@ -154,15 +162,23 @@ Page({
       })
       return
     }
+    if (codephone != serverCode){
+      wx.showToast({
+        title: '请输入正确的验证码',
+        icon: "none",
+        duration: 2000
+      })
+      return
+    }
    
-    console.log(app.globalData.wecharUser.openid);
+    console.log(app.globalData.wechar_user.openid);
     wx.request({
       url: bindUser,
       data: {
         phoneNo: this.data.telephone,
         code: this.data.codePhone,
         type: '2',
-        weixinProjectId:app.globalData.wecharUser.openid
+        weixinProjectId: app.globalData.wechar_user.openid
       },
       header: {
         'context-type': 'application/x-www-form-urlencoded',

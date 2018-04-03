@@ -46,5 +46,5 @@ page{
 }
 .list_context .context .left{
   float: left;
-  width: 60%;
+  width: 50%;
 }
