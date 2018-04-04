@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/study/index",
-    "pages/splz/index",
+"pages/study/index",
     "pages/home/home",
+    "pages/splz/index",
     "pages/me/bindUser/user",
     "pages/me/arcList/list",
     "pages/me/vodList/list",

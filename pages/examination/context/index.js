@@ -25,7 +25,8 @@ Page({
     var title = "职教考试";
     if("1"==options.kslx){
       title ="职教考试"
-      htmlUrl = zj_url + "?departmentId=" + app.globalData.myUserInfo.departmentId + "&userId=" + app.globalData.myGlobalUserId + "&workType=" + app.globalData.myUserInfo.workType;
+      // htmlUrl = zj_url + "?departmentId=" + app.globalData.myUserInfo.departmentId + "&userId=" + app.globalData.myGlobalUserId + "&workType=" + app.globalData.myUserInfo.workType;
+      htmlUrl = zj_url + "?departmentId=0&userId=" + app.globalData.myGlobalUserId + "&workType=0";
     }else{
       title ="施工考试"
       htmlUrl = sg_url + "?workId=" + options.wordId + "&userId=" + app.globalData.myGlobalUserId;

@@ -3,11 +3,23 @@
 const app = getApp()
 var total_micro_second = 36 * 60 * 60 * 1000;
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
+const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
+
+
 Page({
   data: {
     src: 'https://t12.baidu.com/it/u=177559061,2124184426&fm=173&app=12&f=JPEG?w=640&h=480&s=65703BC20FD238DC00FC918203005092',
     clock: date_format(total_micro_second),
     hidStart:false,
+    list:[],
+    index:0,
+    indexQuest:{},
+    files:[],
+    answerNums:0,
+    answerList:[],
+    checkedValue:'',
+    hideSubimt:true,
+    setObj:{},
     radioItems: [
       { name: 'A:110', value: '0' },
       { name: 'B:110', value: '1', checked: true },
@@ -26,25 +38,105 @@ Page({
     this.setData({
       hidStart:true
     });
-    count_down(this)
+    getQuestion(this);
+    
     takePhoto(this);
+    
   },
   error(e) {
     console.log(e.detail)
   },
   next(e){
+    takePhoto(this);
+    var cur_index=this.data.index;
+    var cur_answerNums = this.data.answerNums;
+    cur_index++;
+    var hideSubimt=true;
+    //判断题目是否正确
+    var isRight=1;
+    if (this.data.indexQuest.answer == this.data.checkedValue){
+      cur_answerNums++;
+      console.log('回答正确！');
+    }else{
+      console.log("回答错误！")
+    }
+    var tmpAnswer={
+      'questionId': this.data.indexQuest.id,
+      'correctAnswer': this.data.checkedValue,
+      'answer': this.data.indexQuest.answer,
+      'questionContext': this.data.indexQuest.questions,
+      'isRight': isRight,
+      'setId':this.data.setObj.id
+    }
+    var tmpanswerList = this.data.answerList;
+    tmpanswerList.push(tmpAnswer);
     
+    //获取下一题
+    var nextQuest = this.data.list[cur_index];
+    this.setData({
+      indexQuest:nextQuest,
+      index: cur_index,
+      answerNums: cur_answerNums,
+      answerList: tmpanswerList
+    });
+    //重新组织题目
+    getChoice(this);
+    //增加题目
+    cur_index++;
+    if (this.data.list.length == cur_index) {
+      hideSubimt = false;
+      this.setData({
+        hideSubimt: hideSubimt
+      });
+    }
+    
+  },
+  submitKs:function(e){
+    var isRight = 1;
+    if (cur_index != this.data.list.length){
+      var cur_index = this.data.list.length;
+
+      var cur_answerNums = this.data.answerNums;
+      if (this.data.indexQuest.answer == this.data.checkedValue) {
+        cur_answerNums++;
+        console.log('回答正确！');
+      } else {
+        console.log("回答错误！")
+      }
+
+      var tmpAnswer = {
+        'questionId': this.data.indexQuest.id,
+        'correctAnswer': this.data.checkedValue,
+        'answer': this.data.indexQuest.answer,
+        'questionContext': this.data.indexQuest.questions,
+        'isRight': isRight,
+        'setId': this.data.setObj.id
+      }
+      var tmpanswerList = this.data.answerList;
+      tmpanswerList.push(tmpAnswer);
+
+      this.setData({
+        index: cur_index,
+        answerNums: cur_answerNums,
+        answerList: tmpanswerList
+      });
+
+    }
+    console.log(answerList);
+    console.log("完成考试！");
+    
+
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
-
+    
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
       radioItems[i].checked = radioItems[i].value == e.detail.value;
     }
-
     this.setData({
-      radioItems: radioItems
+      radioItems: radioItems,
+      checkedValue: e.detail.value
     });
   },
 })
@@ -56,16 +148,16 @@ var takePhoto=function(that) {
     success: (res) => {
       // upload(that,res.tempImagePath)
       console.log(res.tempImagePath);
+      var tems= that.data.files;
+      tems.push(res.tempImagePath);
       that.setData({
-        src: res.tempImagePath
+        files: tems
       });
     }
   })
 }
 
 var upload = function (that, path) {
-
-
   wx.showToast({
     icon: "loading",
     title: "正在上传"
@@ -113,8 +205,84 @@ var upload = function (that, path) {
 
 }
 
+//获取题目信息
+var getQuestion=function(that){
+  wx.showLoading({
+    title: '正在获取题目...'
+  })
+  wx.request({
+    url: question_url,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      nums: 10,
+      type:1,
+      workType: 0,
+      departmentId: 0,
+      catId: 0,
+      isHide: 0
+    },
+    success: function (res) {
+      //console.info(that.data.list);
+      
+      that.setData({
+        list: res.data.list,
+        index:0,
+        indexQuest: res.data.list[0],
+        setObj:res.data.data.obj
+      });
+      getChoice(that);
+      count_down(that);
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '获取题目失败',
+        showCancel: false
+      })
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
+}
 
+var getChoice=function(that){
+  var tmp1={
+    name: "A:" +that.data.indexQuest.choice_a,
+    value: 'A',
+    checked: true 
+  }
+  var tmp2 = {
+    name: "B:" +that.data.indexQuest.choice_b,
+    value: 'B'
+  }
 
+  var tmpRideo = [];
+  tmpRideo.push(tmp1);
+  tmpRideo.push(tmp2);
+  if (null != that.data.indexQuest.choice_c) {
+    var tmp3 = {
+      name: "C:"+that.data.indexQuest.choice_c,
+      value: 'C'
+    }
+    tmpRideo.push(tmp3);
+  }
+  if (null != that.data.indexQuest.choice_d){
+    var tmp4 = {
+      name: "D:" +that.data.indexQuest.choice_d,
+      value: 'D'
+    }
+    tmpRideo.push(tmp4);
+  }
+
+  
+  that.setData({
+    radioItems: tmpRideo
+  })
+}
 
 /* 毫秒级倒计时 */
 function count_down(that) {

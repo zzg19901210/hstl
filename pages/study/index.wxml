@@ -4,19 +4,21 @@
     <view class="nickname">{{myUserInfo.nickname}}</view>
   </view>
   <view class='timer'>
-    <view>总题数：10</view>
-    <view>已完成：0</view>
+    <view>总题数：{{list.length}}</view>
+    <view>已完成：{{index}}</view>
+    <view>回答正确：{{answerNums}}</view>
     <view>{{clock}}</view>
   </view>
   <camera device-position="front" flash="off" binderror="error" style=""></camera>
 
 </view>
 
-<view class='start-ks'>
-  <button class='btn-startKs' bindtap="startKs" hidden='{{hidStart}}'>开始考试</button>
+<view class='start-ks' hidden='{{hidStart}}'>
+  <view class='hr'></view>
+  <button class='btn-startKs' bindtap="startKs" >开始考试</button>
 </view>
 <view class='body-context' hidden='{{!hidStart}}' >
-  <view class="weui-cells__title" >1、我国的火警报警电话是( )？[8分]</view>
+  <view class="weui-cells__title" >{{index+1}}、{{indexQuest.questions}}</view>
   <view class="weui-cells weui-cells_after-title">
   
     <radio-group bindchange="radioChange">
@@ -31,6 +33,6 @@
 
   </view>
 </view>
-<button class='button' bindtap="next" hidden='{{!hidStart}}'>下一题</button>
+<button class='button' bindtap="next" hidden='{{!hideSubimt}}'>下一题</button>
 
-<button type="primary" bindtap="next" hidden='{{!hidStart}}'>完成考试</button>
+ <button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button> 

@@ -25,6 +25,7 @@ page {
 }
 .header .contxt  .nickname {
   text-align: center;
+  color: #7f8c8d;
 }
 .header .timer{
   float: left;
@@ -33,7 +34,7 @@ page {
   padding-left:62rpx;
   color: #7f8c8d;
   font-size: 35rpx;
-  padding-top: 30rpx;
+  padding-top: 15rpx;
 }
 .header .timer >image{
   width: 150rpx;
@@ -54,9 +55,15 @@ page {
   font-size: 40rpx;
   color: #000;
 }
+.hr{
+  border-top: 1px solid #ebebeb;
+  padding-top:30%;
+}
 .start-ks{
+  height: 100%;
+  padding: 15rpx 15rpx 0 15rpx;
   position: relative;
-  top: 20%;
+  background: #fff;
 }
 .btn-startKs{
   background-color: #3498db;
@@ -75,4 +82,5 @@ page {
 .button{
    background-color: #3498db;
    color: #fff;
+   margin-top: 15rpx;
 }
