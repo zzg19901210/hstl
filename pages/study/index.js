@@ -2,13 +2,17 @@
 
 const app = getApp()
 var total_micro_second = 36 * 60 * 60 * 1000;
+// 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
+//获取问题列表
 const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
-
+//做题日志
+const submitQuestionLogsUrl = app.globalData.serverUrl +"/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
+// 成绩提交
+const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
 
 Page({
   data: {
-    src: 'https://t12.baidu.com/it/u=177559061,2124184426&fm=173&app=12&f=JPEG?w=640&h=480&s=65703BC20FD238DC00FC918203005092',
     clock: date_format(total_micro_second),
     hidStart:false,
     list:[],
@@ -20,6 +24,7 @@ Page({
     checkedValue:'',
     hideSubimt:true,
     setObj:{},
+    src:'',
     radioItems: [
       { name: 'A:110', value: '0' },
       { name: 'B:110', value: '1', checked: true },
@@ -122,10 +127,10 @@ Page({
       });
 
     }
-    console.log(answerList);
+    // console.log(answerList);
     console.log("完成考试！");
     
-
+    submitQuestion(this);
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
@@ -249,6 +254,101 @@ var getQuestion=function(that){
   });
 }
 
+
+//提交成绩信息
+var submitQuestion = function (that) {
+  wx.showLoading({
+    title: '正在提交成绩...'
+  });
+
+  //获取随机图片并上传
+  var picUrl = that.data.files;
+  var picServerUrl = that.data.src;
+  if(picUrl.length>0){
+    for (var i = 0; i < 3; i++) {
+      var random = Math.floor(Math.random() * that.data.files.length);
+      upload(that, picUrl[random]);
+      if ("" == picServerUrl){
+        picServerUrl = that.data.src;
+      }else{
+        picServerUrl = picServerUrl + "," + that.data.src;
+      }
+     
+    }
+  }
+  
+  var totalNums = that.data.list.length;
+  var errorNums = totalNums - that.data.answerNums;
+  var avgScore = 100 / totalNums;
+  var correctScore = avgScore * that.data.answerNums;
+  var errorScore = avgScore * errorNums;
+  var percentScore = that.data.answerNums/totalNums
+  wx.request({
+    url: submitAchievement,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      setId: that.data.setObj.id,
+      enterUserId: app.globalData.myGlobalUserId,
+      correctNums: that.data.answerNums,
+      correctScore: correctScore,
+      errorNums: errorNums,
+      errorScore: errorScore,
+      costTime: total_micro_second,
+      percentScore: percentScore,
+      picUrl: picServerUrl
+    },
+    success: function (res) {
+      //提交做题日志
+      submitQuestionLogs(that);
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '提交成绩失败',
+        showCancel: false
+      })
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
+}
+
+//提交做题记录
+var submitQuestionLogs=function(that){
+  wx.showLoading({
+    title: '请稍等...'
+  });
+
+  wx.request({
+    url: submitQuestionLogsUrl,
+    header: {
+      'context-type': 'application/json',
+      'Accept': 'application/json'
+    },
+    data: that.data.answerList,
+    success: function (res) {
+      wx.redirectTo({
+        url: 'success/success?answerNums=that.data.answerNums&totalNums=that.data.list.length&costTime=total_micro_second'
+      })
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '提交日志失败',
+        showCancel: false
+      });
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
+}
+
+// 获取答案列表
 var getChoice=function(that){
   var tmp1={
     name: "A:" +that.data.indexQuest.choice_a,

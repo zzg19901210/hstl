@@ -1,6 +1,8 @@
 {
   "pages": [
-"pages/study/index",
+   
+    "pages/study/success/success",
+    "pages/study/index",
     "pages/home/home",
     "pages/splz/index",
     "pages/me/bindUser/user",
