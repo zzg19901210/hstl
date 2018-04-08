@@ -7,7 +7,7 @@ const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
 const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
 //做题日志
-const submitQuestionLogsUrl = app.globalData.serverUrl +"/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
+const submitQuestionLogsUrl = app.globalData.serverUrl +"/app/service/appServiceInterface/submitQuestionLogs.json";
 // 成绩提交
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
 
@@ -40,9 +40,7 @@ Page({
     
   },
   startKs(){
-    this.setData({
-      hidStart:true
-    });
+   
     getQuestion(this);
     
     takePhoto(this);
@@ -236,7 +234,8 @@ var getQuestion=function(that){
         list: res.data.list,
         index:0,
         indexQuest: res.data.list[0],
-        setObj:res.data.data.obj
+        setObj:res.data.data.obj,
+        hidStart: true
       });
       getChoice(that);
       count_down(that);
@@ -283,6 +282,7 @@ var submitQuestion = function (that) {
   var correctScore = avgScore * that.data.answerNums;
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums/totalNums
+  var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
   wx.request({
     url: submitAchievement,
     header: {
@@ -296,7 +296,7 @@ var submitQuestion = function (that) {
       correctScore: correctScore,
       errorNums: errorNums,
       errorScore: errorScore,
-      costTime: total_micro_second,
+      costTime: costTime,
       percentScore: percentScore,
       picUrl: picServerUrl
     },
@@ -322,9 +322,10 @@ var submitQuestionLogs=function(that){
   wx.showLoading({
     title: '请稍等...'
   });
-
+  var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
   wx.request({
     url: submitQuestionLogsUrl,
+    method:'POST',
     header: {
       'context-type': 'application/json',
       'Accept': 'application/json'
@@ -332,7 +333,7 @@ var submitQuestionLogs=function(that){
     data: that.data.answerList,
     success: function (res) {
       wx.redirectTo({
-        url: 'success/success?answerNums=that.data.answerNums&totalNums=that.data.list.length&costTime=total_micro_second'
+        url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime
       })
     }, fail: function (e) {
       console.log(e);

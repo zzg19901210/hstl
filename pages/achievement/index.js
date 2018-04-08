@@ -143,7 +143,8 @@ var loadContxt = function (that) {
     },
     data: {
       limit: page_size,
-      offset: page
+      offset: page,
+      enterUserId: app.globalData.myGlobalUserId
     },
     success: function (res) {
       //console.info(that.data.list);

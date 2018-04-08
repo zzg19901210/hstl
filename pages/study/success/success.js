@@ -18,7 +18,7 @@ Page({
     var avgScore = 100 / options.totalNums;
     var correctScore = avgScore * options.answerNums;
 
-    that.data({
+    this.setData({
       answerNums: options.answerNums,
       totalNums: options.totalNums,
       costTime: options.costTime,
