@@ -29,7 +29,7 @@ page {
 }
 .header .timer{
   float: left;
-  width: 300rpx;
+  width: 290rpx;
   text-align: left;
   padding-left:62rpx;
   color: #7f8c8d;

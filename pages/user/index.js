@@ -143,6 +143,7 @@ Page({
     
   },
   btnBindPhone: function (e) {
+    
     //保存绑定手机信息
     let telephone = this.data.telephone
     if (telephone.length != 11 || isNaN(telephone)) {
@@ -162,7 +163,7 @@ Page({
       })
       return
     }
-    if (codephone != serverCode){
+    if (codephone != this.data.serverCode){
       wx.showToast({
         title: '请输入正确的验证码',
         icon: "none",
@@ -172,6 +173,10 @@ Page({
     }
    
     console.log(app.globalData.wechar_user.openid);
+    wx.showLoading({
+      title: '请稍等...'
+    });
+
     wx.request({
       url: bindUser,
       data: {
@@ -196,6 +201,9 @@ Page({
             duration: 2000
           })
         }
+      },
+      complete:function(){
+        wx.hideLoading();
       }
     });
   }
