@@ -4,36 +4,14 @@ page {
   background: #ebebeb;
 }
 
-.header {
-  background-color: #fff;
-  width: 100%;
-  height: 280rpx;
-  padding-left: 20rpx;
-  padding-top: 25rpx;
+.controls {
+  position: relative;
+  top: 84%;
+  height: 220rpx;
+  display: flex;
 }
-
-.header .contxt {
-  display: block;
-  float: left;
+.controls .img {
   width: 150rpx;
-}
-
-.header .contxt > image {
   height: 150rpx;
-  width: 150rpx;
-  border-radius: 150rpx;
-}
-.header .contxt  .nickname {
-  text-align: center;
-}
-.header .timer{
-  float: left;
-  width: 300rpx;
-  text-align: center;
-}
-.header >camera {
-  float: right;
-  width: 200rpx;
-  height: 200rpx;
-  margin-right: 15rpx;
+  margin: 5rpx auto;
 }

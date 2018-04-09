@@ -1,13 +1,8 @@
-<view class='header'>
-  <view class="contxt">
-    <image src="{{myUserInfo.headPortrait}}"></image>
-    <view class="nickname">{{myUserInfo.nickname}}</view>
-  </view>
-  <view class='timer'>
-    00:30:00
-  </view>
-  <camera device-position="front" flash="off" binderror="error" style=""></camera>
-
-</view>
-
-<button type="primary" bindtap="takePhoto">拍照</button>
+<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 100%;">
+  <cover-view class="controls" hidden='{{recordStart}}' bindtap="startRecord">
+    <cover-image class="img" src="/images/btn_lz.png" />
+  </cover-view>
+  <cover-view class="controls"  hidden='{{!recordStart}}' bindtap="stopRecord">
+    <cover-image class="img" src="/images/btn_stop.png" />
+  </cover-view>
+</camera>

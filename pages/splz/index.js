@@ -5,7 +5,8 @@ const app = getApp()
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 Page({
   data:{
-    src:'https://t12.baidu.com/it/u=177559061,2124184426&fm=173&app=12&f=JPEG?w=640&h=480&s=65703BC20FD238DC00FC918203005092'
+    src:'',
+    recordStart:false
   },
   onLoad() {
     this.setData({
@@ -23,6 +24,22 @@ Page({
         that.setData({
           src: res.tempImagePath
         });
+      }
+    })
+  }, startRecord() {
+    this.ctx.startRecord({
+      success: (res) => {
+        console.log('startRecord')
+      }
+    })
+  },
+  stopRecord() {
+    this.ctx.stopRecord({
+      success: (res) => {
+        this.setData({
+          src: res.tempThumbPath,
+          videoSrc: res.tempVideoPath
+        })
       }
     })
   },

@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/splz/index",
     "pages/home/home",
+    "pages/user/index",
     "pages/main/main",
     "pages/study/index",
     "pages/study/success/success",
-    "pages/splz/index",
     "pages/me/bindUser/user",
     "pages/me/arcList/list",
     "pages/me/vodList/list",
@@ -23,7 +24,6 @@
     "pages/achievement/index",
     "pages/zj/zj",
     "pages/video_list/index",
-    "pages/user/index",
     "pages/live_list/index",
     "pages/404/index",
     "pages/video_play/index",

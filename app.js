@@ -34,8 +34,6 @@ App({
               that.globalData.myGlobalUserId = data.data.data.obj.id;
               that.globalData.myUserInfo = data.data.data.obj;
             }
-            
-            
           },
           fail:function(res){
             wx.showToast({
@@ -73,8 +71,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl:"https://www.beijiangci.cn/hstl",
-    // serverUrl: "http://localhost:8080",
+    // serverUrl:"https://www.beijiangci.cn/hstl",
+    serverUrl: "http://localhost:8080",
     myGlobalUserId:null,
     myUserInfo: null,
     wechar_user: { openid: '未获取上openid',session_key: '323232', unionid:'1232132'}
