@@ -190,7 +190,10 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
-        if (true) {
+
+        if ("1"==res.data.status) {
+          app.globalData.myGlobalUserId = res.data.data.obj.id;
+          app.globalData.myUserInfo = res.data.data.obj;
           wx.switchTab({
             url: '../home/home'
           })

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/main/main",
     "pages/study/index",
     "pages/study/success/success",
     "pages/splz/index",

@@ -35,6 +35,7 @@ App({
               that.globalData.myUserInfo = data.data.data.obj;
             }
             
+            
           },
           fail:function(res){
             wx.showToast({
