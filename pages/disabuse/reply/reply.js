@@ -13,6 +13,7 @@ Page({
     disabuseInfo: {
 
     },
+    hidenReply:true,
     userList: [{
       // nickname: '张三',
       // headProt: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
@@ -25,8 +26,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var hidenReply=true;
+    if (app.globalData.myUserInfo.isSpecialist=="2"){
+      hidenReply=false;
+    }
     this.setData({
-      disabuseId: options.disabuseId
+      disabuseId: options.disabuseId,
+      hidenReply: hidenReply
     });
     getDisabuseInfo(this);
     wx.setNavigationBarTitle({

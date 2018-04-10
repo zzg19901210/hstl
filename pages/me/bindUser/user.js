@@ -1,11 +1,12 @@
 // pages/me/bindUser/user.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    wechar_url:'http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstlTest&scope=snsapi_base&userId=2'
+    wechar_url:'http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=2'
   },
 
   /**
@@ -13,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
 
-    var url = "http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstlTest&scope=snsapi_base&userId=" + this.globalData.myGlobalUserId;
+    var url = "http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=" + app.globalData.myGlobalUserId;
     this.setData({
       wechar_url:url
     });

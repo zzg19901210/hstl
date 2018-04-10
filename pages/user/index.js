@@ -182,6 +182,8 @@ Page({
       data: {
         phoneNo: this.data.telephone,
         code: this.data.codePhone,
+        headPortrait: this.data.userInfo.avatarUrl,
+        nickname: this.data.userInfo.nickName,
         type: '2',
         weixinProjectId: app.globalData.wechar_user.openid
       },

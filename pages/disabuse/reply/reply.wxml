@@ -45,6 +45,6 @@
   <view class='nonepinglun'  wx:if="{{userList.length <1 }}">暂无评论</view>
 </view>
 
-<view class='btn-add'>
+<view class='btn-add' hidden='{{hidenReply}}'>
     <button class="weui-btn" type="primary" bindtap='onAdd'>我要回复</button>
 </view>
