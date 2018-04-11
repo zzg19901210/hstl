@@ -292,6 +292,7 @@ var submitQuestion = function (that) {
     data: {
       setId: that.data.setObj.id,
       enterUserId: app.globalData.myGlobalUserId,
+      departmentId: app.globalData.myUserInfo.departmentId,
       correctNums: that.data.answerNums,
       correctScore: correctScore,
       errorNums: errorNums,
