@@ -161,6 +161,9 @@ var loadMore = function (that) {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    data: {
+      type: that.data.xxtype
+    },
     success: function (res) {
       //console.info(that.data.list);
       if (res.data.list.length==0){

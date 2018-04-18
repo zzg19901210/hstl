@@ -1,0 +1,26 @@
+.list{
+  width: 93%;
+  padding: 15rpx 15rpx 0 25rpx;
+  /* background-image: url('../../../images/study_bg.jpeg');   */
+}
+.item {
+  border-radius: 15rpx;
+  padding: 15rpx 20rpx;
+  background-color: #1ab394;
+  height: 200rpx;
+
+}
+.item image{
+  width: 100rpx;
+  float: left;
+  height: 100rpx;
+  margin: 0 auto;
+}
+.item .context{
+  width: 150rpx;
+  padding-left: 20rpx;
+  float: left;  
+}
+.item .context .title{
+  color: #fff;
+}

@@ -1,0 +1,8 @@
+<view class='list'>
+  <view class='item'>
+    <image src='http://www.rails.com.cn/data/skins/chinese/imgzt/132_1.jpg'></image>
+    <view class='context'>
+      <text class='title'>行车业务</text>
+    </view>
+  </view>
+</view>
