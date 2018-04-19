@@ -21,7 +21,7 @@ Page({
         icon: '/images/home_icon/dz.png'
       },
       {
-        name: '业务视频学习',
+        name: '职教资料学习',
         url: '/pages/video_list/index?ywType=1&type=2',
         icon: '/images/home_icon/zj.png'
       },
