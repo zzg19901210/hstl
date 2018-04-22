@@ -38,7 +38,7 @@ Page({
   },
   //判断当前滚动超过一屏时，设置tab标题滚动条。
   checkCor: function () {
-    if (this.data.currentTab > 4) {
+    if (this.data.currentTab > 3) {
       this.setData({
         scrollLeft: 300
       })
@@ -167,6 +167,15 @@ var loadContxt=function(that,catId,page){
         
       }else{
         for (var i = 0; i < res.data.rows.length; i++) {
+          var tmpObj = {
+            id: res.data.rows[i].id,
+            pic_ali: res.data.rows[i].pic_ali,
+            source: res.data.rows[i].source,
+            title: res.data.rows[i].title,
+            picAliUrl: res.data.rows[i].picAliUrl,
+            nickname: res.data.rows[i].nickname
+          }
+          // list.push(tmpObj);
           list.push(res.data.rows[i]);
         }
         //设置数据

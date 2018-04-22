@@ -2,6 +2,8 @@ const app = getApp();
 const url = app.globalData.serverUrl + "/vodCategoryAction/getOrdinaryVodCategory.json";
 const dz_url = app.globalData.serverUrl + "/vodCategoryAction/getPartyVodCategory.json";
 const context_url = app.globalData.serverUrl + "/vodInfoAction/getVodInfoListByType.json";
+
+const context_url_arch = app.globalData.serverUrl + "/archivesInfoAction/getArchivesByCatId.json";
 var page = 1;
 const page_size = 10;
 Page({
@@ -41,7 +43,7 @@ Page({
   },
   //判断当前滚动超过一屏时，设置tab标题滚动条。
   checkCor: function () {
-    if (this.data.currentTab > 4) {
+    if (this.data.currentTab > 3) {
       this.setData({
         scrollLeft: 300
       })
@@ -180,6 +182,20 @@ var loadMore = function (that) {
         cat_list[i]['page'] = 1;
         cat_list[i]['list_arc'] = [];
       }
+      if ("2"==that.data.xxtype){
+        var kjxx={
+          title:'课件学习',
+          type:'2',
+          id:'30'
+        };
+        var zsgz = {
+          title: '章上规章',
+          type: '2',
+          id: '31'
+        };
+        cat_list.push(kjxx);
+        cat_list.push(zsgz);
+      }
       //设置数据
       that.setData({
         cat_list: cat_list
@@ -192,8 +208,14 @@ var loadMore = function (that) {
 
 var loadContxt = function (that, catId, page) {
   loadding(that);
+  var tempurl = context_url;
+  if ("2" == that.data.xxtype){
+    if (catId==30||catId==31){
+      tempurl=context_url_arch;
+    }
+  }
   wx.request({
-    url: context_url,
+    url: tempurl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -201,6 +223,7 @@ var loadContxt = function (that, catId, page) {
     data: {
       limit: page_size,
       vodCatId: catId,
+      // catId:catId,
       offset: page,
       vodType:that.data.xxtype
     },
@@ -224,9 +247,23 @@ var loadContxt = function (that, catId, page) {
         console.log("没有更多数据了");
 
       } else {
-        for (var i = 0; i < res.data.rows.length; i++) {
-          list.push(res.data.rows[i]);
+        if ("30" == catId||"31"==catId){
+          for (var i = 0; i < res.data.rows.length; i++) {
+            var tmpObj={
+              id: res.data.rows[i].id,
+              pic_ali: res.data.rows[i].pic_ali,
+              source: res.data.rows[i].source,
+              title: res.data.rows[i].title,
+              nickname: res.data.rows[i].nickname
+            }
+            list.push(tmpObj);
+          }
+        }else{
+          for (var i = 0; i < res.data.rows.length; i++) {
+            list.push(res.data.rows[i]);
+          }
         }
+       
         //设置数据
         // that.setData({
         //   list: list

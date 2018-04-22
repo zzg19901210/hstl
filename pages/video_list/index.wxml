@@ -17,28 +17,47 @@
   </scroll-view>
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
     <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
-      <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
-        <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-           <navigator url="/pages/video_play/index?title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}"> 
-            <!-- <view class='item' bindtap='btnItem' bindtap='btnItem' data-arch='{{arch}}'> -->
+      <block wx:if="{{cat.id==8}}">
+        <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+          <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
+            <navigator url="/pages/video_play/index?title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}">
+              <!-- <view class='item' bindtap='btnItem' bindtap='btnItem' data-arch='{{arch}}'> -->
               <view class='item'>
-              <view class="item-video" style='background-image:url({{arch.aliImageUrl}})'>
-                <view class='bg' style='background-image:url(../../images/bg.png)'>
-                  <text class='title'>{{arch.title}}</text>
-                  <view class='play'>
-                    <image src="../../images/play.png"></image>
+                <view class="item-video" style='background-image:url({{arch.aliImageUrl}})'>
+                  <view class='bg' style='background-image:url(../../images/bg.png)'>
+                    <text class='title'>{{arch.title}}</text>
+                    <view class='play'>
+                      <image src="../../images/play.png"></image>
+                    </view>
                   </view>
                 </view>
-              </view>
-               <view class='fotter'>
+                <view class='fotter'>
                   <image src='{{arch.headPortrait}}'></image>
                   <text class='nickname'>{{arch.nickname}}</text>
                   <text class='click'>{{arch.click}}次播放</text>
                 </view>
-            </view>
-           </navigator> 
-        </block>
-      </scroll-view>
+              </view>
+            </navigator>
+          </block>
+        </scroll-view>
+      </block>
+      <block wx:else>
+        <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+          <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
+            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
+              <view class="item-ans">
+                <view class="avatar">
+                  <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+                </view>
+                <view class="expertInfo">
+                  <view class="name">{{arch.title}}</view>
+                  <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </scroll-view>
+      </block>
     </swiper-item>
   </swiper>
 </view>
