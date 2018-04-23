@@ -1,8 +1,39 @@
-<view class='list'>
-  <view class='item'>
-    <image src='http://www.rails.com.cn/data/skins/chinese/imgzt/132_1.jpg'></image>
-    <view class='context'>
-      <text class='title'>行车业务</text>
-    </view>
+<view class="header" hidden="{{hideHeader}}">
+  <view class="weui-loading"></view>
+  <text>下拉刷新  </text>
+  <text>{{refreshTime}}</text>
+</view>
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <view class='list'>
+    <!-- <view class='item' > -->
+    <block wx:for="{{list}}" wx:for-item="obj" wx:key="*this">
+      <navigator url="/pages/study/index?title={{obj.id}}">
+        <view class='item' style='background-color:{{obj.bgColor}};'>
+          <image src='{{obj.imageUrl}}'></image>
+          <view class='context'>
+            <text class='title'>{{obj.title}}</text>
+            <view class='body'>
+              <text>总题数量:{{obj.num}}</text>
+              <text>题库时间:{{obj.createTime}}</text>
+            </view>
+
+          </view>
+          <view class='ranking'>
+            <image src="/images/icon_phb.png"></image>
+          </view>
+        </view>
+      </navigator>
+    </block>
   </view>
+
+</scroll-view>
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<view class="bottom" hidden="{{hideBottom}}">
+  <view class="weui-loading" hidden='{{hideBottom_loading}}'></view>
+  <text>{{loadMoreData}}</text>
+  <text>{{refreshTime}}</text>
 </view>

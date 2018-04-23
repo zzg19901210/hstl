@@ -1,26 +1,63 @@
-.list{
+.list {
   width: 93%;
   padding: 15rpx 15rpx 0 25rpx;
   /* background-image: url('../../../images/study_bg.jpeg');   */
 }
+
 .item {
   border-radius: 15rpx;
-  padding: 15rpx 20rpx;
+  padding: 15rpx 15rpx 15rpx 15rpx;
   background-color: #1ab394;
-  height: 200rpx;
-
+  height: 180rpx;
+  margin-bottom: 20rpx;
 }
-.item image{
-  width: 100rpx;
+
+.item > image {
+  width: 180rpx;
   float: left;
-  height: 100rpx;
+  height: 180rpx;
   margin: 0 auto;
 }
-.item .context{
-  width: 150rpx;
-  padding-left: 20rpx;
-  float: left;  
+
+.item .context {
+  width: 400rpx;
+  /* width: 150rpx; */
+  padding-left: 30rpx;
+  text-align: left;
+  float: left;
+  margin-bottom: 31rpx;
 }
-.item .context .title{
+
+.item .context .title {
+  /* font-weight:bold; */
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 35rpx;
+  line-height: 70rpx;
+  font-family: "微软雅黑";
+}
+
+.body {
+  line-height: 50rpx;
+  font-size: 25rpx;
+  color: #ebebeb;
+}
+
+.body text {
+  display: block;
+}
+
+.ranking {
+  /* display: inline-block; */
+  float: left;
+  width: 60rpx;
+  position: relative;
+  top: 50rpx;
+}
+
+.ranking >image {
+  width: 60rpx;
+  height: 60rpx;
 }
