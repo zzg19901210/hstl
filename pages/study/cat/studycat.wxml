@@ -7,7 +7,7 @@
   <view class='list'>
     <!-- <view class='item' > -->
     <block wx:for="{{list}}" wx:for-item="obj" wx:key="*this">
-      <navigator url="/pages/study/index?title={{obj.id}}">
+      <navigator url="/pages/study/index?catId={{obj.id}}&title={{obj.title}}">
         <view class='item' style='background-color:{{obj.bgColor}};'>
           <image src='{{obj.imageUrl}}'></image>
           <view class='context'>

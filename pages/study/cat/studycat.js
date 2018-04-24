@@ -28,7 +28,7 @@ Page({
   onLoad: function (options) {
     
     wx.setNavigationBarTitle({
-      title: '在线考试',
+      title: '在线考试-分类',
       success: function (res) {
         // success
       }

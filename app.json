@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/study/index",
     "pages/study/cat/studycat",
     "pages/home/home",
     "pages/user/index",
     "pages/splz/index",
     "pages/main/main",
-    "pages/study/index",
     "pages/study/success/success",
     "pages/me/bindUser/user",
     "pages/me/arcList/list",

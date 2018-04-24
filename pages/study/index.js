@@ -15,6 +15,7 @@ Page({
   data: {
     clock: date_format(total_micro_second),
     hidStart:false,
+    hidRanking:true,
     list:[],
     index:0,
     indexQuest:{},
@@ -25,6 +26,7 @@ Page({
     hideSubimt:true,
     setObj:{},
     src:'',
+    catId:0,
     radioItems: [
       { name: 'A:110', value: '0' },
       { name: 'B:110', value: '1', checked: true },
@@ -32,9 +34,16 @@ Page({
       { name: 'D:120', value: '3' },
     ],
   },
-  onLoad() {
+  onLoad(options) {
     this.setData({
-      myUserInfo: app.globalData.myUserInfo
+      myUserInfo: app.globalData.myUserInfo,
+      catId: options.catId
+    });
+    wx.setNavigationBarTitle({
+      title: options.title,
+      success: function (res) {
+        // success
+      }
     });
     this.ctx = wx.createCameraContext();
     
@@ -60,8 +69,18 @@ Page({
     if (this.data.indexQuest.answer == this.data.checkedValue){
       cur_answerNums++;
       console.log('回答正确！');
+      // wx.showToast({
+      //   title: '回答正确',
+      //   icon: 'success',
+      //   duration: 2000
+      // })
     }else{
       console.log("回答错误！")
+      wx.showToast({
+        title: '回答错误：正确答案是' + this.data.indexQuest.answer,
+        icon: 'none',
+        duration: 2000
+      })
     }
     var tmpAnswer={
       'questionId': this.data.indexQuest.id,
@@ -140,6 +159,11 @@ Page({
     this.setData({
       radioItems: radioItems,
       checkedValue: e.detail.value
+    });
+  },
+  ranking:function(e){
+    this.setData({
+      hidRanking:false
     });
   },
 })
@@ -224,21 +248,29 @@ var getQuestion=function(that){
       type:1,
       workType: 0,
       departmentId: 0,
-      catId: 0,
+      catId: that.data.catId,
       isHide: 0
     },
     success: function (res) {
       //console.info(that.data.list);
+      if(res.data.status=="0"){
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+          showCancel: false
+        })
+      }else{
+        that.setData({
+          list: res.data.list,
+          index: 0,
+          indexQuest: res.data.list[0],
+          setObj: res.data.data.obj,
+          hidStart: true
+        });
+        getChoice(that);
+        count_down(that);
+      }
       
-      that.setData({
-        list: res.data.list,
-        index:0,
-        indexQuest: res.data.list[0],
-        setObj:res.data.data.obj,
-        hidStart: true
-      });
-      getChoice(that);
-      count_down(that);
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -274,6 +306,8 @@ var submitQuestion = function (that) {
       }
      
     }
+  }else{
+    picServerUrl ="http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg";
   }
   
   var totalNums = that.data.list.length;
@@ -397,6 +431,8 @@ function count_down(that) {
     that.setData({
       clock: "已经截止"
     });
+    //时间完成提交答案
+    submitQuestionLogs(that);
     // timeout则跳出递归
     return;
   }

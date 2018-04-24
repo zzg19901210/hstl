@@ -31,10 +31,15 @@
 .item .context .title {
   /* font-weight:bold; */
   color: #fff;
-  white-space: nowrap;
+  /* display: -webkit-box; */
+  display: block;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 35rpx;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  word-break: break-all;
+  font-size: 30rpx;
   line-height: 70rpx;
   font-family: "微软雅黑";
 }

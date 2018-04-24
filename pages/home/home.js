@@ -27,7 +27,7 @@ Page({
       },
       {
         name: '在线考试',
-        url: '/pages/study/index',
+        url: '/pages/study/cat/studycat',
         icon: '/images/home_icon/zxdt.png'
       },
       {

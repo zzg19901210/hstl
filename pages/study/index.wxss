@@ -23,49 +23,58 @@ page {
   width: 150rpx;
   border-radius: 150rpx;
 }
+
 .header .contxt  .nickname {
   text-align: center;
   color: #7f8c8d;
 }
-.header .timer{
+
+.header .timer {
   float: left;
   width: 290rpx;
   text-align: left;
-  padding-left:62rpx;
+  padding-left: 62rpx;
   color: #7f8c8d;
   font-size: 35rpx;
   padding-top: 15rpx;
 }
-.header .timer >image{
+
+.header .timer >image {
   width: 150rpx;
   height: 150rpx;
 }
+
 .header >camera {
   float: right;
   width: 210rpx;
   height: 210rpx;
   margin-right: 30rpx;
 }
-.body-context{
+
+.body-context {
   background: #fff;
 }
-.weui-cells__title{
+
+.weui-cells__title {
   padding-top: 25rpx;
   line-height: 80rpx;
   font-size: 40rpx;
   color: #000;
 }
-.hr{
+
+.hr {
   border-top: 1px solid #ebebeb;
-  padding-top:30%;
+  padding-top: 30%;
 }
-.start-ks{
+
+.start-ks {
   height: 100%;
   padding: 15rpx 15rpx 0 15rpx;
   position: relative;
   background: #fff;
 }
-.btn-startKs{
+
+.btn-startKs {
   background-color: #3498db;
   color: #fff;
   font-size: 30rpx;
@@ -74,13 +83,70 @@ page {
   height: 200rpx;
   text-align: center;
   border-radius: 200rpx;
-
 }
-.button-hover{
+
+.button-hover {
   background-color: #3498db;
 }
-.button{
-   background-color: #3498db;
-   color: #fff;
-   margin-top: 15rpx;
+
+.button {
+  background-color: #3498db;
+  color: #fff;
+  margin-top: 15rpx;
+}
+
+.ranking {
+  position: fixed; /*or前面的是absolute就可以用*/
+  bottom: 0px;
+  width: 100%;
+  /* margin: 0 auto; */
+  float: right;
+}
+
+.ranking .btn-ranking {
+  background-color: #3498db;
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 120rpx;
+  width: 280rpx;
+  height: 120rpx;
+  text-align: center;
+  border-radius: 50rpx;
+}
+
+.b1 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+.b1 .group{
+  display: inline-block;
+  vertical-align:middle;
+  position:relative;  
+  width: 98%;
+  height: 100rpx;
+  /* background: rgba(0, 0, 0, 0.8); */
+  text-align: center;
+  padding-top: 15rpx;
+}
+.b1 .group .btn{
+  display:inline-block;
+  font-size:28rpx;
+  border:1rpx solid #fff;
+  color: #3c9ae8;
+  text-align:center;
+  height: 70rpx;
+  width: 200rpx;
+  line-height: 70rpx;
+  /* border-radius: 15rpx; */
+}
+.b1 .group .activity{
+  display:inline-block;
+  font-size:28rpx;
+  background: #3c9ae8;
+  border:1px solid #3c9ae8;
+  color: #fff;
 }
