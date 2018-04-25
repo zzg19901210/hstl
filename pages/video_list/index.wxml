@@ -20,7 +20,7 @@
       <block wx:if="{{cat.id==8}}">
         <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
           <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-            <navigator url="/pages/video_play/index?title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}">
+            <navigator url="/pages/video_play/index?ywType={{xxtype}}&vod_type={{ywType}}&title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}">
               <!-- <view class='item' bindtap='btnItem' bindtap='btnItem' data-arch='{{arch}}'> -->
               <view class='item'>
                 <view class="item-video" style='background-image:url({{arch.aliImageUrl}})'>

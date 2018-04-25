@@ -15,7 +15,7 @@
     <text>相关阅读</text>
   </view>
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-    <navigator redirect="true" url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}">
+    <navigator redirect="true" url="/pages/video_play/index?ywType={{type}}&vod_type={{vod_type}}&ttitle={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}">
       <view class='list_context'>
         <view class='text_context'>
           <text class='c_title'>{{cont.title}}</text>

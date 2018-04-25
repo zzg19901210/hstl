@@ -16,11 +16,11 @@
 <view class='start-ks' hidden='{{hidStart}}'>
   <view class='hr'></view>
   <button class='btn-startKs' bindtap="startKs">开始考试</button>
-  <view class="ranking">
-    <button class="btn-ranking" bindtap="ranking" >
+   <view class="ranking">
+    <button class="btn-ranking" bindtap="ranking">
       排行榜
     </button>
-  </view>
+  </view> 
 </view>
 <view class='body-context' hidden='{{!hidStart}}'>
   <view class="weui-cells__title">{{index+1}}、{{indexQuest.questions}}</view>
@@ -35,14 +35,22 @@
         </view>
       </label>
     </radio-group>
-
   </view>
 </view>
 <button class='button' bindtap="next" hidden='{{!hideSubimt==hidStart}}'>下一题</button>
 <button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button>
 <view class="b1" catchtouchmove="true" hidden="{{hidRanking}}">
+  <view class='title'>考试成绩排行榜</view>
+  <view class='body'>
     <view class='group'>
       <view class='btn activity'>总排行</view>
       <view class='btn'>题库排行</view>
     </view>
+  </view>
+  <view class='body_footer'>
+
+  </view>
+  <view class='footer'>
+    <button>返回</button>
+  </view>
 </view>

@@ -18,11 +18,14 @@ Page({
     headPortrait:'',
     video_url:'',
     errorimges:'/images/head.jpg',
-    list: [{
-      title: '鬼才许可贺岁片《狄仁杰之四大天王》',
-      aliImageUrl: 'https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=68521645b8fb43160e12722841cd2d46/ca1349540923dd540371d1e6db09b3de9c824839.jpg',
-      nickname: '徐克 、 电影'
-    }
+    vod_type:1,
+    type:1,
+    list: [
+      // {
+      // title: '鬼才许可贺岁片《狄仁杰之四大天王》',
+      // aliImageUrl: 'https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=68521645b8fb43160e12722841cd2d46/ca1349540923dd540371d1e6db09b3de9c824839.jpg',
+      // nickname: '徐克 、 电影'
+      // }
     ]
   },
 
@@ -34,11 +37,14 @@ Page({
     // console.log(options.dataObj);
     // var bean = decodeURIComponent(JSON.parse(options.dataObj));
     this.setData({
+
       title: options.title,
       video_url:options.video_url,
       nickname:options.nickname,
       vodId:options.vodId,
-      headPortrait: options.headPortrait
+      headPortrait: options.headPortrait,
+      vod_type: options.vod_type,
+      type: options.ywType
     })
     setVod(this);
     load(this);
@@ -84,6 +90,10 @@ var load=function(that){
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
+    },
+    data:{
+      type: that.data.type,
+      vodType: that.data.vod_type
     },
     success: function (res) {
       wx.hideLoading();

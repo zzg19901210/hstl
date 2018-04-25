@@ -225,7 +225,7 @@ var loadContxt = function (that, catId, page) {
       vodCatId: catId,
       // catId:catId,
       offset: page,
-      vodType:that.data.xxtype
+      type:that.data.xxtype
     },
     success: function (res) {
       //console.info(that.data.list);

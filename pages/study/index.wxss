@@ -68,7 +68,7 @@ page {
 }
 
 .start-ks {
-  height: 100%;
+  height: 77%;
   padding: 15rpx 15rpx 0 15rpx;
   position: relative;
   background: #fff;
@@ -119,10 +119,28 @@ page {
   width: 100%;
   height: 100%;
   top: 0px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(47,79,79, 0.8);
   overflow: hidden;
+  z-index: 9999;
+  margin: 0 auto;
 }
-.b1 .group{
+.b1 .title{
+  text-align: center;
+  color: #fff;
+  font-family: "微软雅黑";
+  font-size: 32rpx;
+  padding-top: 60rpx;
+  padding-bottom: 50rpx;
+}
+.b1 .body{
+   background: rgba(0, 0, 0, 0.8); 
+   width: 88%;
+   margin: 0 auto;
+   height: 650rpx;
+   
+}
+
+.b1 .body .group{
   display: inline-block;
   vertical-align:middle;
   position:relative;  
@@ -137,6 +155,7 @@ page {
   font-size:28rpx;
   border:1rpx solid #fff;
   color: #3c9ae8;
+  background: #fff;
   text-align:center;
   height: 70rpx;
   width: 200rpx;
@@ -149,4 +168,11 @@ page {
   background: #3c9ae8;
   border:1px solid #3c9ae8;
   color: #fff;
+}
+.b1 .body_footer{
+   background: rgba(0, 0, 0, 0.8); 
+   width: 88%;
+   margin: 0 auto;
+   height: 120rpx;
+   margin-top: 15rpx;
 }
