@@ -10,7 +10,8 @@ const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestio
 const submitQuestionLogsUrl = app.globalData.serverUrl +"/app/service/appServiceInterface/submitQuestionLogs.json";
 // 成绩提交
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
-
+//获取排行榜
+const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
 Page({
   data: {
     clock: date_format(total_micro_second),
@@ -462,4 +463,34 @@ function date_format(micro_second) {
 // 位数不足补零
 function fill_zero_prefix(num) {
   return num < 10 ? "0" + num : num
+}
+
+
+//提交做题记录
+var findUserRankingList = function (that) {
+  wx.showLoading({
+    title: '请稍等...'
+  });
+ wx.request({
+    url: findUserRankingListUrl,
+    method: 'POST',
+    header: {
+      'context-type': 'application/json',
+      'Accept': 'application/json'
+    },
+    data: that.data.answerList,
+    success: function (res) {
+      
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '提交日志失败',
+        showCancel: false
+      });
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
 }

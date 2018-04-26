@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/study/index",
+    "pages/home/home",
     "pages/study/cat/studycat",
     "pages/user/index",
     "pages/splz/index",

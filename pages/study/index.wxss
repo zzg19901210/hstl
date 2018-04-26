@@ -119,7 +119,7 @@ page {
   width: 100%;
   height: 100%;
   top: 0px;
-  background: rgba(47,79,79, 0.8);
+  background: rgba(83,92,104, 0.9);
   overflow: hidden;
   z-index: 9999;
   margin: 0 auto;
@@ -136,7 +136,7 @@ page {
    background: rgba(0, 0, 0, 0.8); 
    width: 88%;
    margin: 0 auto;
-   height: 650rpx;
+   height: 700rpx;
    
 }
 
@@ -153,20 +153,24 @@ page {
 .b1 .group .btn{
   display:inline-block;
   font-size:28rpx;
-  border:1rpx solid #fff;
-  color: #3c9ae8;
-  background: #fff;
   text-align:center;
-  height: 70rpx;
-  width: 200rpx;
-  line-height: 70rpx;
+  height: 65rpx;
+  width: 160rpx;
+  border:1rpx solid #535c68;
+  color: #535c68;
+  background: rgba(0, 0, 0, 0.8); 
+  line-height: 65rpx;
   /* border-radius: 15rpx; */
 }
 .b1 .group .activity{
   display:inline-block;
   font-size:28rpx;
-  background: #3c9ae8;
-  border:1px solid #3c9ae8;
+  /* background: #fff; */
+
+  background: rgba(0, 0, 0, 0.8); 
+  /* border:1px solid #3c9ae8;
+  color: #fff; */
+  border:1rpx solid #fff;
   color: #fff;
 }
 .b1 .body_footer{
@@ -175,4 +179,65 @@ page {
    margin: 0 auto;
    height: 120rpx;
    margin-top: 15rpx;
+   padding-top: 20rpx;
+}
+
+.item{
+  height: 90rpx;
+  width: 94%;
+  margin: 0 auto;
+  color: #fff;
+  padding-left: 6%;
+  padding-top:10rpx; 
+}
+.two{
+   background: rgba(0,0,10, 0.8);
+}
+.item .xh{
+  float: left;
+  font-family: "微软雅黑";
+  font-size: 32rpx;
+  padding-right: 40rpx;
+}
+.item >image{
+  height: 80rpx;
+  width: 80rpx;
+  float: left;
+  margin-right: 40rpx;
+
+}
+.item > text{
+  line-height: 80rpx;
+}
+.item .nickname{
+  display: inline-block;
+  width: 270rpx;
+}
+.footer{
+  position: fixed;
+  bottom: 50rpx;
+  width: 90%;
+  margin: 0 auto;
+  padding-left: 5%;
+}
+.footer .btn-fotter{
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 90rpx;
+  background: rgba(0,0,0, 0.9);
+  color: #fff;
+  float: left;
+}
+.footer .btn-fotter-right{
+  width: 250rpx;
+  height: 90rpx;
+  float: right;
+  line-height: 90rpx;
+  border-radius: 90rpx;
+  border:1rpx solid #fff;
+  font-family: "宋体";
+  font-size: 30rpx;
+  background: rgba(47,79,79, 0.8);
+  color: #fff;
 }
