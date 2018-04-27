@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wechar_url:'http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=2'
+    wechar_url:'https://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=2'
   },
 
   /**
@@ -14,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
 
-    var url = "http://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=" + app.globalData.myGlobalUserId;
+    var url = "https://vote.lrkpzx.com/codetoany/getcode.php?auk=hstl&scope=snsapi_base&userId=" + app.globalData.myGlobalUserId;
     this.setData({
       wechar_url:url
     });

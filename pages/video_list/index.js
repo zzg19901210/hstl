@@ -88,7 +88,7 @@ Page({
         });
       } else {
         wx.setNavigationBarTitle({
-          title: "业务-视频学习",
+          title: "业务-资料学习",
           success: function (res) {
             // success
           }
@@ -223,7 +223,7 @@ var loadContxt = function (that, catId, page) {
     data: {
       limit: page_size,
       vodCatId: catId,
-      // catId:catId,
+      catId:catId,
       offset: page,
       type:that.data.xxtype
     },

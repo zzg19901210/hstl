@@ -34,6 +34,7 @@ Page({
       { name: 'C:120', value: '2' },
       { name: 'D:120', value: '3' },
     ],
+    listRanking:[]
   },
   onLoad(options) {
     this.setData({
@@ -163,10 +164,37 @@ Page({
     });
   },
   ranking:function(e){
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#000000',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
     this.setData({
       hidRanking:false
     });
+    findUserRankingList(this);
   },
+  hidRanking:function(e){
+    this.setData({
+      hidRanking: true
+    });
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#3c9ae8',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+  },
+  showHome:function(e){
+    wx.switchTab({
+      url: '/pages/home/home'
+    })
+  }
 })
 
 
@@ -480,12 +508,22 @@ var findUserRankingList = function (that) {
     },
     data: that.data.answerList,
     success: function (res) {
-      
+      var tempDate = [];
+      var j=1;
+      for (var i = 0; i < res.data.rows.length; i++) {
+        var item = res.data.rows[i];
+        item['itemrownum']=j;
+        tempDate.push(item);
+        j++;
+      }
+      that.setData({
+        listRanking: tempDate
+      });
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
         title: '提示',
-        content: '提交日志失败',
+        content: '获取排行榜信息错误',
         showCancel: false
       });
     },

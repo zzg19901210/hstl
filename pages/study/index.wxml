@@ -47,20 +47,22 @@
       <view class='btn'>题库排行</view>
     </view>
     <scroll-view scroll-y style="height: 590rpx;">
-
-      <view class='item'>
-        <text class='xh'>1</text>
-        <image src='https://wx.qlogo.cn/mmopen/vi_32/ibuELzqZLVXxo2CDF1bfnuic39MfUguXs7gmndaHcKyBxvdZdGxH4k9FgiaYE4MEhjeVonlBmqWbrBWjy2IobX8AQ/0'></image>
-        <text class='nickname'>Sikalng</text>
-        <text class='scort'>110</text>
-      </view>
+      <block wx:for="{{listRanking}}" wx:for-item="obj" wx:key="*this">
+        <view class='item {{obj.itemrownum%2==0?"two":""}}'>
+          <text class='xh'>{{obj.itemrownum}}</text>
+          <image src='{{obj.head_portrait}}'></image>
+          <text class='nickname'>{{obj.nickname}}</text>
+          <text class='scort'>{{obj.correct_score}}</text>
+        </view>
+      </block>
+<!-- 
       <view class='item two'>
         <text class='xh'>2</text>
         <image src='https://wx.qlogo.cn/mmopen/vi_32/ibuELzqZLVXxo2CDF1bfnuic39MfUguXs7gmndaHcKyBxvdZdGxH4k9FgiaYE4MEhjeVonlBmqWbrBWjy2IobX8AQ/0'></image>
         <text class='nickname'>Sikalng</text>
         <text class='scort'>110</text>
-      </view>
-     
+      </view> -->
+
     </scroll-view>
   </view>
 
@@ -73,7 +75,7 @@
     </view>
   </view>
   <view class='footer'>
-    <button class='btn-fotter'>←</button>
-    <button class='btn-fotter-right'>返回首页</button>
+    <button class='btn-fotter' bindtap='hidRanking'>←</button>
+    <button class='btn-fotter-right' bindtap='showHome'>返回首页</button>
   </view>
 </view>

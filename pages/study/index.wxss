@@ -130,7 +130,7 @@ page {
   font-family: "微软雅黑";
   font-size: 32rpx;
   padding-top: 60rpx;
-  padding-bottom: 50rpx;
+  padding-bottom: 25rpx;
 }
 .b1 .body{
    background: rgba(0, 0, 0, 0.8); 
@@ -197,6 +197,7 @@ page {
   float: left;
   font-family: "微软雅黑";
   font-size: 32rpx;
+  width: 40rpx;
   padding-right: 40rpx;
 }
 .item >image{
