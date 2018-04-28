@@ -63,6 +63,9 @@ Page({
     ]
 
   }, onLoad: function () {
+    wx.setNavigationBarTitle({
+      title: '首页'
+    })
     var interval = setInterval(function () {
       wx.showLoading({
         title: '正在加载...',

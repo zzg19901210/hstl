@@ -22,6 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideLoading();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -66,6 +67,9 @@ Page({
     this.setData({
       codeDis: true
     })
+    wx.showLoading({
+      title: '正在发送...'
+    });
     //发送短信验证码
     wx.request({
       url: sendCode,
@@ -115,6 +119,8 @@ Page({
           }
         }
         
+      },complete:function(e){
+        wx.hideLoading();
       }
     })
 
