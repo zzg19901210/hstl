@@ -55,7 +55,7 @@
           <text class='scort'>{{obj.correct_score}}</text>
         </view>
       </block>
-<!-- 
+      <!-- 
       <view class='item two'>
         <text class='xh'>2</text>
         <image src='https://wx.qlogo.cn/mmopen/vi_32/ibuELzqZLVXxo2CDF1bfnuic39MfUguXs7gmndaHcKyBxvdZdGxH4k9FgiaYE4MEhjeVonlBmqWbrBWjy2IobX8AQ/0'></image>
@@ -68,10 +68,10 @@
 
   <view class='body_footer'>
     <view class='item'>
-      <text class='xh'>35</text>
-      <image src='https://wx.qlogo.cn/mmopen/vi_32/ibuELzqZLVXxo2CDF1bfnuic39MfUguXs7gmndaHcKyBxvdZdGxH4k9FgiaYE4MEhjeVonlBmqWbrBWjy2IobX8AQ/0'></image>
-      <text class='nickname'>Sikalng</text>
-      <text class='scort'>110</text>
+      <text class='xh'>{{MyRanking.itemrownum}}</text>
+      <image src='{{MyRanking.head_portrait}}'></image>
+      <text class='nickname'>{{MyRanking.nickname}}</text>
+      <text class='scort'>{{MyRanking.correct_score}}</text>
     </view>
   </view>
   <view class='footer'>

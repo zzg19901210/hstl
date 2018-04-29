@@ -97,7 +97,7 @@ page {
 
 .ranking {
   position: fixed; /*or前面的是absolute就可以用*/
-  bottom: 0px;
+  bottom: 20px;
   width: 100%;
   /* margin: 0 auto; */
   float: right;
@@ -107,11 +107,11 @@ page {
   background-color: #3498db;
   color: #fff;
   font-size: 30rpx;
-  line-height: 120rpx;
-  width: 280rpx;
-  height: 120rpx;
+  line-height: 80rpx;
+  width: 230rpx;
+  height: 80rpx;
   text-align: center;
-  border-radius: 50rpx;
+  border-radius: 40rpx;
 }
 
 .b1 {

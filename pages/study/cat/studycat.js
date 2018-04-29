@@ -17,7 +17,6 @@ Page({
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
     list: [
-     
     ]
 
   },
@@ -26,7 +25,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     wx.setNavigationBarTitle({
       title: '在线考试-分类',
       success: function (res) {

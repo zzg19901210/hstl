@@ -1,4 +1,4 @@
-const app = getApp();
+var app = getApp();
 Page({
   data: {
     movies: [
@@ -63,6 +63,8 @@ Page({
     ]
 
   }, onLoad: function () {
+
+    console.log(app.myUserInfo);
     wx.setNavigationBarTitle({
       title: '首页'
     })

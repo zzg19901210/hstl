@@ -1,5 +1,4 @@
 
-
 const app = getApp()
 var total_micro_second = 36 * 60 * 60 * 1000;
 // 获取上传文件路径
@@ -23,7 +22,7 @@ Page({
     files:[],
     answerNums:0,
     answerList:[],
-    checkedValue:'',
+    checkedValue:'A',
     hideSubimt:true,
     setObj:{},
     src:'',
@@ -34,12 +33,25 @@ Page({
       { name: 'C:120', value: '2' },
       { name: 'D:120', value: '3' },
     ],
-    listRanking:[]
+    listRanking:[],
+    MyRanking:{
+      itemrownum:'暂无',
+      head_portrait:'',
+      nickname:'',
+      correct_score:0
+    }
   },
   onLoad(options) {
+    console.log(app.myUserInfo);
     this.setData({
       myUserInfo: app.globalData.myUserInfo,
-      catId: options.catId
+      catId: options.catId,
+      MyRanking: {
+        itemrownum: '无',
+        head_portrait: app.globalData.myUserInfo.headPortrait,
+        nickname: app.globalData.myUserInfo.nickname,
+        correct_score: 0
+      }
     });
     wx.setNavigationBarTitle({
       title: options.title,
@@ -71,12 +83,14 @@ Page({
     if (this.data.indexQuest.answer == this.data.checkedValue){
       cur_answerNums++;
       console.log('回答正确！');
+      var isRight = 1;
       // wx.showToast({
       //   title: '回答正确',
       //   icon: 'success',
       //   duration: 2000
       // })
     }else{
+      var isRight = 2;
       console.log("回答错误！")
       wx.showToast({
         title: '回答错误：正确答案是' + this.data.indexQuest.answer,
@@ -101,7 +115,8 @@ Page({
       indexQuest:nextQuest,
       index: cur_index,
       answerNums: cur_answerNums,
-      answerList: tmpanswerList
+      answerList: tmpanswerList,
+      checkedValue: 'A'
     });
     //重新组织题目
     getChoice(this);
@@ -277,7 +292,7 @@ var getQuestion=function(that){
       type:1,
       workType: 0,
       departmentId: 0,
-      catId: that.data.catId,
+      catId: 0,
       isHide: 0
     },
     success: function (res) {
@@ -294,7 +309,8 @@ var getQuestion=function(that){
           index: 0,
           indexQuest: res.data.list[0],
           setObj: res.data.data.obj,
-          hidStart: true
+          hidStart: true,
+          checkedValue:'A'
         });
         getChoice(that);
         count_down(that);
@@ -428,14 +444,14 @@ var getChoice=function(that){
   var tmpRideo = [];
   tmpRideo.push(tmp1);
   tmpRideo.push(tmp2);
-  if (null != that.data.indexQuest.choice_c) {
+  if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
     var tmp3 = {
       name: "C:"+that.data.indexQuest.choice_c,
       value: 'C'
     }
     tmpRideo.push(tmp3);
   }
-  if (null != that.data.indexQuest.choice_d){
+  if (null != that.data.indexQuest.choice_d && "" !=that.data.indexQuest.choice_d){
     var tmp4 = {
       name: "D:" +that.data.indexQuest.choice_d,
       value: 'D'
@@ -511,10 +527,15 @@ var findUserRankingList = function (that) {
       var tempDate = [];
       var j=1;
       for (var i = 0; i < res.data.rows.length; i++) {
-        var item = res.data.rows[i];
-        item['itemrownum']=j;
-        tempDate.push(item);
-        j++;
+        if (app.globalData.myGlobalUserId == res.data.rows[i].enter_user_id){
+
+        }else{
+          var item = res.data.rows[i];
+          item['itemrownum'] = j;
+          tempDate.push(item);
+          j++;
+        }
+       
       }
       that.setData({
         listRanking: tempDate

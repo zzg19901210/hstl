@@ -41,15 +41,15 @@ Page({
           success: function (data) {
             console.log(data.data.data.obj);
             if ("2" == data.data.msg) {
-              that.globalData.myGlobalUserId = 0;
+              app.globalData.myGlobalUserId = 0;
               console.log(data.data.data.obj);
-              that.globalData.wechar_user = data.data.data.obj;
+              app.globalData.wechar_user = data.data.data.obj;
               wx.redirectTo({
                 url: '../../pages/user/index',
               });
             } else {
-              that.globalData.myGlobalUserId = data.data.data.obj.id;
-              that.globalData.myUserInfo = data.data.data.obj;
+              app.globalData.myGlobalUserId = data.data.data.obj.id;
+              app.globalData.myUserInfo = data.data.data.obj;
               wx.switchTab({
                   url: '/pages/home/home',
                   success: function (e) {
