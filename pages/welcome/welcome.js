@@ -5,6 +5,7 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
+    isFirst:false,
     imgUrls: [
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524899106672&di=ecfd188287bf667432e836244846fad9&imgtype=0&src=http%3A%2F%2Fs14.sinaimg.cn%2Fmw690%2F0062UP1Agy6RnYQ5P7n6d%26690',
       'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2593790037,317444479&fm=27&gp=0.jpg',
@@ -23,37 +24,42 @@ Page({
         timingFunc: 'easeIn'
       }
     })
+    var that_this=this;
   
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         // console.log("code:"+res.code)
         var that = app;
-        wx.request({
-          url: app.globalData.serverUrl + '/app/wechartSns/login.json',
-          header: {
-            'context-type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-          },
-          data: {
-            code: res.code
-          },
-          success: function (data) {
-            console.log(data.data.data.obj);
-            if ("2" == data.data.msg) {
-              app.globalData.myGlobalUserId = 0;
-              console.log(data.data.data.obj);
-              app.globalData.wechar_user = data.data.data.obj;
-              wx.redirectTo({
-                url: '../../pages/user/index',
+        console.log(that_this.data.isFirst);
+        if (!that_this.data.isFirst){
+          wx.request({
+            url: app.globalData.serverUrl + '/app/wechartSns/login.json',
+            header: {
+              'context-type': 'application/x-www-form-urlencoded',
+              'Accept': 'application/json'
+            },
+            data: {
+              code: res.code
+            },
+            success: function (data) {
+              that_this.setData({
+                isFirst:true
               });
-            } else {
-              app.globalData.myGlobalUserId = data.data.data.obj.id;
-              app.globalData.myUserInfo = data.data.data.obj;
-              wx.switchTab({
+              // console.log(data.data.data.obj);
+              if ("2" == data.data.msg) {
+                app.globalData.myGlobalUserId = 0;
+                console.log(data.data.data.obj);
+                app.globalData.wechar_user = data.data.data.obj;
+                wx.redirectTo({
+                  url: '../../pages/user/index',
+                });
+              } else {
+                app.globalData.myGlobalUserId = data.data.data.obj.id;
+                app.globalData.myUserInfo = data.data.data.obj;
+                wx.switchTab({
                   url: '/pages/home/home',
                   success: function (e) {
-                    console.log('跳转成功');
                     var page = getCurrentPages().pop();
                     if (page == undefined || page == null) return;
                     page.onLoad();
@@ -62,18 +68,20 @@ Page({
                     console.log(e);
                   }
                 });
+              }
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '获取用户失败啦',
+                icon: 'none'
+              });
+              wx.redirectTo({
+                url: '../../pages/user/index',
+              });
             }
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: '获取用户失败啦',
-              icon: 'none'
-            });
-            wx.redirectTo({
-              url: '../../pages/user/index',
-            });
-          }
-        });
+          });
+        }
+        
 
       }
     })

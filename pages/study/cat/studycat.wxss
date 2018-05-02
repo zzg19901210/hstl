@@ -13,9 +13,9 @@
 }
 
 .item > image {
-  width: 180rpx;
+  width: 170rpx;
   float: left;
-  height: 180rpx;
+  height: 170rpx;
   margin: 0 auto;
 }
 

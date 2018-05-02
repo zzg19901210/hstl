@@ -92,7 +92,7 @@ Page({
             url: '/pages/splz/index',
             icon: '/images/home_icon/lz.png'
           });
-        } else if ("4" == app.globalData.myUserInfo.roleId){
+        } else if ("6" == app.globalData.myUserInfo.roleId){
           if ("1" == app.globalData.myUserInfo.userType){
             routers.push({
               name: '业务视频审录',
