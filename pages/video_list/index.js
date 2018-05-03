@@ -189,7 +189,7 @@ var loadMore = function (that) {
           id:'30'
         };
         var zsgz = {
-          title: '章上规章',
+          title: '掌上规章',
           type: '2',
           id: '31'
         };

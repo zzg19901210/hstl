@@ -65,9 +65,10 @@ var setVod = function (that) {
   wx.request({
     url: setVodUrl,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    method: 'POST',
     data: {
       userId: app.globalData.myGlobalUserId,
       vodId: that.data.vodId,
@@ -88,7 +89,7 @@ var load=function(that){
   wx.request({
     url: getRecommenVod,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
     data:{

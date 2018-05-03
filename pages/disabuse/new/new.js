@@ -139,9 +139,10 @@ var saveSubmit = function (that) {
   wx.request({
     url: save_url,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    method: 'POST',
     data: {
       title: that.data.title,
       bodyDsec: that.data.context,

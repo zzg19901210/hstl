@@ -6,7 +6,7 @@ const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
 const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
 //做题日志
-const submitQuestionLogsUrl = app.globalData.serverUrl +"/app/service/appServiceInterface/submitQuestionLogs.json";
+const submitQuestionLogsUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/submitQuestionLogs.json";
 // 成绩提交
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
 //获取排行榜
@@ -14,35 +14,36 @@ const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServi
 Page({
   data: {
     clock: date_format(total_micro_second),
-    hidStart:false,
-    hidRanking:true,
-    list:[],
-    index:0,
-    indexQuest:{},
-    files:[],
-    answerNums:0,
-    answerList:[],
-    checkedValue:'A',
-    hideSubimt:true,
-    setObj:{},
-    src:'',
-    catId:0,
+    hidStart: false,
+    hidRanking: true,
+    list: [],
+    index: 0,
+    indexQuest: {},
+    files: [],
+    answerNums: 0,
+    answerList: [],
+    checkedValue: 'A',
+    hideSubimt: true,
+    setObj: {},
+    src: '',
+    srcCount: 0,
+    catId: 0,
     radioItems: [
       { name: 'A:110', value: '0' },
       { name: 'B:110', value: '1', checked: true },
       { name: 'C:120', value: '2' },
       { name: 'D:120', value: '3' },
     ],
-    listRanking:[],
-    MyRanking:{
-      itemrownum:'暂无',
-      head_portrait:'',
-      nickname:'',
-      correct_score:0
+    listRanking: [],
+    MyRanking: {
+      itemrownum: '暂无',
+      head_portrait: '',
+      nickname: '',
+      correct_score: 0
     }
   },
   onLoad(options) {
-    console.log(app.myUserInfo);
+    console.log(app.globalData.myUserInfo);
     this.setData({
       myUserInfo: app.globalData.myUserInfo,
       catId: options.catId,
@@ -60,27 +61,27 @@ Page({
       }
     });
     this.ctx = wx.createCameraContext();
-    
+
   },
-  startKs(){
-   
+  startKs() {
+
     getQuestion(this);
-    
+
     takePhoto(this);
-    
+
   },
   error(e) {
     console.log(e.detail)
   },
-  next(e){
+  next(e) {
     takePhoto(this);
-    var cur_index=this.data.index;
+    var cur_index = this.data.index;
     var cur_answerNums = this.data.answerNums;
     cur_index++;
-    var hideSubimt=true;
+    var hideSubimt = true;
     //判断题目是否正确
-    var isRight=1;
-    if (this.data.indexQuest.answer == this.data.checkedValue){
+    var isRight = 1;
+    if (this.data.indexQuest.answer == this.data.checkedValue) {
       cur_answerNums++;
       console.log('回答正确！');
       var isRight = 1;
@@ -89,7 +90,7 @@ Page({
       //   icon: 'success',
       //   duration: 2000
       // })
-    }else{
+    } else {
       var isRight = 2;
       console.log("回答错误！")
       wx.showToast({
@@ -98,21 +99,21 @@ Page({
         duration: 2000
       })
     }
-    var tmpAnswer={
+    var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
       'correctAnswer': this.data.checkedValue,
       'answer': this.data.indexQuest.answer,
       'questionContext': this.data.indexQuest.questions,
       'isRight': isRight,
-      'setId':this.data.setObj.id
+      'setId': this.data.setObj.id
     }
     var tmpanswerList = this.data.answerList;
     tmpanswerList.push(tmpAnswer);
-    
+
     //获取下一题
     var nextQuest = this.data.list[cur_index];
     this.setData({
-      indexQuest:nextQuest,
+      indexQuest: nextQuest,
       index: cur_index,
       answerNums: cur_answerNums,
       answerList: tmpanswerList,
@@ -128,11 +129,11 @@ Page({
         hideSubimt: hideSubimt
       });
     }
-    
+
   },
-  submitKs:function(e){
+  submitKs: function (e) {
     var isRight = 1;
-    if (cur_index != this.data.list.length){
+    if (cur_index != this.data.list.length) {
       var cur_index = this.data.list.length;
 
       var cur_answerNums = this.data.answerNums;
@@ -163,12 +164,12 @@ Page({
     }
     // console.log(answerList);
     console.log("完成考试！");
-    
-    submitQuestion(this);
+
+    upload(this);
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
-    
+
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
       radioItems[i].checked = radioItems[i].value == e.detail.value;
@@ -178,7 +179,7 @@ Page({
       checkedValue: e.detail.value
     });
   },
-  ranking:function(e){
+  ranking: function (e) {
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#000000',
@@ -188,11 +189,11 @@ Page({
       }
     })
     this.setData({
-      hidRanking:false
+      hidRanking: false
     });
     findUserRankingList(this);
   },
-  hidRanking:function(e){
+  hidRanking: function (e) {
     this.setData({
       hidRanking: true
     });
@@ -205,7 +206,7 @@ Page({
       }
     })
   },
-  showHome:function(e){
+  showHome: function (e) {
     wx.switchTab({
       url: '/pages/home/home'
     })
@@ -213,13 +214,13 @@ Page({
 })
 
 
-var takePhoto=function(that) {
+var takePhoto = function (that) {
   that.ctx.takePhoto({
     quality: 'high',
     success: (res) => {
       // upload(that,res.tempImagePath)
       console.log(res.tempImagePath);
-      var tems= that.data.files;
+      var tems = that.data.files;
       tems.push(res.tempImagePath);
       that.setData({
         files: tems
@@ -228,56 +229,82 @@ var takePhoto=function(that) {
   })
 }
 
-var upload = function (that, path) {
-  wx.showToast({
-    icon: "loading",
-    title: "正在上传"
-  });
-
-  wx.uploadFile({
-    url: upload_url,
-    filePath: path,
-    name: 'file',
-    header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
-    formData: {
-      //和服务器约定的token, 一般也可以放在header中
-      'session_token': wx.getStorageSync('session_token')
-    },
-    success: function (res) {
-      console.log(res);
-      if (res.statusCode != 200) {
-        wx.showModal({
-          title: '提示',
-          content: '上传失败',
-          showCancel: false
-        })
-        return;
-      }
-      var data = JSON.parse(res.data);
-      // console.log(that.data.tempFile);
-      console.log(data.data.list[0].uri);
-      that.setData({
-        src: data.data.list[0].uri
+var upload = function (that) {
+  var picUrl = that.data.files;
+  if (picUrl.length > 0) {
+    for (var i = 0; i < 3; i++) {
+      var random = Math.floor(Math.random() * that.data.files.length);
+      var path=picUrl[random];
+      wx.showToast({
+        icon: "loading",
+        title: "正在上传"
       });
-      // saveTouxiang();
-    },
-    fail: function (e) {
-      console.log(e);
-      wx.showModal({
-        title: '提示',
-        content: '上传失败',
-        showCancel: false
-      })
-    },
-    complete: function () {
-      wx.hideToast();  //隐藏Toast
+      wx.uploadFile({
+        url: upload_url,
+        filePath: path,
+        name: 'file',
+        header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
+        formData: {
+          //和服务器约定的token, 一般也可以放在header中
+          'session_token': wx.getStorageSync('session_token')
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.statusCode != 200) {
+            wx.showModal({
+              title: '提示',
+              content: '上传失败',
+              showCancel: false
+            })
+            return;
+          }
+          var data = JSON.parse(res.data);
+          // console.log(that.data.tempFile);
+          var picServerUrl = that.data.src;
+          if ("" == picServerUrl) {
+            picServerUrl = data.data.list[0].uri;
+          } else {
+            picServerUrl = picServerUrl + "," + data.data.list[0].uri;
+          }
+          console.log("拼接后的图片地址："+picServerUrl);
+          var srcCount = that.data.srcCount;
+          srcCount++;
+          that.setData({
+            src: picServerUrl,
+            srcCount: srcCount
+          });
+
+          if (srcCount==3){
+            submitQuestion(that);
+          }
+          // saveTouxiang();
+        },
+        fail: function (e) {
+          console.log(e);
+          wx.showModal({
+            title: '提示',
+            content: '上传失败',
+            showCancel: false
+          })
+        },
+        complete: function () {
+          wx.hideToast();  //隐藏Toast
+        }
+      });
+
     }
-  });
+  } else {
+    var picServerUrl = "http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg";
+    that.setData({
+      src: picServerUrl
+    });
+  }
+
 
 }
 
 //获取题目信息
-var getQuestion=function(that){
+var getQuestion = function (that) {
   wx.showLoading({
     title: '正在获取题目...'
   })
@@ -289,7 +316,7 @@ var getQuestion=function(that){
     },
     data: {
       nums: 10,
-      type:1,
+      type: 1,
       workType: 0,
       departmentId: 0,
       catId: 0,
@@ -297,25 +324,25 @@ var getQuestion=function(that){
     },
     success: function (res) {
       //console.info(that.data.list);
-      if(res.data.status=="0"){
+      if (res.data.status == "0") {
         wx.showModal({
           title: '提示',
           content: res.data.msg,
           showCancel: false
         })
-      }else{
+      } else {
         that.setData({
           list: res.data.list,
           index: 0,
           indexQuest: res.data.list[0],
           setObj: res.data.data.obj,
           hidStart: true,
-          checkedValue:'A'
+          checkedValue: 'A'
         });
         getChoice(that);
         count_down(that);
       }
-      
+
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -337,37 +364,25 @@ var submitQuestion = function (that) {
     title: '正在提交成绩...'
   });
 
-  //获取随机图片并上传
-  var picUrl = that.data.files;
   var picServerUrl = that.data.src;
-  if(picUrl.length>0){
-    for (var i = 0; i < 3; i++) {
-      var random = Math.floor(Math.random() * that.data.files.length);
-      upload(that, picUrl[random]);
-      if ("" == picServerUrl){
-        picServerUrl = that.data.src;
-      }else{
-        picServerUrl = picServerUrl + "," + that.data.src;
-      }
-     
-    }
-  }else{
-    picServerUrl ="http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg";
-  }
-  
+
+
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
   var avgScore = 100 / totalNums;
   var correctScore = avgScore * that.data.answerNums;
   var errorScore = avgScore * errorNums;
-  var percentScore = that.data.answerNums/totalNums
+  var percentScore = that.data.answerNums / totalNums
   var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
+  costTime = parseInt(costTime/1000);
+  console.log(picServerUrl);
   wx.request({
     url: submitAchievement,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    method: 'POST',
     data: {
       setId: that.data.setObj.id,
       enterUserId: app.globalData.myGlobalUserId,
@@ -398,18 +413,18 @@ var submitQuestion = function (that) {
 }
 
 //提交做题记录
-var submitQuestionLogs=function(that){
+var submitQuestionLogs = function (that) {
   wx.showLoading({
     title: '请稍等...'
   });
   var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
   wx.request({
     url: submitQuestionLogsUrl,
-    method:'POST',
     header: {
-      'context-type': 'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
+    method: 'POST',
     data: that.data.answerList,
     success: function (res) {
       wx.redirectTo({
@@ -430,14 +445,14 @@ var submitQuestionLogs=function(that){
 }
 
 // 获取答案列表
-var getChoice=function(that){
-  var tmp1={
-    name: "A:" +that.data.indexQuest.choice_a,
+var getChoice = function (that) {
+  var tmp1 = {
+    name: "A:" + that.data.indexQuest.choice_a,
     value: 'A',
-    checked: true 
+    checked: true
   }
   var tmp2 = {
-    name: "B:" +that.data.indexQuest.choice_b,
+    name: "B:" + that.data.indexQuest.choice_b,
     value: 'B'
   }
 
@@ -446,20 +461,20 @@ var getChoice=function(that){
   tmpRideo.push(tmp2);
   if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
     var tmp3 = {
-      name: "C:"+that.data.indexQuest.choice_c,
+      name: "C:" + that.data.indexQuest.choice_c,
       value: 'C'
     }
     tmpRideo.push(tmp3);
   }
-  if (null != that.data.indexQuest.choice_d && "" !=that.data.indexQuest.choice_d){
+  if (null != that.data.indexQuest.choice_d && "" != that.data.indexQuest.choice_d) {
     var tmp4 = {
-      name: "D:" +that.data.indexQuest.choice_d,
+      name: "D:" + that.data.indexQuest.choice_d,
       value: 'D'
     }
     tmpRideo.push(tmp4);
   }
 
-  
+
   that.setData({
     radioItems: tmpRideo
   })
@@ -510,34 +525,51 @@ function fill_zero_prefix(num) {
 }
 
 
-//提交做题记录
+//获取用户排行榜
 var findUserRankingList = function (that) {
   wx.showLoading({
     title: '请稍等...'
   });
- wx.request({
+  wx.request({
     url: findUserRankingListUrl,
     method: 'POST',
     header: {
-      'context-type': 'application/json',
+      'Context-Type': 'application/json',
       'Accept': 'application/json'
     },
     data: that.data.answerList,
     success: function (res) {
       var tempDate = [];
-      var j=1;
+      var MyRanking = that.data.MyRanking;
+      var j = 1;
       for (var i = 0; i < res.data.rows.length; i++) {
-        if (app.globalData.myGlobalUserId == res.data.rows[i].enter_user_id){
+        //处理排行信息
+        var item = res.data.rows[i];
+        //判断是否是自己的排行信息
+        if (app.globalData.myGlobalUserId == res.data.rows[i].enter_user_id) {
+          item['itemrownum'] = j;
+          tempDate.push(item);
+          j++;
+          // MyRanking: {
+          //   itemrownum: '无',
+          //     head_portrait: app.globalData.myUserInfo.headPortrait,
+          //       nickname: app.globalData.myUserInfo.nickname,
+          //         correct_score: 0
+          // }
+          // that.setData({
+          //   MyRanking:item
+          // });
+          MyRanking = item;
+        } else {
 
-        }else{
-          var item = res.data.rows[i];
           item['itemrownum'] = j;
           tempDate.push(item);
           j++;
         }
-       
+
       }
       that.setData({
+        MyRanking: MyRanking,
         listRanking: tempDate
       });
     }, fail: function (e) {

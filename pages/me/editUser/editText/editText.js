@@ -64,9 +64,10 @@ var saveSubmit = function (that) {
   wx.request({
     url: editUserUrl,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    method:'POST',
     data: submitData,
     success: function (res) {
       // console.log(res);
