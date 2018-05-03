@@ -298,6 +298,7 @@ var upload = function (that) {
     that.setData({
       src: picServerUrl
     });
+    submitQuestion(that);
   }
 
 
