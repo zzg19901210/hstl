@@ -254,7 +254,9 @@ var loadContxt = function (that, catId, page) {
               pic_ali: res.data.rows[i].pic_ali,
               source: res.data.rows[i].source,
               title: res.data.rows[i].title,
-              nickname: res.data.rows[i].nickname
+              nickname: res.data.rows[i].nickname,
+              writer: res.data.rows[i].nickname,
+              click: res.data.rows[i].click
             }
             list.push(tmpObj);
           }
