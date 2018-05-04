@@ -17,7 +17,41 @@
   </scroll-view>
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
     <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
-      <block wx:if="{{cat.id==8}}">
+      <block wx:if="{{cat.id==30}}">
+        <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+          <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
+            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
+              <view class="item-ans">
+                <view class="avatar">
+                  <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+                </view>
+                <view class="expertInfo">
+                  <view class="name">{{arch.title}}</view>
+                  <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </scroll-view>
+      </block>
+      <block wx:elif="{{cat.id==31}}">
+        <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+          <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
+            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
+              <view class="item-ans">
+                <view class="avatar">
+                  <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+                </view>
+                <view class="expertInfo">
+                  <view class="name">{{arch.title}}</view>
+                  <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </scroll-view>
+      </block>
+      <block wx:else>
         <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
           <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
             <navigator url="/pages/video_play/index?ywType={{xxtype}}&vod_type={{ywType}}&title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}">
@@ -35,23 +69,6 @@
                   <image src='{{arch.headPortrait}}'></image>
                   <text class='nickname'>{{arch.nickname}}</text>
                   <text class='click'>{{arch.click}}次播放</text>
-                </view>
-              </view>
-            </navigator>
-          </block>
-        </scroll-view>
-      </block>
-      <block wx:else>
-        <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
-          <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
-              <view class="item-ans">
-                <view class="avatar">
-                  <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
-                </view>
-                <view class="expertInfo">
-                  <view class="name">{{arch.title}}</view>
-                  <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
                 </view>
               </view>
             </navigator>

@@ -182,7 +182,7 @@ var loadMore = function (that) {
         cat_list[i]['page'] = 1;
         cat_list[i]['list_arc'] = [];
       }
-      if ("2"==that.data.xxtype){
+      if ("2" == that.data.xxtype && "1" == that.data.ywType){
         var kjxx={
           title:'课件学习',
           type:'2',
