@@ -31,7 +31,7 @@ page{
 }
 .list_context .score .total{
   float: left;
-  width: 48%;
+  width: 46%;
 }
 .list_context .qurstion {
   padding-left: 10rpx;
@@ -42,7 +42,7 @@ page{
 }
 .list_context .qurstion .total{
   float: left;
-  width: 48%;
+  width: 45%;
 }
 
 .scoll-h {

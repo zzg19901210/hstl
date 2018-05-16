@@ -73,43 +73,47 @@ Page({
         title: '正在加载...',
       });
       if (app.globalData.myUserInfo == null) {
-        
+
       } else {
         var routers = this.data.routers;
-        if ("1" == app.globalData.myUserInfo.roleId){
-          routers.push({
-            name: '业务视频审录',
-            url: '/pages/video_list/index?ywType=1&type=1',
-            icon: '/images/home_icon/lz.png'
-          });
-          routers.push({
-            name: '政治理论视频审录',
-            url: '/pages/video_list/index?ywType=2&type=1',
-            icon: '/images/home_icon/dzlz.png'
-          });
-          routers.push({
-            name: '视频录制',
-            url: '/pages/splz/index',
-            icon: '/images/home_icon/lz.png'
-          });
-        } else if ("6" == app.globalData.myUserInfo.roleId){
-          if ("1" == app.globalData.myUserInfo.userType){
+        if (routers.length < 10) {
+          if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
               url: '/pages/video_list/index?ywType=1&type=1',
               icon: '/images/home_icon/lz.png'
             });
-          }else{
             routers.push({
               name: '政治理论视频审录',
               url: '/pages/video_list/index?ywType=2&type=1',
               icon: '/images/home_icon/dzlz.png'
             });
+            routers.push({
+              name: '视频录制',
+              url: '/pages/splz/index',
+              icon: '/images/home_icon/lz.png'
+            });
+
+
+          } else if ("6" == app.globalData.myUserInfo.roleId) {
+            if ("1" == app.globalData.myUserInfo.userType) {
+              routers.push({
+                name: '业务视频审录',
+                url: '/pages/video_list/index?ywType=1&type=1',
+                icon: '/images/home_icon/lz.png'
+              });
+            } else {
+              routers.push({
+                name: '政治理论视频审录',
+                url: '/pages/video_list/index?ywType=2&type=1',
+                icon: '/images/home_icon/dzlz.png'
+              });
+            }
           }
+          this.setData({
+            routers: routers
+          });
         }
-        this.setData({
-          routers: routers
-        });
         clearInterval(interval);
         wx.hideLoading();
       }
