@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/examination/construction/index",
     "pages/welcome/welcome",
     "pages/study/index",
     "pages/home/home",

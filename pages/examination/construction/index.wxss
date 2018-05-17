@@ -1,0 +1,35 @@
+/* pages/examination/construction/index.wxss */
+
+@import "/plus/wxParse/wxParse.wxss";
+
+
+
+.start-ks {
+  padding: 15rpx 15rpx 0 15rpx;
+  position: relative;
+  background: #fff;
+}
+
+.btn-startKs {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+}
+
+.ranking {
+  position: fixed; /*or前面的是absolute就可以用*/
+  top: 100rpx;
+  /* margin: 0 auto; */
+  right:20rpx;
+}
+
+.ranking .btn-ranking {
+  background: rgba(83,92,104, 0.9);
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  width: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+}

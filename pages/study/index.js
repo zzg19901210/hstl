@@ -74,8 +74,11 @@ Page({
     console.log(e.detail)
   },
   next(e) {
-    takePhoto(this);
     var cur_index = this.data.index;
+    var tak = parseInt(this.data.list.length / 2 );
+    if (tak== cur_index){
+      takePhoto(this);
+    }
     var cur_answerNums = this.data.answerNums;
     cur_index++;
     var hideSubimt = true;
@@ -132,6 +135,7 @@ Page({
 
   },
   submitKs: function (e) {
+    takePhoto(this);
     var isRight = 1;
     if (cur_index != this.data.list.length) {
       var cur_index = this.data.list.length;
@@ -232,13 +236,14 @@ var takePhoto = function (that) {
 var upload = function (that) {
   var picUrl = that.data.files;
   if (picUrl.length > 0) {
+    wx.showToast({
+      icon: "loading",
+      title: "正在上传"
+    });
     for (var i = 0; i < 3; i++) {
       var random = Math.floor(Math.random() * that.data.files.length);
       var path=picUrl[random];
-      wx.showToast({
-        icon: "loading",
-        title: "正在上传"
-      });
+    
       wx.uploadFile({
         url: upload_url,
         filePath: path,
@@ -261,11 +266,14 @@ var upload = function (that) {
           var data = JSON.parse(res.data);
           // console.log(that.data.tempFile);
           var picServerUrl = that.data.src;
-          if ("" == picServerUrl) {
-            picServerUrl = data.data.list[0].uri;
-          } else {
-            picServerUrl = picServerUrl + "," + data.data.list[0].uri;
+          if (null != data.data.list && "" != data.data.list&&data.data.list.length>0){
+            if ("" == picServerUrl) {
+              picServerUrl = data.data.list[0].uri;
+            } else {
+              picServerUrl = picServerUrl + "," + data.data.list[0].uri;
+            }
           }
+          
           console.log("拼接后的图片地址："+picServerUrl);
           var srcCount = that.data.srcCount;
           srcCount++;
@@ -275,6 +283,7 @@ var upload = function (that) {
           });
 
           if (srcCount==3){
+            wx.hideToast();  //隐藏Toast
             submitQuestion(that);
           }
           // saveTouxiang();
@@ -288,7 +297,7 @@ var upload = function (that) {
           })
         },
         complete: function () {
-          wx.hideToast();  //隐藏Toast
+        
         }
       });
 
