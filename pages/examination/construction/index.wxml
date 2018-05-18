@@ -12,16 +12,29 @@
   <button class='btn-startKs' bindtap="startKs">开始考试</button>
 
 </view>
-<view class="ranking">
+<view class="ranking" hidden='{{hidStart}}'>
   <button class="btn-ranking" bindtap="ranking">
     排行榜
   </button>
 </view>
 
+<view class='header' hidden='{{!hidStart}}'>
+  <view class="contxt">
+    <image src="{{myUserInfo.headPortrait}}"></image>
+    <view class="nickname">{{myUserInfo.nickname}}</view>
+  </view>
+  <view class='timer'>
+    <view>总题数：{{list.length}}</view>
+    <view>已完成：{{index}}</view>
+    <view>回答正确：{{answerNums}}</view>
+    <view>{{clock}}</view>
+  </view>
+  <!-- <camera device-position="front" flash="off" binderror="error" style=""></camera> -->
 
+</view>
 <view class='question' hidden='{{!hidStart}}'>
 
-  <view class="weui-cells__title">{{index+1}}、{{indexQuest.questions}}</view>
+  <view class="weui-cells__title">{{index+1}}、{{indexQuest.title}}</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
@@ -33,4 +46,6 @@
       </label>
     </radio-group>
   </view>
+  <button class='button' bindtap="next" hidden='{{!hideSubimt==hidStart}}'>下一题</button>
+  <button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button>
 </view>

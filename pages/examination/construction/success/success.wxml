@@ -16,6 +16,10 @@
             </view>
             <view class="weui-form-preview__bd">
                 <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">答题人</view>
+                    <view class="weui-form-preview__value">{{nickname}}</view>
+                </view>
+                <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">总题数</view>
                     <view class="weui-form-preview__value">{{totalNums}}</view>
                 </view>
@@ -25,7 +29,7 @@
                 </view>
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">用时</view>
-                    <view class="weui-form-preview__value">{{costTime}}ms</view>
+                    <view class="weui-form-preview__value">{{costTime}} 秒</view>
                 </view>
             </view>
             <view class="weui-form-preview__ft">

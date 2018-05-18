@@ -22,7 +22,7 @@ const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appWorkI
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据woworkSetId
    */
   data: {
     clock: date_format(total_micro_second),
@@ -38,7 +38,11 @@ Page({
     work:{
 
     },
+
+    answerNums: 0,
+    answerList: [],
     hidStart:false,
+    hideSubimt:true,
     MyRanking: {
       itemrownum: '暂无',
       head_portrait: '',
@@ -52,18 +56,19 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      // workSetId: options.workSetId,
-      workSetId: 2,
+      workSetId: options.workSetId,
+      myUserInfo: app.globalData.myUserInfo,
+      // workSetId: 2,
       MyRanking: {
         itemrownum: '无',
-        // head_portrait: app.globalData.myUserInfo.headPortrait,
-        // nickname: app.globalData.myUserInfo.nickname,
+        head_portrait: app.globalData.myUserInfo.headPortrait,
+        nickname: app.globalData.myUserInfo.nickname,
         correct_score: 0
       }
     });
     wx.setNavigationBarTitle({
-      // title: options.title,
-      title: '啦啦啦',
+      title: options.title,
+      // title: '啦啦啦',
       success: function (res) {
         // success
       }
@@ -87,6 +92,103 @@ Page({
       radioItems: radioItems,
       checkedValue: e.detail.value
     });
+  },
+  next: function(e) {
+    var cur_index = this.data.index;
+   
+    var cur_answerNums = this.data.answerNums;
+    cur_index++;
+    var hideSubimt = true;
+    //判断题目是否正确
+    var isRight = 1;
+    if (this.data.indexQuest.answer == this.data.checkedValue) {
+      cur_answerNums++;
+      console.log('回答正确！');
+      var isRight = 1;
+      // wx.showToast({
+      //   title: '回答正确',
+      //   icon: 'success',
+      //   duration: 2000
+      // })
+    } else {
+      var isRight = 2;
+      console.log("回答错误！")
+      wx.showToast({
+        title: '回答错误：正确答案是' + this.data.indexQuest.answer,
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    var tmpAnswer = {
+      'workQuestionId': this.data.indexQuest.id,
+      'userSelect': this.data.checkedValue,
+      'answer': this.data.indexQuest.answer,
+      'questionContext': this.data.indexQuest.questions,
+      'isRight': isRight,
+      'wordId': this.data.wordSetId,
+      'userId': this.data.myUserInfo.id
+    }
+    var tmpanswerList = this.data.answerList;
+    tmpanswerList.push(tmpAnswer);
+
+    //获取下一题
+    var nextQuest = this.data.list[cur_index];
+    this.setData({
+      indexQuest: nextQuest,
+      index: cur_index,
+      answerNums: cur_answerNums,
+      answerList: tmpanswerList,
+      checkedValue: 'A'
+    });
+    //重新组织题目
+    getChoice(this);
+    //增加题目
+    cur_index++;
+    if (this.data.list.length == cur_index) {
+      hideSubimt = false;
+      this.setData({
+        hideSubimt: hideSubimt
+      });
+    }
+
+  },
+  submitKs: function (e) {
+    // takePhoto(this);
+    var isRight = 1;
+    if (cur_index != this.data.list.length) {
+      var cur_index = this.data.list.length;
+
+      var cur_answerNums = this.data.answerNums;
+      if (this.data.indexQuest.answer == this.data.checkedValue) {
+        cur_answerNums++;
+        console.log('回答正确！');
+      } else {
+        console.log("回答错误！")
+      }
+
+      var tmpAnswer = {
+        'workQuestionId': this.data.indexQuest.id,
+        'userSelect': this.data.checkedValue,
+        'answer': this.data.indexQuest.answer,
+        'questionContext': this.data.indexQuest.questions,
+        'isRight': isRight,
+        'wordId': this.data.wordSetId,
+        'userId': this.data.myUserInfo.id
+      }
+      var tmpanswerList = this.data.answerList;
+      tmpanswerList.push(tmpAnswer);
+
+      this.setData({
+        index: cur_index,
+        answerNums: cur_answerNums,
+        answerList: tmpanswerList
+      });
+
+    }
+    // console.log(answerList);
+    console.log("完成考试！");
+    submitQuestion(this);
+
   },
 })
 
@@ -116,7 +218,9 @@ var getWork=function(that){
           work: res.data.data.obj
         });
         WxParse.wxParse('article', 'html', res.data.data.obj.questionIntroduction, that, 5);
+        
       }
+      wx.hideLoading();
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -124,9 +228,10 @@ var getWork=function(that){
         content: '获取信息失败',
         showCancel: false
       })
+      wx.hideLoading();
     },
     complete: function () {
-      wx.hideLoading();
+    
     }
   });
 }
@@ -143,7 +248,7 @@ var getQuestion = function (that) {
       'Accept': 'application/json'
     },
     data: {
-      woworkSetId: that.data.workSetId
+      workSetId: that.data.workSetId
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -154,7 +259,7 @@ var getQuestion = function (that) {
           showCancel: false
         })
       } else {
-        
+        console.log(res.data.rows[0]);
         that.setData({
           list: res.data.rows,
           index: 0,
@@ -162,9 +267,12 @@ var getQuestion = function (that) {
           hidStart: true,
           checkedValue: 'A'
         });
+        WxParse.wxParse('article', 'html',"", that, 5);
         getChoice(that);
         count_down(that);
       }
+
+      wx.hideLoading();
 
     }, fail: function (e) {
       console.log(e);
@@ -173,9 +281,10 @@ var getQuestion = function (that) {
         content: '获取题目失败',
         showCancel: false
       })
+
+      wx.hideLoading();
     },
     complete: function () {
-      wx.hideLoading();
     }
   });
 }
@@ -207,16 +316,15 @@ var submitQuestion = function (that) {
     },
     method: 'POST',
     data: {
-      setId: that.data.setObj.id,
-      enterUserId: app.globalData.myGlobalUserId,
+      workId: that.data.workSetId,
+      workUserId: app.globalData.myGlobalUserId,
       departmentId: app.globalData.myUserInfo.departmentId,
       correctNums: that.data.answerNums,
       correctScore: correctScore,
       errorNums: errorNums,
       errorScore: errorScore,
       costTime: costTime,
-      percentScore: percentScore,
-      picUrl: picServerUrl
+      percentScore: percentScore
     },
     success: function (res) {
       //提交做题日志
@@ -241,6 +349,7 @@ var submitQuestionLogs = function (that) {
     title: '请稍等...'
   });
   var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
+  costTime =parseInt(costTime/1000);
   wx.request({
     url: submitQuestionLogsUrl,
     header: {
@@ -251,8 +360,10 @@ var submitQuestionLogs = function (that) {
     data: that.data.answerList,
     success: function (res) {
       wx.redirectTo({
-        url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime
+        url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime 
       })
+
+      wx.hideLoading();
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -260,9 +371,10 @@ var submitQuestionLogs = function (that) {
         content: '提交日志失败',
         showCancel: false
       });
+
+      wx.hideLoading();
     },
     complete: function () {
-      wx.hideLoading();
     }
   });
 }
@@ -291,32 +403,36 @@ function fill_zero_prefix(num) {
 // 获取答案列表
 var getChoice = function (that) {
   var tmp1 = {
-    name: "A:" + that.data.indexQuest.choice_a,
+    name:  that.data.indexQuest.choicea,
     value: 'A',
     checked: true
   }
   var tmp2 = {
-    name: "B:" + that.data.indexQuest.choice_b,
+    name:  that.data.indexQuest.choiceb,
     value: 'B'
   }
 
   var tmpRideo = [];
   tmpRideo.push(tmp1);
   tmpRideo.push(tmp2);
-  if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
+  if (null != that.data.indexQuest.choicec && "" != that.data.indexQuest.choicec) {
     var tmp3 = {
-      name: "C:" + that.data.indexQuest.choice_c,
+      name: that.data.indexQuest.choicec,
       value: 'C'
     }
     tmpRideo.push(tmp3);
   }
-  if (null != that.data.indexQuest.choice_d && "" != that.data.indexQuest.choice_d) {
+  if (null != that.data.indexQuest.choiced && "" != that.data.indexQuest.choiced) {
     var tmp4 = {
-      name: "D:" + that.data.indexQuest.choice_d,
+      name: that.data.indexQuest.choiced,
       value: 'D'
     }
     tmpRideo.push(tmp4);
   }
+
+  that.setData({
+    radioItems: tmpRideo
+  })
 }
 /* 毫秒级倒计时 */
 function count_down(that) {

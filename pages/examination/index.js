@@ -4,7 +4,7 @@ const app = getApp();
 
 // const context_url = app.globalData.serverUrl + "/studyQuestionAction/getWorkQuestionList.json";
 
-const context_url = app.globalData.serverUrl + "/app/service/work/workList.json";
+const context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/workList.json";
 
 var cur_page = 1;
 const page_size = 10;

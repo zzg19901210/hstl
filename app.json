@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/examination/construction/index",
     "pages/welcome/welcome",
+    "pages/examination/construction/index",
+    "pages/examination/construction/success/success",
     "pages/study/index",
     "pages/home/home",
     "pages/study/cat/studycat",

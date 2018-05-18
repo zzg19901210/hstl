@@ -3,9 +3,11 @@
   <text>下拉刷新  </text>
   <text>{{refreshTime}}</text>
 </view>
- <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-     <navigator url="context/index?kslx=2&wordId={{cont.id}}"> 
+    <!-- <navigator url="context/index?kslx=2&wordId={{cont.id}}">  -->
+
+    <navigator url="construction/index?workSetId={{cont.id}}&title={{cont.questionTitle}}">
       <view class='item'>
         <view class='list_context'>
           <text class='c_title'>{{cont.questionTitle}}</text>
@@ -19,9 +21,9 @@
           </view>
         </view>
       </view>
-     </navigator> 
+    </navigator>
   </block>
-</scroll-view> 
+</scroll-view>
 <view class="body-view">
   <loading hidden="{{hidden}}" bindchange="loadingChange">
     加载中...

@@ -1,4 +1,5 @@
 // pages/study/success/success.js
+const app = getApp()
 Page({
 
   /**
@@ -8,7 +9,8 @@ Page({
     answerNums:'10',
     totalNums:'20',
     costTime:'360',
-    correctScore:50
+    correctScore:50,
+    nickname:''
   },
 
   /**
@@ -22,7 +24,8 @@ Page({
       answerNums: options.answerNums,
       totalNums: options.totalNums,
       costTime: options.costTime,
-      correctScore: correctScore
+      correctScore: correctScore,
+      nickname: app.globalData.myUserInfo.nickname
     })
     wx.setNavigationBarTitle({
       title: '考试完成',
