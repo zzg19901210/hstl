@@ -8,7 +8,9 @@
     <!-- <navigator url="/pages/video_play/index?title={{cont.title}}&video_url={{cont.palyUrl}}&nickname={{cont.nickname}}&vodId={{cont.id}}&headPortrait={{cont.headPortrait}}"> -->
       <view class='item'>
         <view class='list_context'>
-          <text class='c_title'>{{cont.createTime}}</text>
+
+          <text class='c_title' wx:if="{{type=='1'}}">{{cont.createTime}}</text>
+          <text class='c_title' wx:else>{{cont.questionTitle}}</text>
           <view class='score'>
             <text class='total'>错误分数：{{cont.errorScore}}分</text>
             <text class='activity'>本次成绩：{{cont.correctScore}}分</text>

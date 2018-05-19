@@ -36,7 +36,8 @@
     "pages/zj/arc_context/index",
     "pages/logs/logs",
     "pages/dz/dz",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/achievement/context/context"
   ],
   "window": {
     "backgroundTextStyle": "light",

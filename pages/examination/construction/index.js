@@ -28,7 +28,6 @@ Page({
     clock: date_format(total_micro_second),
     list: [],
     workSetId:0,
-    listRanking: [],
     index: 0,
     checkedValue: 'A',
     hideSubimt: true,
@@ -38,11 +37,12 @@ Page({
     work:{
 
     },
-
+    hidRanking:true,
     answerNums: 0,
     answerList: [],
     hidStart:false,
     hideSubimt:true,
+    listRanking: [],
     MyRanking: {
       itemrownum: '暂无',
       head_portrait: '',
@@ -93,6 +93,20 @@ Page({
       checkedValue: e.detail.value
     });
   },
+  ranking:function(e){
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#000000',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+    this.setData({
+      hidRanking: false
+    });
+    findUserRankingList(this);
+  },
   next: function(e) {
     var cur_index = this.data.index;
    
@@ -122,10 +136,10 @@ Page({
     var tmpAnswer = {
       'workQuestionId': this.data.indexQuest.id,
       'userSelect': this.data.checkedValue,
-      'answer': this.data.indexQuest.answer,
-      'questionContext': this.data.indexQuest.questions,
+      'correctAnswer': this.data.indexQuest.answer,
+      'workQuestionContext': this.data.indexQuest.questions,
       'isRight': isRight,
-      'wordId': this.data.wordSetId,
+      'workId': this.data.workSetId,
       'userId': this.data.myUserInfo.id
     }
     var tmpanswerList = this.data.answerList;
@@ -138,7 +152,8 @@ Page({
       index: cur_index,
       answerNums: cur_answerNums,
       answerList: tmpanswerList,
-      checkedValue: 'A'
+      checkedValue: 'A',
+      'userId': this.data.myUserInfo.id
     });
     //重新组织题目
     getChoice(this);
@@ -169,17 +184,17 @@ Page({
       var tmpAnswer = {
         'workQuestionId': this.data.indexQuest.id,
         'userSelect': this.data.checkedValue,
-        'answer': this.data.indexQuest.answer,
-        'questionContext': this.data.indexQuest.questions,
+        'correctAnswer': this.data.indexQuest.answer,
+        'workQuestionContext': this.data.indexQuest.questions,
         'isRight': isRight,
-        'wordId': this.data.wordSetId,
+        'workId': this.data.workSetId,
         'userId': this.data.myUserInfo.id
       }
       var tmpanswerList = this.data.answerList;
       tmpanswerList.push(tmpAnswer);
 
       this.setData({
-        index: cur_index,
+        // index: cur_index,
         answerNums: cur_answerNums,
         answerList: tmpanswerList
       });
@@ -190,6 +205,24 @@ Page({
     submitQuestion(this);
 
   },
+  hidRanking: function (e) {
+    this.setData({
+      hidRanking: true
+    });
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#3c9ae8',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+  },
+  showHome: function (e) {
+    wx.switchTab({
+      url: '/pages/home/home'
+    })
+  }
 })
 
 var getWork=function(that){
@@ -324,11 +357,12 @@ var submitQuestion = function (that) {
       errorNums: errorNums,
       errorScore: errorScore,
       costTime: costTime,
-      percentScore: percentScore
+      percentScore: percentScore,
+      totalScore:100
     },
     success: function (res) {
       //提交做题日志
-      submitQuestionLogs(that);
+      submitQuestionLogs(that,res.data.data.obj);
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -344,12 +378,19 @@ var submitQuestion = function (that) {
 }
 
 //提交做题记录
-var submitQuestionLogs = function (that) {
+var submitQuestionLogs = function (that,obj) {
   wx.showLoading({
     title: '请稍等...'
   });
   var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
   costTime =parseInt(costTime/1000);
+  var postData = that.data.answerList;
+  var sumbitData = [];
+  for (var i = 0; i < postData.length; i++) {
+    var tmpdata = postData[i];
+    tmpdata.workLogsId = obj.id;
+    sumbitData.push(tmpdata);
+  }
   wx.request({
     url: submitQuestionLogsUrl,
     header: {
@@ -357,7 +398,7 @@ var submitQuestionLogs = function (that) {
       'Accept': 'application/json'
     },
     method: 'POST',
-    data: that.data.answerList,
+    data: sumbitData,
     success: function (res) {
       wx.redirectTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime 
@@ -455,5 +496,69 @@ function count_down(that) {
     total_micro_second -= 10;
     count_down(that);
   }, 10)
+}
+
+
+
+//获取用户排行榜
+var findUserRankingList = function (that) {
+  wx.showLoading({
+    title: '请稍等...'
+  });
+  wx.request({
+    url: findUserRankingListUrl,
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      workId:'2'
+    },
+    success: function (res) {
+      var tempDate = [];
+      var MyRanking = that.data.MyRanking;
+      var j = 1;
+      for (var i = 0; i < res.data.rows.length; i++) {
+        //处理排行信息
+        var item = res.data.rows[i];
+        //判断是否是自己的排行信息
+        if (app.globalData.myGlobalUserId == res.data.rows[i].enter_user_id) {
+          item['itemrownum'] = j;
+          tempDate.push(item);
+          j++;
+          // MyRanking: {
+          //   itemrownum: '无',
+          //     head_portrait: app.globalData.myUserInfo.headPortrait,
+          //       nickname: app.globalData.myUserInfo.nickname,
+          //         correct_score: 0
+          // }
+          // that.setData({
+          //   MyRanking:item
+          // });
+          MyRanking = item;
+        } else {
+          item['itemrownum'] = j;
+          tempDate.push(item);
+          j++;
+        }
+
+      }
+      that.setData({
+        MyRanking: MyRanking,
+        listRanking: tempDate
+      });
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '获取排行榜信息错误',
+        showCancel: false
+      });
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
 }
 

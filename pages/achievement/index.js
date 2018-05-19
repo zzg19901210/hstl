@@ -19,6 +19,7 @@ Page({
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
     requestUrl:zj_context_url,
+    type:'1',
     list: [
     //   {
     //   title: '2018-3-12',
@@ -47,12 +48,14 @@ Page({
     if(options.cjlx=="1"){
       title = "职教-我的成绩";
       this.setData({
-        requestUrl: zj_context_url
+        requestUrl: zj_context_url,
+        type:'1'
       });
     }else{
       title = "施工-我的成绩";
       this.setData({
-        requestUrl: sg_context_url
+        requestUrl: sg_context_url,
+        type: '2'
       });
     }
     wx.setNavigationBarTitle({

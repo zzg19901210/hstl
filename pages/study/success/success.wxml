@@ -25,7 +25,7 @@
                 </view>
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">用时</view>
-                    <view class="weui-form-preview__value">{{costTime}}ms</view>
+                    <view class="weui-form-preview__value">{{costTime}} 秒</view>
                 </view>
             </view>
             <view class="weui-form-preview__ft">

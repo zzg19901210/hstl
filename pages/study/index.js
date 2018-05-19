@@ -29,10 +29,10 @@ Page({
     srcCount: 0,
     catId: 0,
     radioItems: [
-      { name: 'A:110', value: '0' },
-      { name: 'B:110', value: '1', checked: true },
-      { name: 'C:120', value: '2' },
-      { name: 'D:120', value: '3' },
+      // { name: 'A:110', value: '0' },
+      // { name: 'B:110', value: '1', checked: true },
+      // { name: 'C:120', value: '2' },
+      // { name: 'D:120', value: '3' },
     ],
     listRanking: [],
     MyRanking: {
@@ -108,6 +108,7 @@ Page({
       'answer': this.data.indexQuest.answer,
       'questionContext': this.data.indexQuest.questions,
       'isRight': isRight,
+      'userId': app.globalData.myGlobalUserId,
       'setId': this.data.setObj.id
     }
     var tmpanswerList = this.data.answerList;
@@ -154,13 +155,14 @@ Page({
         'answer': this.data.indexQuest.answer,
         'questionContext': this.data.indexQuest.questions,
         'isRight': isRight,
+        'userId': app.globalData.myGlobalUserId,
         'setId': this.data.setObj.id
       }
       var tmpanswerList = this.data.answerList;
       tmpanswerList.push(tmpAnswer);
 
       this.setData({
-        index: cur_index,
+        // index: cur_index,
         answerNums: cur_answerNums,
         answerList: tmpanswerList
       });
@@ -240,6 +242,10 @@ var upload = function (that) {
       icon: "loading",
       title: "正在上传"
     });
+    that.setData({
+      src: "",
+      srcCount: 0
+    });
     for (var i = 0; i < 3; i++) {
       var random = Math.floor(Math.random() * that.data.files.length);
       var path=picUrl[random];
@@ -282,7 +288,7 @@ var upload = function (that) {
             srcCount: srcCount
           });
 
-          if (srcCount==3){
+          if (srcCount>2){
             wx.hideToast();  //隐藏Toast
             submitQuestion(that);
           }
@@ -329,7 +335,7 @@ var getQuestion = function (that) {
       type: 1,
       workType: 0,
       departmentId: 0,
-      catId: 0,
+      catId: that.data.catId,
       isHide: 0
     },
     success: function (res) {
@@ -403,11 +409,12 @@ var submitQuestion = function (that) {
       errorScore: errorScore,
       costTime: costTime,
       percentScore: percentScore,
-      picUrl: picServerUrl
+      picUrl: picServerUrl,
+      catId: that.data.catId
     },
     success: function (res) {
       //提交做题日志
-      submitQuestionLogs(that);
+      submitQuestionLogs(that,res.data.data.obj);
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -423,11 +430,19 @@ var submitQuestion = function (that) {
 }
 
 //提交做题记录
-var submitQuestionLogs = function (that) {
+var submitQuestionLogs = function (that,obj) {
   wx.showLoading({
     title: '请稍等...'
   });
   var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
+  costTime = parseInt(costTime / 1000);
+  var postData = that.data.answerList;
+  var sumbitData=[];
+  for (var i = 0; i < postData.length; i++) {
+    var tmpdata = postData[i];
+    tmpdata.setLogId=obj.id;
+    sumbitData.push(tmpdata);
+  }
   wx.request({
     url: submitQuestionLogsUrl,
     header: {
@@ -435,10 +450,16 @@ var submitQuestionLogs = function (that) {
       'Accept': 'application/json'
     },
     method: 'POST',
-    data: that.data.answerList,
+    data: sumbitData,
     success: function (res) {
+      wx.showLoading({
+        title: '正在计算成绩...'
+      });
       wx.redirectTo({
-        url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime
+        url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime,
+        success:function(e){
+          wx.hideLoading();
+        }
       })
     }, fail: function (e) {
       console.log(e);
@@ -544,10 +565,10 @@ var findUserRankingList = function (that) {
     url: findUserRankingListUrl,
     method: 'POST',
     header: {
-      'Context-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
-    data: that.data.answerList,
+    // data: that.data.answerList,
     success: function (res) {
       var tempDate = [];
       var MyRanking = that.data.MyRanking;

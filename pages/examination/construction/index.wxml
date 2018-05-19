@@ -34,7 +34,8 @@
 </view>
 <view class='question' hidden='{{!hidStart}}'>
 
-  <view class="weui-cells__title">{{index+1}}、{{indexQuest.title}}</view>
+  <!-- <view class="weui-cells__title">{{index+1}}、{{indexQuest.title}}</view> -->
+  <view class="weui-cells__title">{{indexQuest.title}}</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
@@ -48,4 +49,37 @@
   </view>
   <button class='button' bindtap="next" hidden='{{!hideSubimt==hidStart}}'>下一题</button>
   <button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button>
+</view>
+
+
+<view class="b1" catchtouchmove="true" hidden="{{hidRanking}}">
+  <view class='title'>施工考试成绩排行榜</view>
+  <view class='body'>
+    <!-- <view class='group'>
+      <view class='btn activity'>总排行</view>
+      <view class='btn'>题库排行</view>
+    </view> -->
+    <scroll-view scroll-y style="height:790rpx;">
+      <block wx:for="{{listRanking}}" wx:for-item="obj" wx:key="*this">
+        <view class='item {{obj.itemrownum%2==0?"two":""}}'>
+          <text class='xh'>{{obj.itemrownum}}</text>
+          <image src='{{obj.head_portrait}}'></image>
+          <text class='nickname'>{{obj.nickname}}</text>
+          <text class='scort'>{{obj.correct_score}}</text>
+        </view>
+      </block>
+      <!-- 
+      <view class='item two'>
+        <text class='xh'>2</text>
+        <image src='https://wx.qlogo.cn/mmopen/vi_32/ibuELzqZLVXxo2CDF1bfnuic39MfUguXs7gmndaHcKyBxvdZdGxH4k9FgiaYE4MEhjeVonlBmqWbrBWjy2IobX8AQ/0'></image>
+        <text class='nickname'>Sikalng</text>
+        <text class='scort'>110</text>
+      </view> -->
+
+    </scroll-view>
+  </view>
+  <view class='footer'>
+    <button class='btn-fotter' bindtap='hidRanking'>←</button>
+    <button class='btn-fotter-right' bindtap='showHome'>返回首页</button>
+  </view>
 </view>
