@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/doubleroom/roomlist/roomlist",
+    "pages/doubleroom/room/room",
+    "pages/doubleroom/roomname/roomname",
     "pages/achievement/context/context",
     "pages/examination/construction/index",
     "pages/examination/construction/success/success",
