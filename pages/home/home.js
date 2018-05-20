@@ -10,11 +10,11 @@ Page({
     ],
     imageWidth: wx.getSystemInfoSync().windowWidth,
     routers: [
-      {
-        name: '视频会议',
-        url: '../doubleroom/roomlist/roomlist',
-        icon: '/images/home_icon/doubleroom.png'
-      },
+      // {
+      //   name: '视频录制',
+      //   url: '/pages/splz/index',
+      //   icon: '/images/home_icon/lz.png'
+      // },
       {
         name: '政治理论视频学习',
         url: '/pages/video_list/index?ywType=2&type=2',
