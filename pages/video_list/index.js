@@ -15,8 +15,8 @@ Page({
     list: [],
     hidden: true,
     page: 1,
-    ywType:"1",
-    xxtype:"1"
+    ywType: "1",
+    xxtype: "1"
 
   },
   // 滚动切换标签样式
@@ -55,21 +55,21 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
-    
+
     console.log(options.type)
     that.setData({
-      ywType:options.ywType,
-      xxtype:options.type
+      ywType: options.ywType,
+      xxtype: options.type
     });
-    if("1"==options.type){
-      if ("2" == options.ywType){
+    if ("1" == options.type) {
+      if ("2" == options.ywType) {
         wx.setNavigationBarTitle({
           title: "政治理论-视频审阅",
           success: function (res) {
             // success
           }
         });
-      }else{
+      } else {
         wx.setNavigationBarTitle({
           title: "业务-视频审阅",
           success: function (res) {
@@ -77,8 +77,8 @@ Page({
           }
         });
       }
-     
-    }else{
+
+    } else {
       if ("2" == options.ywType) {
         wx.setNavigationBarTitle({
           title: "政治理论-视频学习",
@@ -88,7 +88,7 @@ Page({
         });
       } else {
         wx.setNavigationBarTitle({
-          title: "业务-资料学习",
+          title: "职教资料学习",
           success: function (res) {
             // success
           }
@@ -139,11 +139,48 @@ Page({
     page = 1;
     loadContxt(this, this.data.cat_list[this.data.currentTab].id, page);
     console.log("上拉加载");
-  }, btnItem:function(e){
+  }, btnItem: function (e) {
     var arch = e.currentTarget.dataset.arch;
     console.log(arch.title);
     wx.navigateTo({
       url: '/pages/video_play/index?dataObj=' + encodeURIComponent(JSON.stringify(arch))
+    });
+  }, downloadFile: function (e) {
+    var url = "http://hstl.oss.isport.nm.cn/hstl/xx/2018%E5%B9%B4%E6%8A%80%E5%B8%88%E5%85%A8%E8%A7%A3%E9%87%8D%E8%81%98%EF%BC%88%E8%BD%A6%E7%AB%99%E5%80%BC%E7%8F%AD%E5%91%98%EF%BC%89.xls";
+    wx.showLoading({
+      title: '正在打开文件',
+    })
+    wx.downloadFile({
+      url: url,
+      success: function (res) {
+        if (res.statusCode === 200) {
+          var filePath = res.tempFilePath;
+          wx.openDocument({
+            filePath: filePath,
+            success: function (e) {
+              wx.hideLoading();
+              console.log('打开文件成功');
+            }, fail: function (e) {
+              wx.hideLoading();
+              console.log('打开文件成功');
+              wx.showToast({
+                title: '文件打开失败,请重新点击',
+                icon: 'none'
+              })
+            }
+          });
+        }else{
+          wx.hideLoading();
+          console.log('打开文件成功');
+          wx.showToast({
+            title: '文件下载失败，请重试！',
+            icon: 'none'
+          })
+        }
+        
+      }, fail: function (e) {
+        wx.hideLoading();
+      }
     });
   }
 
@@ -151,10 +188,10 @@ Page({
 
 var loadMore = function (that) {
   loadding(that);
-  var temUrl="";
-  if(that.data.ywType=="2"){
+  var temUrl = "";
+  if (that.data.ywType == "2") {
     temUrl = dz_url;
-  }else{
+  } else {
     temUrl = url;
   }
   wx.request({
@@ -168,10 +205,10 @@ var loadMore = function (that) {
     },
     success: function (res) {
       //console.info(that.data.list);
-      if (res.data.list.length==0){
+      if (res.data.list.length == 0) {
         wx.showToast({
           title: '服务器尚未分类',
-          icon:'none'
+          icon: 'none'
         })
         stopLoding(that);
         return;
@@ -182,11 +219,11 @@ var loadMore = function (that) {
         cat_list[i]['page'] = 1;
         cat_list[i]['list_arc'] = [];
       }
-      if ("2" == that.data.xxtype && "1" == that.data.ywType){
-        var kjxx={
-          title:'课件学习',
-          type:'2',
-          id:'30'
+      if ("2" == that.data.xxtype && "1" == that.data.ywType) {
+        var kjxx = {
+          title: '课件学习',
+          type: '2',
+          id: '30'
         };
         var zsgz = {
           title: '掌上规章',
@@ -209,9 +246,9 @@ var loadMore = function (that) {
 var loadContxt = function (that, catId, page) {
   loadding(that);
   var tempurl = context_url;
-  if ("2" == that.data.xxtype){
-    if (catId==30||catId==31){
-      tempurl=context_url_arch;
+  if ("2" == that.data.xxtype) {
+    if (catId == 30 || catId == 31) {
+      tempurl = context_url_arch;
     }
   }
   wx.request({
@@ -223,9 +260,9 @@ var loadContxt = function (that, catId, page) {
     data: {
       limit: page_size,
       vodCatId: catId,
-      catId:catId,
+      catId: catId,
       offset: page,
-      type:that.data.xxtype
+      type: that.data.xxtype
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -247,9 +284,9 @@ var loadContxt = function (that, catId, page) {
         console.log("没有更多数据了");
 
       } else {
-        if ("30" == catId||"31"==catId){
+        if ("30" == catId || "31" == catId) {
           for (var i = 0; i < res.data.rows.length; i++) {
-            var tmpObj={
+            var tmpObj = {
               id: res.data.rows[i].id,
               pic_ali: res.data.rows[i].pic_ali,
               source: res.data.rows[i].source,
@@ -260,12 +297,12 @@ var loadContxt = function (that, catId, page) {
             }
             list.push(tmpObj);
           }
-        }else{
+        } else {
           for (var i = 0; i < res.data.rows.length; i++) {
             list.push(res.data.rows[i]);
           }
         }
-       
+
         //设置数据
         // that.setData({
         //   list: list

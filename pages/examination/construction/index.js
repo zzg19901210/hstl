@@ -363,16 +363,18 @@ var submitQuestion = function (that) {
     success: function (res) {
       //提交做题日志
       submitQuestionLogs(that,res.data.data.obj);
+      wx.hideLoading();
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
         title: '提示',
         content: '提交成绩失败',
         showCancel: false
-      })
+      });
+      wx.hideLoading();
     },
     complete: function () {
-      wx.hideLoading();
+   
     }
   });
 }
