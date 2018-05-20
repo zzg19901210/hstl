@@ -137,7 +137,7 @@ Page({
       'workQuestionId': this.data.indexQuest.id,
       'userSelect': this.data.checkedValue,
       'correctAnswer': this.data.indexQuest.answer,
-      'workQuestionContext': this.data.indexQuest.questions,
+      'workQuestionContext': this.data.indexQuest.title,
       'isRight': isRight,
       'workId': this.data.workSetId,
       'userId': this.data.myUserInfo.id
@@ -185,7 +185,7 @@ Page({
         'workQuestionId': this.data.indexQuest.id,
         'userSelect': this.data.checkedValue,
         'correctAnswer': this.data.indexQuest.answer,
-        'workQuestionContext': this.data.indexQuest.questions,
+        'workQuestionContext': this.data.indexQuest.title,
         'isRight': isRight,
         'workId': this.data.workSetId,
         'userId': this.data.myUserInfo.id

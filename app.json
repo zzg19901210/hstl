@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/achievement/context/context",
     "pages/examination/construction/index",
     "pages/examination/construction/success/success",
     "pages/study/index",
@@ -36,8 +37,7 @@
     "pages/zj/arc_context/index",
     "pages/logs/logs",
     "pages/dz/dz",
-    "pages/index/index",
-    "pages/achievement/context/context"
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

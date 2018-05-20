@@ -1,1 +1,51 @@
 /* pages/achievement/context/context.wxss */
+
+page {
+  background-color: #ecf0f1;
+}
+
+.item {
+  background-color: #fff;
+}
+
+.list_context {
+  border-top: 1px solid #dfe6e9;
+  width: 93%;
+  margin-left: 25rpx;
+  padding-left: 15rpx;
+}
+
+.list_context  .c_title {
+  width: 100%;
+  display: block;
+  line-height: 60rpx;
+  /* height: 60rpx; */
+  font-size: 30rpx;
+}
+
+.list_context .user_select {
+  padding-left: 25rpx;
+  font-size: 25rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  color: #95a5a6;
+}
+
+.list_context .correct_answer {
+  padding-left: 25rpx;
+  font-size: 25rpx;
+  line-height: 50rpx;
+  height: 60rpx;
+  color: #95a5a6;
+}
+
+.scoll-h {
+  height: 100%;
+}
+
+.lefttitle {
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}

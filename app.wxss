@@ -1,6 +1,4 @@
 /**app.wxss**/
-
-
 @import 'style/weui.wxss';
 
 .container {
@@ -11,15 +9,15 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
 
 body, page {
   height: 100%;
 }
 
 page {
-    font-size: 16px;
-    background-color: #F8F8F8;
+  font-size: 16px;
+  background-color: #f8f8f8;
 }
 
 body, page {
@@ -41,7 +39,7 @@ body, page {
 }
 
 .disabled-text {
-  color: #B2B2B2;
+  color: #b2b2b2;
 }
 
 .weui-btn-area {
@@ -80,5 +78,35 @@ body, page {
 }
 
 .weui-placeholder {
-    color: #B2B2B2;
+  color: #b2b2b2;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+}
+
+.badge-info {
+  background-color: #23c6c8;
+  color: #fff;
+}
+
+.badge-success {
+  background-color: #1c84c6;
+  color: #fff;
+}
+
+.badge-danger {
+  background-color: #ed5565;
+  color: #fff;
 }

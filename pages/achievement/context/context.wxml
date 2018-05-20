@@ -1,2 +1,38 @@
-<!--pages/achievement/context/context.wxml-->
-<text>pages/achievement/context/context.wxml</text>
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:if="{{type==2}}">
+    <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+      <view class='item'>
+        <view class='list_context'>
+          <text class='c_title'>{{cont.workQuestionContext}}</text>
+          <view class='user_select'>
+            <text class='lefttitle'>选择答案：</text>
+            <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.userSelect}}</text>
+
+          </view>
+          <view class='correct_answer'>
+            <text class='lefttitle'>正确答案：</text>
+            <text class='badge badge-info'>{{cont.correctAnswer}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+      <view class='item'>
+        <view class='list_context'>
+          <text class='c_title'>{{cont.questionContext}}</text>
+          <view class='user_select'>
+            <text class='lefttitle'>选择答案：</text>
+            <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.answer}}</text>
+
+          </view>
+          <view class='correct_answer'>
+            <text class='lefttitle'>正确答案：</text>
+            <text class='badge badge-info'>{{cont.correctAnswer}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+</scroll-view>
