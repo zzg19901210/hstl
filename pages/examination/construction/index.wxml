@@ -47,8 +47,11 @@
       </label>
     </radio-group>
   </view>
-  <button class='button' bindtap="next" hidden='{{!hideSubimt==hidStart}}'>下一题</button>
-  <button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button>
+
+  <button class='button' bindtap="previous" hidden='{{!hidStart}}' wx:if="{{index>0}}">上一题</button>
+
+  <button class='button' bindtap="next" hidden='{{!hidStart}}' wx:if="{{index+1<list.length}}" >下一题</button>
+  <button class='button' bindtap="submitKs" hidden='{{!hidStart}}'  wx:else>完成考试</button>
 </view>
 
 

@@ -174,6 +174,10 @@ var loadding = function (that) {
 
 var loadContxt = function (that) {
   loadding(that);
+  var departmentId = app.globalData.myUserInfo.departmentId;
+  if (app.globalData.myUserInfo.roleId == 7 || app.globalData.myUserInfo.roleId ==1){
+    departmentId="";
+  }
   var page = that.data.currentPage;
   wx.request({
     url: context_url,
@@ -184,7 +188,7 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
-      departmentId: app.globalData.myUserInfo.departmentId
+      departmentId: departmentId
     },
     success: function (res) {
       //console.info(that.data.list);

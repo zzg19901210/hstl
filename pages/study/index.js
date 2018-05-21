@@ -1,6 +1,6 @@
 
 const app = getApp()
-var total_micro_second = 36 * 60 * 60 * 1000;
+var total_micro_second = 20 * 60 * 1000;
 // 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
@@ -389,7 +389,7 @@ var submitQuestion = function (that) {
   var correctScore = avgScore * that.data.answerNums;
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums / totalNums
-  var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
+  var costTime = 20 * 60 * 1000 - total_micro_second;
   costTime = parseInt(costTime/1000);
   console.log(picServerUrl);
   wx.request({
@@ -434,7 +434,7 @@ var submitQuestionLogs = function (that,obj) {
   wx.showLoading({
     title: '请稍等...'
   });
-  var costTime = 36 * 60 * 60 * 1000 - total_micro_second;
+  var costTime = 20 * 60 * 1000 - total_micro_second;
   costTime = parseInt(costTime / 1000);
   var postData = that.data.answerList;
   var sumbitData=[];
