@@ -12,9 +12,14 @@ Page({
     routers: [
       {
         name: '视频会议',
-        url: '../doubleroom/roomlist/roomlist',
-        icon: '/images/home_icon/doubleroom.png'
+        url: '../multiroom/roomlist/roomlist',
+        icon: '/images/home_icon/multiroom.png'
       },
+      // {
+      //   name: '双人通话',
+      //   url: '../doubleroom/roomlist/roomlist',
+      //   icon: '/images/home_icon/doubleroom.png'
+      // },
       {
         name: '政治理论视频学习',
         url: '/pages/video_list/index?ywType=2&type=2',
@@ -76,7 +81,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 10) {
+        if (routers.length < 11) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
