@@ -3,9 +3,9 @@
  */
 var config = {
   //客户业务后台请求域名
-  serverUrl: 'http://192.168.11.175:8080',
+  serverUrl: 'https://hhhtcz.isport.nm.cn',
   //腾讯云RoomService后台请求域名
-  roomServiceUrl: 'http://192.168.11.175:8080',
+  roomServiceUrl: 'https://hhhtcz.isport.nm.cn',
   webrtcServerUrl: 'https://xzb.qcloud.com/webrtc/weapp/webrtc_room'
 }
 
