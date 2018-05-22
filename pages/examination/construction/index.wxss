@@ -96,7 +96,11 @@ page{
   color: #fff;
   margin-top: 15rpx;
 }
-
+.btn-default {
+  background-color: red;
+  color: #fff;
+  margin-top: 15rpx;
+}
 
 .b1 {
   position: fixed;

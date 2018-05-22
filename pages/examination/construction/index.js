@@ -88,6 +88,17 @@ Page({
   },
   radioChange: function (e) {
     // console.log('radio发生change事件，携带value值为：', e.detail.value);
+    if (this.data.index + 1 >= this.data.list.length) {
+      var radioItems = this.data.radioItems;
+      for (var i = 0, len = radioItems.length; i < len; ++i) {
+        radioItems[i].checked = radioItems[i].value == e.detail.value;
+      }
+      this.setData({
+        radioItems: radioItems,
+        checkedValue: e.detail.value
+      });
+      return;
+    }
     wx.showLoading({
       title: '正在切换下一题',
     })
@@ -117,13 +128,25 @@ Page({
     findUserRankingList(this);
   },
   next: function (e) {
-    if (this.data.index+1>this.data.list.length){
+    var cur_index = this.data.index;
+    console.log(e.currentTarget.dataset.checked);
+    var checkValue = e.currentTarget.dataset.checked;
+    if (cur_index + 1 >= this.data.list.length) {
+      var radioItems = this.data.radioItems;
+      for (var i = 0, len = radioItems.length; i < len; ++i) {
+        radioItems[i].checked = radioItems[i].value == checkValue;
+      }
+      this.setData({
+        radioItems: radioItems,
+        checkedValue: checkValue
+      });
       return;
     }
-    var cur_index = this.data.index;
-    
-    // var checkValue=e.detail.value;
-    var checkValue = this.data.checkedValue;
+    wx.showLoading({
+      title: '正在切换下一题',
+    })
+   
+    // var checkValue = this.data.checkedValue;
     var cur_answerNums = this.data.answerNums;
   
     var hideSubimt = true;
@@ -180,13 +203,7 @@ Page({
     //重新组织题目
     getChoice(this, checkedValue);
     //增加题目
-    cur_index++;
-    if (this.data.list.length == cur_index) {
-      hideSubimt = false;
-      this.setData({
-        hideSubimt: hideSubimt
-      });
-    }
+    wx.hideLoading();
   },
   previous:function(e){
    
@@ -375,8 +392,7 @@ var submitQuestion = function (that) {
     title: '正在提交成绩...'
   });
 
-  var picServerUrl = that.data.src;
-
+  // var picServerUrl = that.data.src;
 
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
@@ -386,7 +402,7 @@ var submitQuestion = function (that) {
   var percentScore = that.data.answerNums / totalNums
   var costTime = that.data.totalTimer * 60 * 1000 - total_micro_second;
   costTime = parseInt(costTime / 1000);
-  console.log(picServerUrl);
+  // console.log(picServerUrl);
   wx.request({
     url: submitAchievement,
     header: {

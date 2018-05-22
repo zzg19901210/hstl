@@ -64,9 +64,7 @@ Page({
 
   },
   startKs() {
-
     getQuestion(this);
-
     takePhoto(this);
 
   },
@@ -75,16 +73,33 @@ Page({
   },
   next(e) {
     var cur_index = this.data.index;
-    var tak = parseInt(this.data.list.length / 2 );
-    if (tak== cur_index){
+    console.log(e.currentTarget.dataset.checked);
+    var checkValue = e.currentTarget.dataset.checked;
+    if (cur_index + 1 >= this.data.list.length) {
+      var radioItems = this.data.radioItems;
+      for (var i = 0, len = radioItems.length; i < len; ++i) {
+        radioItems[i].checked = radioItems[i].value == checkValue;
+      }
+      this.setData({
+        radioItems: radioItems,
+        checkedValue: checkValue
+      });
+      return;
+    }
+    wx.showLoading({
+      title: '正在切换下一题',
+    })
+
+    var tak = parseInt(this.data.list.length / 2);
+    if (tak == cur_index) {
       takePhoto(this);
     }
     var cur_answerNums = this.data.answerNums;
-    cur_index++;
+   
     var hideSubimt = true;
     //判断题目是否正确
     var isRight = 1;
-    if (this.data.indexQuest.answer == this.data.checkedValue) {
+    if (this.data.indexQuest.answer == checkValue) {
       cur_answerNums++;
       console.log('回答正确！');
       var isRight = 1;
@@ -96,15 +111,15 @@ Page({
     } else {
       var isRight = 2;
       console.log("回答错误！")
-      wx.showToast({
-        title: '回答错误：正确答案是' + this.data.indexQuest.answer,
-        icon: 'none',
-        duration: 2000
-      })
+      // wx.showToast({
+      //   title: '回答错误：正确答案是' + this.data.indexQuest.answer,
+      //   icon: 'none',
+      //   duration: 2000
+      // })
     }
     var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
-      'correctAnswer': this.data.checkedValue,
+      'correctAnswer': checkValue ,
       'answer': this.data.indexQuest.answer,
       'questionContext': this.data.indexQuest.questions,
       'isRight': isRight,
@@ -112,27 +127,54 @@ Page({
       'setId': this.data.setObj.id
     }
     var tmpanswerList = this.data.answerList;
-    tmpanswerList.push(tmpAnswer);
+    if (tmpanswerList[cur_index] == null) {
+      tmpanswerList.push(tmpAnswer);
+    } else {
+      tmpanswerList[cur_index] = tmpAnswer;
+    }
+    cur_index++;
 
     //获取下一题
     var nextQuest = this.data.list[cur_index];
+    var tmpAnswer = tmpanswerList[cur_index];
+    var checkedValue = 'A';
+    if (tmpAnswer != null) {
+      checkedValue = tmpAnswer.correctAnswer;
+    }
     this.setData({
       indexQuest: nextQuest,
       index: cur_index,
       answerNums: cur_answerNums,
       answerList: tmpanswerList,
-      checkedValue: 'A'
+      checkedValue: checkedValue
     });
     //重新组织题目
-    getChoice(this);
-    //增加题目
-    cur_index++;
-    if (this.data.list.length == cur_index) {
-      hideSubimt = false;
-      this.setData({
-        hideSubimt: hideSubimt
-      });
+    getChoice(this, checkedValue);
+    wx.hideLoading();
+
+  },
+  previous: function (e) {
+
+    var cur_index = this.data.index;
+    if (cur_index == 0) {
+      return;
     }
+    cur_index--;
+    var hideSubimt = true;
+    var tmpAnswer = this.data.answerList[cur_index];
+    //获取上一题
+    var previousQuest = this.data.list[cur_index];
+    var checkedValue = tmpAnswer.correctAnswer;
+    if ("" == checkedValue) {
+      checkedValue = 'A';
+    }
+    this.setData({
+      indexQuest: previousQuest,
+      index: cur_index,
+      checkedValue: checkedValue
+    });
+    //重新组织题目
+    getChoice(this, checkedValue);
 
   },
   submitKs: function (e) {
@@ -248,8 +290,8 @@ var upload = function (that) {
     });
     for (var i = 0; i < 3; i++) {
       var random = Math.floor(Math.random() * that.data.files.length);
-      var path=picUrl[random];
-    
+      var path = picUrl[random];
+
       wx.uploadFile({
         url: upload_url,
         filePath: path,
@@ -272,15 +314,15 @@ var upload = function (that) {
           var data = JSON.parse(res.data);
           // console.log(that.data.tempFile);
           var picServerUrl = that.data.src;
-          if (null != data.data.list && "" != data.data.list&&data.data.list.length>0){
+          if (null != data.data.list && "" != data.data.list && data.data.list.length > 0) {
             if ("" == picServerUrl) {
               picServerUrl = data.data.list[0].uri;
             } else {
               picServerUrl = picServerUrl + "," + data.data.list[0].uri;
             }
           }
-          
-          console.log("拼接后的图片地址："+picServerUrl);
+
+          console.log("拼接后的图片地址：" + picServerUrl);
           var srcCount = that.data.srcCount;
           srcCount++;
           that.setData({
@@ -288,7 +330,7 @@ var upload = function (that) {
             srcCount: srcCount
           });
 
-          if (srcCount>2){
+          if (srcCount > 2) {
             wx.hideToast();  //隐藏Toast
             submitQuestion(that);
           }
@@ -303,7 +345,7 @@ var upload = function (that) {
           })
         },
         complete: function () {
-        
+
         }
       });
 
@@ -355,7 +397,7 @@ var getQuestion = function (that) {
           hidStart: true,
           checkedValue: 'A'
         });
-        getChoice(that);
+        getChoice(that,'A');
         count_down(that);
       }
 
@@ -390,7 +432,7 @@ var submitQuestion = function (that) {
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums / totalNums
   var costTime = 20 * 60 * 1000 - total_micro_second;
-  costTime = parseInt(costTime/1000);
+  costTime = parseInt(costTime / 1000);
   console.log(picServerUrl);
   wx.request({
     url: submitAchievement,
@@ -414,7 +456,7 @@ var submitQuestion = function (that) {
     },
     success: function (res) {
       //提交做题日志
-      submitQuestionLogs(that,res.data.data.obj);
+      submitQuestionLogs(that, res.data.data.obj);
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
@@ -430,17 +472,17 @@ var submitQuestion = function (that) {
 }
 
 //提交做题记录
-var submitQuestionLogs = function (that,obj) {
+var submitQuestionLogs = function (that, obj) {
   wx.showLoading({
     title: '请稍等...'
   });
   var costTime = 20 * 60 * 1000 - total_micro_second;
   costTime = parseInt(costTime / 1000);
   var postData = that.data.answerList;
-  var sumbitData=[];
+  var sumbitData = [];
   for (var i = 0; i < postData.length; i++) {
     var tmpdata = postData[i];
-    tmpdata.setLogId=obj.id;
+    tmpdata.setLogId = obj.id;
     sumbitData.push(tmpdata);
   }
   wx.request({
@@ -457,7 +499,7 @@ var submitQuestionLogs = function (that,obj) {
       });
       wx.redirectTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime,
-        success:function(e){
+        success: function (e) {
           wx.hideLoading();
         }
       })
@@ -476,36 +518,44 @@ var submitQuestionLogs = function (that,obj) {
 }
 
 // 获取答案列表
-var getChoice = function (that) {
+var getChoice = function (that, checked) {
+
   var tmp1 = {
-    name: "A:" + that.data.indexQuest.choice_a,
-    value: 'A',
-    checked: true
+    name:'A:'+that.data.indexQuest.choice_a,
+    value: 'A'
   }
   var tmp2 = {
-    name: "B:" + that.data.indexQuest.choice_b,
+    name: 'B:' +that.data.indexQuest.choice_b,
     value: 'B'
   }
-
   var tmpRideo = [];
   tmpRideo.push(tmp1);
   tmpRideo.push(tmp2);
   if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
     var tmp3 = {
-      name: "C:" + that.data.indexQuest.choice_c,
+      name: 'D:' +that.data.indexQuest.choice_c,
       value: 'C'
     }
     tmpRideo.push(tmp3);
   }
   if (null != that.data.indexQuest.choice_d && "" != that.data.indexQuest.choice_d) {
     var tmp4 = {
-      name: "D:" + that.data.indexQuest.choice_d,
+      name: 'D:' +that.data.indexQuest.choice_d,
       value: 'D'
     }
     tmpRideo.push(tmp4);
   }
-
-
+  if ("A" == checked) {
+    tmp1.checked = true
+  } else if ("B" == checked) {
+    tmp2.checked = true
+  } else if ("C" == checked) {
+    tmp3.checked = true
+  } else if ("D" == checked) {
+    tmp4.checked = true
+  } else {
+    tmp1.checked = true
+  }
   that.setData({
     radioItems: tmpRideo
   })

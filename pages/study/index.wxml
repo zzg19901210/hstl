@@ -26,7 +26,7 @@
   <view class="weui-cells__title">{{index+1}}、{{indexQuest.questions}}</view>
   <view class="weui-cells weui-cells_after-title">
 
-    <radio-group bindchange="radioChange">
+    <!-- <radio-group bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
         <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
         <view class="weui-cell__bd">{{item.name}}</view>
@@ -34,11 +34,24 @@
           <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
         </view>
       </label>
+    </radio-group> -->
+    <radio-group>
+      <block wx:for="{{radioItems}}" wx:for-item="item" wx:key="*this">
+        <label class="weui-cell weui-check__label"  bindtap='next' id="{{item.value}}" data-checked="{{item.value}}">
+          <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+          <view class="weui-cell__bd">{{item.name}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+          </view>
+        </label>
+      </block>
     </radio-group>
   </view>
 </view>
-<button class='button' bindtap="next" hidden='{{!hideSubimt==hidStart}}'>下一题</button>
-<button class='button' bindtap="submitKs" hidden='{{hideSubimt}}'>完成考试</button>
+<button class='btn-default' bindtap="previous" hidden='{{!hidStart}}' wx:if="{{index>0}}">上一题</button>
+
+<!-- <button class='button' bindtap="next" hidden='{{!hidStart}}' wx:if="{{index+1<list.length}}">下一题</button> -->
+<button class='button' bindtap="submitKs" hidden='{{!hidStart}}' wx:if="{{index+2>list.length}}">完成考试</button>
 <view class="b1" catchtouchmove="true" hidden="{{hidRanking}}">
   <view class='title'>考试成绩排行榜</view>
   <view class='body'>

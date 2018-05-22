@@ -94,6 +94,11 @@ page {
   color: #fff;
   margin-top: 15rpx;
 }
+.btn-default{
+  background-color: red;
+  color: #fff;
+  margin-top: 15rpx;
+}
 
 .ranking {
   position: fixed; /*or前面的是absolute就可以用*/
