@@ -15,7 +15,10 @@ Page({
     codePhone: "",
     flag: false,
     codeDis: false,
-    serverCode: ""
+    serverCode: "",
+     userInfo:{
+       
+     }
   },
 
   /**

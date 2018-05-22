@@ -6,3 +6,11 @@ image{
   height: 100%;
   width: 100%;
 }
+.btn_sq{
+  position: fixed;
+  bottom: 20rpx;
+  width:96%;
+  margin-left: 15rpx;
+  color: white;
+  background: #3c9ae8;
+}
