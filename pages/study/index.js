@@ -73,7 +73,7 @@ Page({
   },
   next(e) {
     var cur_index = this.data.index;
-    console.log(e.currentTarget.dataset.checked);
+    // console.log(e.currentTarget.dataset.checked);
     var checkValue = e.currentTarget.dataset.checked;
     if (cur_index + 1 >= this.data.list.length) {
       var radioItems = this.data.radioItems;
@@ -88,7 +88,7 @@ Page({
     }
     wx.showLoading({
       title: '正在切换下一题',
-    })
+    });
 
     var tak = parseInt(this.data.list.length / 2);
     if (tak == cur_index) {
@@ -178,6 +178,9 @@ Page({
 
   },
   submitKs: function (e) {
+    wx.showLoading({
+      title: '正在保存...',
+    })
     takePhoto(this);
     var isRight = 1;
     if (cur_index != this.data.list.length) {
@@ -280,9 +283,8 @@ var takePhoto = function (that) {
 var upload = function (that) {
   var picUrl = that.data.files;
   if (picUrl.length > 0) {
-    wx.showToast({
-      icon: "loading",
-      title: "正在上传"
+    wx.showLoading({
+      title: '正在保存...',
     });
     that.setData({
       src: "",
@@ -331,7 +333,7 @@ var upload = function (that) {
           });
 
           if (srcCount > 2) {
-            wx.hideToast();  //隐藏Toast
+            // wx.hideToast();  //隐藏Toast
             submitQuestion(that);
           }
           // saveTouxiang();
@@ -463,10 +465,11 @@ var submitQuestion = function (that) {
         title: '提示',
         content: '提交成绩失败',
         showCancel: false
-      })
+      });
+      wx.hideLoading();
     },
     complete: function () {
-      wx.hideLoading();
+     
     }
   });
 }

@@ -231,6 +231,9 @@ Page({
   },
   submitKs: function (e) {
     // takePhoto(this);
+    wx.showLoading({
+      title: '正在保存...',
+    })
     var isRight = 1;
     if (cur_index != this.data.list.length) {
       var cur_index = this.data.list.length;
@@ -425,7 +428,7 @@ var submitQuestion = function (that) {
     success: function (res) {
       //提交做题日志
       submitQuestionLogs(that, res.data.data.obj);
-      wx.hideLoading();
+      // wx.hideLoading();
     }, fail: function (e) {
       console.log(e);
       wx.showModal({
