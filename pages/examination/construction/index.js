@@ -206,21 +206,30 @@ Page({
     wx.hideLoading();
   },
   previous:function(e){
-   
+    
     var cur_index = this.data.index;
     if (cur_index == 0) {
       return;
     }
+   
+  
     cur_index--;
     var hideSubimt = true;
     var tmpAnswer=this.data.answerList[cur_index];
     //获取上一题
     var previousQuest = this.data.list[cur_index];
+    var cur_answerNums = this.data.answerNums;
+    if (cur_answerNums > 0) {
+      if ("1"==tmpAnswer.isRight){
+        cur_answerNums--;
+      }
+    }
     var checkedValue = tmpAnswer.userSelect;
     if ("" == checkedValue) {
       checkedValue = 'A';
     }
     this.setData({
+      answerNums:cur_answerNums,
       indexQuest: previousQuest,
       index: cur_index,
       checkedValue: checkedValue
