@@ -10,11 +10,7 @@ Page({
     ],
     imageWidth: wx.getSystemInfoSync().windowWidth,
     routers: [
-      {
-        name: '视频会议',
-        url: '../multiroom/roomlist/roomlist',
-        icon: '/images/home_icon/multiroom.png'
-      },
+
       // {
       //   name: '双人通话',
       //   url: '../doubleroom/roomlist/roomlist',
@@ -81,7 +77,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 11) {
+        if (routers.length < 10) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
@@ -98,8 +94,11 @@ Page({
               url: '/pages/splz/index',
               icon: '/images/home_icon/lz.png'
             });
-
-
+            routers.push({
+              name: '视频会议',
+              url: '../multiroom/roomlist/roomlist',
+              icon: '/images/home_icon/multiroom.png'
+            });
           } else if ("6" == app.globalData.myUserInfo.roleId) {
             if ("1" == app.globalData.myUserInfo.userType) {
               routers.push({

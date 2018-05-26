@@ -6,9 +6,10 @@ page{
 .item{
   height: 100%;
 }
-.item{
+.arc_item{
   background: #fff;
   padding-left: 25rpx;
+  height: 180rpx;
 }
 .item-ans {
   width: 93%;

@@ -103,6 +103,60 @@ Page({
   },
   errorFunction: function (event) {
     console.log("进入小程序详情页");
+  }, downloadFile: function (e) {
+
+    var type = e.currentTarget.dataset.type;
+    var aId = e.currentTarget.dataset.id;
+    if ("1" == type) {
+      var title = e.currentTarget.dataset.title;
+      wx.navigateTo({
+        url: '/pages/zj/arc_context/index?aId=' + aId + '&arc_title=' + title,
+      });
+    } else {
+      var downloadFileUrl = e.currentTarget.dataset.enclosure;
+      console.log(downloadFileUrl);
+      // var downloadFileUrl = "http://hstl.oss-cn-beijing.aliyuncs.com/%E4%B8%AD%E5%9B%BD%E9%93%81%E8%B7%AF%E6%80%BB%E5%85%AC%E5%8F%B8%E3%80%8A%E9%93%81%E8%B7%AF%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86%E8%A7%84%E7%A8%8B%E3%80%8B%28%E6%99%AE%E9%80%9F%E9%93%81%E8%B7%AF%E9%83%A8%E5%88%86%29.doce80ebd3b-07f2-414b-885c-9d02f76d3a1e.doc";
+      wx.showLoading({
+        title: '正在打开文件',
+      })
+      wx.downloadFile({
+        url: downloadFileUrl,
+        success: function (res) {
+          if (res.statusCode === 200) {
+            var filePath = res.tempFilePath;
+            wx.openDocument({
+              filePath: filePath,
+              success: function (e) {
+                wx.hideLoading();
+                console.log('打开文件成功');
+              }, fail: function (e) {
+                wx.hideLoading();
+                console.log('打开文件成功');
+                wx.showToast({
+                  title: '文件打开失败,请重新点击',
+                  icon: 'none'
+                })
+              }
+            });
+          } else {
+            wx.hideLoading();
+            console.log('打开文件成功');
+            wx.showToast({
+              title: '文件下载失败，请重试！',
+              icon: 'none'
+            })
+          }
+
+        }, fail: function (e) {
+          wx.showToast({
+            title: '文件打开i失败，请重试！',
+            icon: 'none'
+          })
+          wx.hideLoading();
+        }
+      });
+    }
+
   }
 
 })

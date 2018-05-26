@@ -19,19 +19,20 @@
     <swiper-item wx:for="{{cat_list}}" wx:for-item="cat">
       <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
         <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-          <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
-            <view class='item'>
-              <view class="item-ans">
-                <view class="avatar">
-                  <image class="img" src="{{arch.picAliUrl}}" binderror='errorFunction'></image>
-                </view>
-                <view class="expertInfo">
-                  <view class="name">{{arch.title}}</view>
-                  <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
-                </view>
+          <!-- <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}"> -->
+          <!-- <view class='item'> -->
+          <view class='item' bindtap='downloadFile' data-id="{{arch.id}}" data-title="{{arch.title}}" data-type="{{arch.arcType}}" data-enclosure="{{arch.enclosureUrl}}">
+            <view class="item-ans">
+              <view class="avatar">
+                <image class="img" src="{{arch.picAliUrl}}" binderror='errorFunction'></image>
+              </view>
+              <view class="expertInfo">
+                <view class="name">{{arch.title}}</view>
+                <view class="tag">{{arch.writer}} {{arch.click}}学习</view>
               </view>
             </view>
-          </navigator>
+          </view>
+          <!-- </navigator> -->
         </block>
       </scroll-view>
     </swiper-item>

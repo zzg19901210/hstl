@@ -20,11 +20,14 @@
       <block wx:if="{{cat.id==30}}">
         <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
           <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
-              <view class='item'>
+            <view class='arc_item' bindtap='downloadFile' data-id="{{arch.id}}" data-title="{{arch.title}}" data-type="{{arch.arcType}}" data-enclosure="{{arch.enclosureUrl}}" >
                 <view class="item-ans">
-                  <view class="avatar">
-                    <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+                  
+                  <view class="avatar" wx:if="{{arch.layout!=0}}">
+                     <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image> 
+                  </view>
+                  <view class="avatar" wx:else>
+                     <image class="img" src="http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg" binderror='errorFunction'></image> 
                   </view>
                   <view class="expertInfo">
                     <view class="name">{{arch.title}}</view>
@@ -32,19 +35,23 @@
                   </view>
                 </view>
               </view>
-            </navigator>
           </block>
         </scroll-view>
       </block>
       <block wx:elif="{{cat.id==31}}">
         <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
           <block wx:for="{{cat.list_arc}}" wx:for-item="arch" wx:key="*this">
-            <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}">
+          
+            <!-- <navigator url="/pages/zj/arc_context/index?aId={{arch.id}}&arc_title={{arch.title}}"> -->
               <!-- <view class="item-ans" catchtap='downloadFile'>  -->
-              <view class='item'>
+              <view class='arc_item' bindtap='downloadFile' data-id="{{arch.id}}" data-title="{{arch.title}}" data-type="{{arch.arcType}}" data-enclosure="{{arch.enclosureUrl}}" >
                 <view class="item-ans">
-                  <view class="avatar">
-                    <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+                  
+                 <view class="avatar" wx:if="{{arch.layout!=0}}">
+                     <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image> 
+                  </view>
+                  <view class="avatar" wx:else>
+                     <image class="img" src="http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg" binderror='errorFunction'></image> 
                   </view>
                   <view class="expertInfo">
                     <view class="name">{{arch.title}}</view>
@@ -52,7 +59,7 @@
                   </view>
                 </view>
               </view>
-            </navigator>
+            <!-- </navigator> -->
           </block>
         </scroll-view>
       </block>
