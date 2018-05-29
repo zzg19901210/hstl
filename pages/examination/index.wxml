@@ -7,7 +7,7 @@
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
     <!-- <navigator url="context/index?kslx=2&wordId={{cont.id}}">  -->
 
-    <navigator url="construction/index?workSetId={{cont.id}}&timer={{cont.timer}}&title={{cont.questionTitle}}">
+    <navigator url="kk/kk?workSetId={{cont.id}}&timer={{cont.timer}}&title={{cont.questionTitle}}">
       <view class='item'>
         <view class='list_context'>
           <text class='c_title'>{{cont.questionTitle}}</text>

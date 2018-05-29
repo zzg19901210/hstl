@@ -508,7 +508,7 @@ var submitQuestionLogs = function (that, obj) {
       wx.showLoading({
         title: '正在计算成绩...'
       });
-      wx.redirectTo({
+      wx.navigateTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime,
         success: function (e) {
           wx.hideLoading();

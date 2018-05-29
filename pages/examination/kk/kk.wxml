@@ -1,0 +1,64 @@
+<import src="../../..//plus/wxParse/wxParse.wxml" />
+<!-- <view class='art_title'>
+   {{title}}
+</view> -->
+
+<view class="wxParse" wx:if='{{work.questionType==1}}'>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+<view class="page" wx:else>
+  <view class='title'>
+
+    <text>东胜东站5月24日施工作业卡控措施表</text>
+  </view>
+  <view class='fgf'>
+    <image src="http://kol-statics.oss-cn-beijing.aliyuncs.com/editor/19174604a13de1849b9fd27b3aacb26512c286.gif"></image>
+  </view>
+
+  <view class='kk'>
+    <view class='kkgb'>
+      <view class='sgry'>卡控干部：</view>
+      <view class='sgry_cont'>{{work.stareCadres}}</view>
+
+    </view>
+    <view class='kkgb'>
+      <view class='sgry'>施工人员</view>
+
+      <view class='sgry_cont'>{{work.constructors}}</view>
+    </view>
+    <view class='djlx'>
+      <view class='djlx_title'>等级类型</view>
+      <view class='djlx_cont'>{{work.gradeType}}</view>
+    </view>
+  </view>
+  <view class='sgfdqk'>
+    <view class='sgfdqk-title'>
+      施工封顶情况
+    </view>
+    <view class='sgfdqk-cont'>
+      {{work.constructionBlockade}}
+    </view>
+  </view>
+  <view class='sgfdqk'>
+    <view class='tczy-title'>
+      修天窗作业情况
+    </view>
+    <view class='sgfdqk-cont'>
+      {{work.workConstruction}}
+    </view>
+  </view>
+  <view class='sgfdqk'>
+    <view class='kkcs-title'>
+      卡控措施
+    </view>
+    <view class='sgfdqk-cont'>
+      {{work.controlMeasures}}
+    </view>
+  </view>
+</view>
+
+<view class='start-ks'>
+  <view class='hr'></view>
+  <button class='btn-startKs' bindtap="startKs">开始考试</button>
+
+</view>

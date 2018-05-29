@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/examination/kk/kk",
     "pages/multiroom/room/room",
     "pages/multiroom/roomlist/roomlist",
     "pages/multiroom/roomname/roomname",

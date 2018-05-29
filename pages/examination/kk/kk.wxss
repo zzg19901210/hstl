@@ -1,0 +1,132 @@
+@import "/plus/wxParse/wxParse.wxss";
+page {
+  background-color: #fff;
+}
+
+.title {
+  white-space: pre-wrap;
+  color: rgb(0, 0, 0);
+  font-family: "微软雅黑";
+  text-align: center;
+  width: 98%;
+  padding-top: 15rpx;
+}
+
+.fgf image {
+  height: 100rpx;
+  width: 100%;
+}
+
+.title text {
+  padding-left: 15rpx;
+  font-size: 45rpx;
+  line-height: 90rpx;
+
+}
+
+.kk {
+  border: 1rpx solid red;
+  width: 96%;
+  margin-left: 15rpx;
+}
+
+.kk .kkgb {
+  font-family: '仿宋';
+  font-size: 35rpx;
+  padding-top: 5px;
+  line-height: 70rpx;
+  padding-bottom: 5px;
+  margin-left: 15rpx;
+  width: 93%;
+  padding-left: 15rpx;
+  border-bottom: 1px dashed #d32a63;
+  
+}
+
+.sgry_cont {
+  padding-left: 15rpx;
+  color: #636e72;
+  font-size: 28rpx;
+}
+
+.djlx {
+  font-family: '仿宋';
+  font-size: 35rpx;
+  padding-top: 5px;
+  line-height: 70rpx;
+  padding-bottom: 5px;
+  margin-left: 15rpx;
+  width: 93%;
+  padding-left: 15rpx;
+}
+
+.djlx_cont {
+  padding-left: 15rpx;
+  color: #636e72;
+  font-size: 28rpx;
+}
+.sgfdqk{
+  width: 96%;
+  margin-left: 15rpx;
+}
+.sgfdqk-title{
+  margin-top: 15rpx;
+  /* border: 1rpx solid red; */
+  text-align: center;
+  margin-left: 25%;
+  width: 50%;
+  background: #55efc4;
+  position: relative;
+  z-index: 9999;
+  top: 45rpx;
+  line-height: 90rpx;
+  color: #fff;
+  font-size: 45rpx;
+}
+.tczy-title{
+  margin-top: 15rpx;
+  /* border: 1rpx solid red; */
+  text-align: center;
+  margin-left: 25%;
+  width: 50%;
+  background: #6c5ce7;
+  position: relative;
+  z-index: 9999;
+  top: 45rpx;
+  line-height: 90rpx;
+  color: #fff;
+  font-size: 45rpx;
+}
+.kkcs-title{
+  margin-top: 15rpx;
+  /* border: 1rpx solid red; */
+  text-align: center;
+  margin-left: 25%;
+  width: 50%;
+  background: #00cec9;
+  position: relative;
+  z-index: 9999;
+  top: 45rpx;
+  line-height: 90rpx;
+  color: #fff;
+  font-size: 45rpx;
+}
+.sgfdqk-cont{
+  border: 1rpx solid red;
+  padding-top: 55rpx;
+  font-size: 35rpx;
+  line-height: 70rpx;
+  padding-left: 15rpx;
+  color: #636e72;
+}
+.start-ks {
+  padding: 15rpx 15rpx 25rpx 15rpx;
+  position: relative;
+  background: #fff;
+}
+
+.btn-startKs {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+}

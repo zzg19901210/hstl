@@ -78,7 +78,8 @@ Page({
         // success
       }
     });
-    getWork(this);
+    // getWork(this);
+    getQuestion(this);
   },
   startKs: function (e) {
     // this.setData({
@@ -348,7 +349,7 @@ var getQuestion = function (that) {
   wx.showLoading({
     title: '正在获取题目...'
   });
-  WxParse.wxParse('article', 'html', "", that, 5);
+  // WxParse.wxParse('article', 'html', "", that, 5);
   wx.request({
     url: question_url,
     header: {
@@ -476,7 +477,7 @@ var submitQuestionLogs = function (that, obj) {
     method: 'POST',
     data: sumbitData,
     success: function (res) {
-      wx.redirectTo({
+      wx.navigateTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime
       })
 
