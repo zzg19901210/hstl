@@ -160,7 +160,7 @@ Page({
       // var downloadFileUrl = "http://hstl.oss-cn-beijing.aliyuncs.com/%E4%B8%AD%E5%9B%BD%E9%93%81%E8%B7%AF%E6%80%BB%E5%85%AC%E5%8F%B8%E3%80%8A%E9%93%81%E8%B7%AF%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86%E8%A7%84%E7%A8%8B%E3%80%8B%28%E6%99%AE%E9%80%9F%E9%93%81%E8%B7%AF%E9%83%A8%E5%88%86%29.doce80ebd3b-07f2-414b-885c-9d02f76d3a1e.doc";
       wx.showLoading({
         title: '正在打开文件',
-      })
+      });
       wx.downloadFile({
         url: downloadFileUrl,
         success: function (res) {
@@ -191,7 +191,7 @@ Page({
 
         }, fail: function (e) {
           wx.showToast({
-            title: '文件打开i失败，请重试！',
+            title: '文件打开失败，请重试！',
             icon: 'none'
           })
           wx.hideLoading();
