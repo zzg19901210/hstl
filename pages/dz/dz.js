@@ -208,7 +208,7 @@ var loadContxt = function (that, catId, page) {
       if (page === 1) {
         list = []
       } else {
-        list = that.data.list
+        // list = that.data.list
 
       }
       if (res.data.rows.length === 0) {

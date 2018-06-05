@@ -125,13 +125,13 @@ Page({
   },
   scroll: function (event) {
     //该方法绑定了页面滚动时的事件，我这里记录了当前的position.y的值,为了请求数据之后把页面定位到这里来。
+    console.log("页面滚动：" + event.detail.scrollTop);
     this.setData({
       scrollTop: event.detail.scrollTop
     });
   },
   topLoad: function (event) {
     //   该方法绑定了页面滑动到顶部的事件，然后做上拉刷新
-
     this.setData({
       list: [],
       scrollTop: 0
@@ -139,6 +139,8 @@ Page({
     page = 1;
     loadContxt(this, this.data.cat_list[this.data.currentTab].id, page);
     console.log("上拉加载");
+
+
   }, btnItem: function (e) {
     var arch = e.currentTarget.dataset.arch;
     console.log(arch.title);
@@ -149,12 +151,12 @@ Page({
 
     var type = e.currentTarget.dataset.type;
     var aId = e.currentTarget.dataset.id;
-    if("1"==type){
+    if ("1" == type) {
       var title = e.currentTarget.dataset.title;
       wx.navigateTo({
         url: '/pages/zj/arc_context/index?aId=' + aId + '&arc_title=' + title,
       });
-    }else{
+    } else {
       var downloadFileUrl = e.currentTarget.dataset.enclosure;
       console.log(downloadFileUrl);
       // var downloadFileUrl = "http://hstl.oss-cn-beijing.aliyuncs.com/%E4%B8%AD%E5%9B%BD%E9%93%81%E8%B7%AF%E6%80%BB%E5%85%AC%E5%8F%B8%E3%80%8A%E9%93%81%E8%B7%AF%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86%E8%A7%84%E7%A8%8B%E3%80%8B%28%E6%99%AE%E9%80%9F%E9%93%81%E8%B7%AF%E9%83%A8%E5%88%86%29.doce80ebd3b-07f2-414b-885c-9d02f76d3a1e.doc";
@@ -198,7 +200,6 @@ Page({
         }
       });
     }
-   
   }
 
 })
@@ -289,8 +290,7 @@ var loadContxt = function (that, catId, page) {
       if (page === 1) {
         list = []
       } else {
-        list = that.data.list
-
+        list = list
       }
       if (res.data.rows.length === 0) {
         stopLoding(that);
@@ -299,7 +299,6 @@ var loadContxt = function (that, catId, page) {
           icon: 'none'
         });
         console.log("没有更多数据了");
-
       } else {
         if ("30" == catId || "31" == catId) {
           for (var i = 0; i < res.data.rows.length; i++) {

@@ -8,6 +8,7 @@ Page({
     interval: 5000,
     duration: 1000,
     isFirst:false,
+    showBtn:false,
     imgUrls: [
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524899106672&di=ecfd188287bf667432e836244846fad9&imgtype=0&src=http%3A%2F%2Fs14.sinaimg.cn%2Fmw690%2F0062UP1Agy6RnYQ5P7n6d%26690',
       'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2593790037,317444479&fm=27&gp=0.jpg',
@@ -45,9 +46,7 @@ Page({
               code: res.code
             },
             success: function (data) {
-              that_this.setData({
-                isFirst:true
-              });
+             
               // console.log(data.data.data.obj);
               if ("2" == data.data.msg) {
                 app.globalData.myGlobalUserId = 0;
@@ -59,10 +58,16 @@ Page({
                 // wx.redirectTo({
                 //   url: '../../pages/user/opendata/opendata',
                 // });
+                that_this.setData({
+                  showBtn: true
+                });
                 getuserInfo();
               } else {
                 app.globalData.myGlobalUserId = data.data.data.obj.id;
                 app.globalData.myUserInfo = data.data.data.obj;
+                // that_this.setData({
+                //   isFirst: true
+                // });
                 wx.switchTab({
                   url: '/pages/home/home',
                   success: function (e) {

@@ -6,4 +6,4 @@
       </swiper-item>  
     </block>  
 </swiper>  
-<button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class='btn_sq' >授权登录</button>
+<button wx:if="{{showBtn}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class='btn_sq' >授权登录</button>

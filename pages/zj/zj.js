@@ -207,9 +207,6 @@ var loadContxt=function(that,catId,page){
       console.log("当前页码为:"+page);
       if(page===1){
         list=[]
-      }else{
-        list=that.data.list
-        
       }
       if (res.data.rows.length===0){
         stopLoding(that);  

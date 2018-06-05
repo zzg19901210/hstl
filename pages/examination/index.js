@@ -9,6 +9,8 @@ const context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/wo
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appWorkInterface/findUserRankingListAll.json";
 
+//获取排行榜
+const findUserRankingListUrlByDep = app.globalData.serverUrl + "/app/service/appWorkInterface/findUserRankingListAllByDep.json";
 
 var cur_page = 1;
 const page_size = 10;
@@ -233,15 +235,15 @@ var findUserRankingList = function (that) {
     title: '请稍等...'
   });
   wx.request({
-    url: findUserRankingListUrl,
+    url: findUserRankingListUrlByDep,
     method: 'POST',
     header: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
-    // data: {
-    //   workId: '2'
-    // },
+    data: {
+      depId: app.globalData.myUserInfo.departmentId
+    },
     success: function (res) {
       var tempDate = [];
       var MyRanking = that.data.MyRanking;
