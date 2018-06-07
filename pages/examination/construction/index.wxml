@@ -29,7 +29,7 @@
     <view>回答正确：{{answerNums}}</view>
     <view>{{clock}}</view>
   </view>
-  <!-- <camera device-position="front" flash="off" binderror="error" style=""></camera> -->
+   <camera device-position="front" flash="off" binderror="error" style=""></camera> 
 
 </view>
 <view class='question' hidden='{{!hidStart}}'>

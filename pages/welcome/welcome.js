@@ -82,10 +82,14 @@ Page({
               }
             },
             fail: function (res) {
-              wx.showToast({
-                title: '获取用户失败啦',
-                icon: 'none'
-              });
+              // wx.showToast({
+              //   title: '获取用户失败啦',
+              //   icon: 'none'
+              // });
+              wx.showModal({
+                title: '获取用户信息',
+                content: '请关闭微信重新打开小程序'
+              })
               // wx.redirectTo({
               //   url: '../../pages/user/index',
               // });

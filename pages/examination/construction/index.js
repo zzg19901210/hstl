@@ -2,7 +2,7 @@
 
 
 const app = getApp()
-var WxParse = require('../../../plus/wxParse/wxParse.js');
+// var WxParse = require('../../../plus/wxParse/wxParse.js');
 var total_micro_second = 20 * 60 * 1000;
 // 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
@@ -33,6 +33,9 @@ Page({
     checkedValue: 'A',
     hideSubimt: true,
     indexQuest: {},
+    files:[],
+    src:"",
+    srcCount:0,
     radioItems: [
     ],
     work: {
@@ -59,6 +62,7 @@ Page({
   onLoad: function (options) {
     var totalTimer = options.timer;
     total_micro_second = totalTimer * 60 * 1000;
+    this.ctx = wx.createCameraContext();
     this.setData({
       workSetId: options.workSetId,
       myUserInfo: app.globalData.myUserInfo,
@@ -73,13 +77,13 @@ Page({
     });
     wx.setNavigationBarTitle({
       title: options.title,
-      // title: '啦啦啦',
       success: function (res) {
         // success
       }
     });
     // getWork(this);
     getQuestion(this);
+    takePhoto(this)
   },
   startKs: function (e) {
     // this.setData({
@@ -131,6 +135,8 @@ Page({
   next: function (e) {
     var cur_index = this.data.index;
     console.log(e.currentTarget.dataset.checked);
+    
+    
     var checkValue = e.currentTarget.dataset.checked;
     if (cur_index + 1 >= this.data.list.length) {
       var radioItems = this.data.radioItems;
@@ -145,8 +151,11 @@ Page({
     }
     wx.showLoading({
       title: '正在切换下一题',
-    })
-   
+    });
+    var tak = parseInt(this.data.list.length / 2);
+    if (tak == cur_index) {
+      takePhoto(this);
+    }
     // var checkValue = this.data.checkedValue;
     var cur_answerNums = this.data.answerNums;
   
@@ -240,7 +249,7 @@ Page({
     
   },
   submitKs: function (e) {
-    // takePhoto(this);
+    takePhoto(this);
     wx.showLoading({
       title: '正在保存...',
     })
@@ -277,7 +286,8 @@ Page({
     }
     // console.log(answerList);
     console.log("完成考试！");
-    submitQuestion(this);
+    // submitQuestion(this);
+    upload(this);
 
   },
   hidRanking: function (e) {
@@ -300,49 +310,49 @@ Page({
   }
 })
 
-var getWork = function (that) {
-  wx.showLoading({
-    title: '正在获取题目...'
-  })
-  wx.request({
-    url: work_url,
-    header: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json'
-    },
-    data: {
-      workSetId: that.data.workSetId
-    },
-    success: function (res) {
-      //console.info(that.data.list);
-      if (res.data.status == "0") {
-        wx.showModal({
-          title: '提示',
-          content: res.data.msg,
-          showCancel: false
-        });
-      } else {
-        that.setData({
-          work: res.data.data.obj
-        });
-        WxParse.wxParse('article', 'html', res.data.data.obj.questionIntroduction, that, 5);
+// var getWork = function (that) {
+//   wx.showLoading({
+//     title: '正在获取题目...'
+//   })
+//   wx.request({
+//     url: work_url,
+//     header: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       'Accept': 'application/json'
+//     },
+//     data: {
+//       workSetId: that.data.workSetId
+//     },
+//     success: function (res) {
+//       //console.info(that.data.list);
+//       if (res.data.status == "0") {
+//         wx.showModal({
+//           title: '提示',
+//           content: res.data.msg,
+//           showCancel: false
+//         });
+//       } else {
+//         that.setData({
+//           work: res.data.data.obj
+//         });
+//         WxParse.wxParse('article', 'html', res.data.data.obj.questionIntroduction, that, 5);
 
-      }
-      wx.hideLoading();
-    }, fail: function (e) {
-      console.log(e);
-      wx.showModal({
-        title: '提示',
-        content: '获取信息失败',
-        showCancel: false
-      })
-      wx.hideLoading();
-    },
-    complete: function () {
+//       }
+//       wx.hideLoading();
+//     }, fail: function (e) {
+//       console.log(e);
+//       wx.showModal({
+//         title: '提示',
+//         content: '获取信息失败',
+//         showCancel: false
+//       })
+//       wx.hideLoading();
+//     },
+//     complete: function () {
 
-    }
-  });
-}
+//     }
+//   });
+// }
 
 //获取题目信息
 var getQuestion = function (that) {
@@ -376,7 +386,7 @@ var getQuestion = function (that) {
           hidStart: true,
           checkedValue: 'A'
         });
-        WxParse.wxParse('article', 'html', "", that, 5);
+        // WxParse.wxParse('article', 'html', "", that, 5);
         getChoice(that,'A');
         // count_down(that);
       }
@@ -405,8 +415,7 @@ var submitQuestion = function (that) {
     title: '正在提交成绩...'
   });
 
-  // var picServerUrl = that.data.src;
-
+  var picServerUrl = that.data.src;
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
   var avgScore = 100 / totalNums;
@@ -433,7 +442,8 @@ var submitQuestion = function (that) {
       errorScore: errorScore,
       costTime: costTime,
       percentScore: percentScore,
-      totalScore: 100
+      totalScore: 100,
+      picUrl:picServerUrl
     },
     success: function (res) {
       //提交做题日志
@@ -648,4 +658,97 @@ var findUserRankingList = function (that) {
     }
   });
 }
+var takePhoto = function (that) {
+  that.ctx.takePhoto({
+    quality: 'high',
+    success: (res) => {
+      // upload(that,res.tempImagePath)
+      console.log(res.tempImagePath);
+      var tems = that.data.files;
+      tems.push(res.tempImagePath);
+      that.setData({
+        files: tems
+      });
+    }
+  })
+}
+var upload = function (that) {
+  var picUrl = that.data.files;
+  if (picUrl.length > 0) {
+    wx.showLoading({
+      title: '正在保存...',
+    });
+    that.setData({
+      src: "",
+      srcCount: 0
+    });
+    for (var i = 0; i < 3; i++) {
+      var random = Math.floor(Math.random() * that.data.files.length);
+      var path = picUrl[random];
 
+      wx.uploadFile({
+        url: upload_url,
+        filePath: path,
+        name: 'file',
+        header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
+        formData: {
+          //和服务器约定的token, 一般也可以放在header中
+          'session_token': wx.getStorageSync('session_token')
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.statusCode != 200) {
+            wx.showModal({
+              title: '提示',
+              content: '上传失败',
+              showCancel: false
+            })
+            return;
+          }
+          var data = JSON.parse(res.data);
+          // console.log(that.data.tempFile);
+          var picServerUrl = that.data.src;
+          if (null != data.data.list && "" != data.data.list && data.data.list.length > 0) {
+            if ("" == picServerUrl) {
+              picServerUrl = data.data.list[0].uri;
+            } else {
+              picServerUrl = picServerUrl + "," + data.data.list[0].uri;
+            }
+          }
+
+          console.log("拼接后的图片地址：" + picServerUrl);
+          var srcCount = that.data.srcCount;
+          srcCount++;
+          that.setData({
+            src: picServerUrl,
+            srcCount: srcCount
+          });
+
+          if (srcCount > 2) {
+            // wx.hideToast();  //隐藏Toast
+            submitQuestion(that);
+          }
+          // saveTouxiang();
+        },
+        fail: function (e) {
+          console.log(e);
+          wx.showModal({
+            title: '提示',
+            content: '上传失败',
+            showCancel: false
+          })
+        },
+        complete: function () {
+
+        }
+      });
+
+    }
+  } else {
+    var picServerUrl = "http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg";
+    that.setData({
+      src: picServerUrl
+    });
+    submitQuestion(that);
+  }
+}

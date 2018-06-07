@@ -4,12 +4,17 @@
 </view> -->
 
 <view class="wxParse" wx:if='{{work.questionType==1}}'>
+  <view class='title'>
+    <text>{{work.questionTitle}}</text>
+  </view>
+  <view class='fgf'>
+    <image src="http://kol-statics.oss-cn-beijing.aliyuncs.com/editor/19174604a13de1849b9fd27b3aacb26512c286.gif"></image>
+  </view>
   <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 </view>
-<view class="page" wx:else>
+<view class="page" wx:if='{{work.questionType==2}}'>
   <view class='title'>
-
-    <text>东胜东站5月24日施工作业卡控措施表</text>
+    <text>{{work.questionTitle}}</text>
   </view>
   <view class='fgf'>
     <image src="http://kol-statics.oss-cn-beijing.aliyuncs.com/editor/19174604a13de1849b9fd27b3aacb26512c286.gif"></image>
