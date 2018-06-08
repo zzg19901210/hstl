@@ -224,7 +224,7 @@ Page({
     // console.log(answerList);
     console.log("完成考试！");
 
-    upload(this);
+    upload(this,0);
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
@@ -288,78 +288,84 @@ var takePhoto = function (that) {
   })
 }
 
-var upload = function (that) {
+var upload = function (that, index) {
+
   var picUrl = that.data.files;
-  if (picUrl.length > 0) {
+  if (picUrl.length > 0 && that.data.srcCount < picUrl.length) {
     wx.showLoading({
       title: '正在保存...',
     });
-    that.setData({
-      src: "",
-      srcCount: 0
-    });
-    for (var i = 0; i < 3; i++) {
-      var random = Math.floor(Math.random() * that.data.files.length);
-      var path = picUrl[random];
+    if (index == 0) {
+      that.setData({
+        src: "",
+        srcCount: 0
+      });
+    }
+    var path = picUrl[index];
 
-      wx.uploadFile({
-        url: upload_url,
-        filePath: path,
-        name: 'file',
-        header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
-        formData: {
-          //和服务器约定的token, 一般也可以放在header中
-          'session_token': wx.getStorageSync('session_token')
-        },
-        success: function (res) {
-          console.log(res);
-          if (res.statusCode != 200) {
-            wx.showModal({
-              title: '提示',
-              content: '上传失败',
-              showCancel: false
-            })
-            return;
-          }
-          var data = JSON.parse(res.data);
-          // console.log(that.data.tempFile);
-          var picServerUrl = that.data.src;
-          if (null != data.data.list && "" != data.data.list && data.data.list.length > 0) {
-            if ("" == picServerUrl) {
-              picServerUrl = data.data.list[0].uri;
-            } else {
-              picServerUrl = picServerUrl + "," + data.data.list[0].uri;
-            }
-          }
-
-          console.log("拼接后的图片地址：" + picServerUrl);
-          var srcCount = that.data.srcCount;
-          srcCount++;
-          that.setData({
-            src: picServerUrl,
-            srcCount: srcCount
-          });
-
-          if (srcCount > 2) {
-            // wx.hideToast();  //隐藏Toast
-            submitQuestion(that);
-          }
-          // saveTouxiang();
-        },
-        fail: function (e) {
-          console.log(e);
+    wx.uploadFile({
+      url: upload_url,
+      filePath: path,
+      name: 'file',
+      header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
+      formData: {
+        //和服务器约定的token, 一般也可以放在header中
+        'session_token': wx.getStorageSync('session_token')
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode != 200) {
           wx.showModal({
             title: '提示',
             content: '上传失败',
             showCancel: false
           })
-        },
-        complete: function () {
-
+          return;
         }
-      });
+        var data = JSON.parse(res.data);
+        // console.log(that.data.tempFile);
+        var picServerUrl = that.data.src;
+        if (null != data.data.list && "" != data.data.list && data.data.list.length > 0) {
+          var srcCount = that.data.srcCount;
+          if ("" == picServerUrl) {
+            picServerUrl = data.data.list[0].uri;
+            srcCount = 0;
+          } else {
+            picServerUrl = picServerUrl + "," + data.data.list[0].uri;
+          }
+        }
+        console.log("拼接后的图片地址：" + picServerUrl);
+        srcCount++;
+        that.setData({
+          src: picServerUrl,
+          srcCount: srcCount
+        });
 
-    }
+        var leng = picUrl.length - 1;
+        console.log("图片总数为：" + leng + ",伤处总数为:" + srcCount);
+
+        if (srcCount > leng) {
+          // wx.hideToast();  //隐藏Toast
+          submitQuestion(that);
+        } else {
+          upload(that, srcCount);
+        }
+        // saveTouxiang();
+      },
+      fail: function (e) {
+        console.log(e);
+        wx.showModal({
+          title: '提示',
+          content: '上传失败',
+          showCancel: false
+        })
+        wx.hideLoading();
+      },
+      complete: function () {
+
+      }
+    });
+
   } else {
     var picServerUrl = "http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg";
     that.setData({
@@ -367,8 +373,6 @@ var upload = function (that) {
     });
     submitQuestion(that);
   }
-
-
 }
 
 //获取题目信息
@@ -590,9 +594,9 @@ function count_down(that) {
   }
   setTimeout(function () {
     // 放在最后--
-    total_micro_second -= 10;
+    total_micro_second -= 1000;
     count_down(that);
-  }, 10)
+  }, 1000)
 }
 
 // 时间格式化输出，如03:25:19 86。每10ms都会调用一次

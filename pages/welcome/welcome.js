@@ -19,6 +19,18 @@ Page({
     wx.setNavigationBarTitle({
       title: '欢迎使用'
     })
+    var that = this
+    wx.getNetworkType({
+      success: function (res) {
+        if (res.networkType == "none") {  
+          wx.showModal({
+            title: '温馨提示',
+            content: '暂无网络请连接网络..',
+            showCancel:false
+          })
+        }
+      }
+    });  
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#3c9ae8',
@@ -87,8 +99,9 @@ Page({
               //   icon: 'none'
               // });
               wx.showModal({
-                title: '获取用户信息',
-                content: '请关闭微信重新打开小程序'
+                title: '获取用户信息失败',
+                content: '请关闭微信重新打开小程序',
+                showCancel: false
               })
               // wx.redirectTo({
               //   url: '../../pages/user/index',

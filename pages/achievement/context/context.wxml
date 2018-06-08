@@ -5,31 +5,94 @@
         <view class='list_context'>
           <text class='c_title'>{{cont.workQuestionContext}}</text>
           <view class='user_select'>
-            <text class='lefttitle'>选择答案：</text>
-            <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.userSelect}}</text>
+            <text class='lefttitle badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.isRight==1?"回答正确":"回答错误"}}</text>
+            <!-- <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.userSelect}}</text> -->
 
+            <text class="rightda"  wx:if="{{'A'==cont.correctAnswer}}">正确答案：{{cont.choicea}}</text>
+            <text class="rightda"  wx:elif="{{'B'==cont.correctAnswer}}">正确答案：{{cont.choiceb}}</text>
+            <text class="rightda"  wx:elif="{{'C'==cont.correctAnswer}}">正确答案：{{cont.choicec}}</text>
+            <text class="rightda"  wx:elif="{{'D'==cont.correctAnswer}}">正确答案：{{cont.choiced}}</text>
           </view>
           <view class='correct_answer'>
-            <text class='lefttitle'>正确答案：</text>
-            <text class='badge badge-info'>{{cont.correctAnswer}}</text>
+            <text class='lefttitle badge badge-info'>用户选择：</text>
+            <!-- <text class='badge badge-info'>{{cont.correctAnswer}}</text> -->
+             <radio-group>
+     
+              <label class="weui-cell weui-check__label">
+                <view class="weui-cell__bd">{{cont.choicea}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'A'==cont.userSelect}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label">
+               <view class="weui-cell__bd">{{cont.choiceb}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'B'==cont.userSelect}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label" wx:if="{{cont.choicec!=''}}">
+                <view class="weui-cell__bd">{{cont.choicec}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'C'==cont.userSelect}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label" wx:if="{{cont.choiced!=''}}">
+                <view class="weui-cell__bd">{{cont.choiced}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'D'==cont.userSelect}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+            </radio-group>
+            
           </view>
         </view>
       </view>
     </block>
   </block>
   <block wx:else>
-    <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+    <block wx:for="{{list}}" wx:for-index="index" wx:for-item="cont" wx:key="*this">
       <view class='item'>
         <view class='list_context'>
-          <text class='c_title'>{{cont.questionContext}}</text>
+          <text class='c_title'>{{index+1}}、{{cont.questionContext}}</text>
           <view class='user_select'>
-            <text class='lefttitle'>选择答案：</text>
-            <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.answer}}</text>
-
+            <text class='lefttitle badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.isRight==1?"回答正确":"回答错误"}}</text>
+            <!-- <text class='badge {{cont.isRight==1?"badge-success":"badge-danger"}}'>{{cont.userSelect}}</text> -->
+            <text class="rightda"  wx:if="{{'A'==cont.correctAnswer}}">正确答案：A:{{cont.choiceA}}</text>
+            <text class="rightda"  wx:elif="{{'B'==cont.correctAnswer}}">正确答案：B:{{cont.choiceB}}</text>
+            <text class="rightda"  wx:elif="{{'C'==cont.correctAnswer}}">正确答案：C:{{cont.choiceC}}</text>
+            <text class="rightda"  wx:elif="{{'D'==cont.correctAnswer}}">正确答案：D:{{cont.choiceD}}</text>
+           
           </view>
           <view class='correct_answer'>
-            <text class='lefttitle'>正确答案：</text>
-            <text class='badge badge-info'>{{cont.correctAnswer}}</text>
+             <text class='lefttitle badge badge-info'>用户选择：</text>
+            <!-- <text class='badge badge-info'>{{cont.correctAnswer}}</text> -->
+             <radio-group>
+     
+              <label class="weui-cell weui-check__label">
+                <view class="weui-cell__bd">A:{{cont.choiceA}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'A'==cont.answer}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label">
+               <view class="weui-cell__bd">B:{{cont.choiceB}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'B'==cont.answer}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label" wx:if="{{cont.choiceC!=''}}">
+                <view class="weui-cell__bd">C:{{cont.choiceC}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'C'==cont.answer}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+              <label class="weui-cell weui-check__label" wx:if="{{cont.choiceD!=''}}">
+                <view class="weui-cell__bd">D:{{cont.choiceD}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{'D'==cont.answer}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+              </label>
+            </radio-group>
           </view>
         </view>
       </view>
