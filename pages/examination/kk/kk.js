@@ -100,12 +100,14 @@ var getWork = function (that) {
           showCancel: false
         });
       } else {
-        that.setData({
-          work: res.data.data.obj
-        });
+        
         if ("1"==res.data.data.obj.questionType){
           WxParse.wxParse('article', 'html', res.data.data.obj.questionIntroduction, that, 5);
-        }       
+        }
+        that.setData({
+          work: res.data.data.obj,
+          hidStart: false
+        });       
       }
       wx.hideLoading();
     }, fail: function (e) {

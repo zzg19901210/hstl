@@ -12,7 +12,7 @@ App({
     //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
     //     // console.log("code:"+res.code)
     //     // var that = app;
-        
+
     //     wx.request({
     //       url: that.globalData.serverUrl + '/app/wechartSns/login.json',
     //       header: {
@@ -90,7 +90,6 @@ App({
     myGlobalUserId: null,
     myUserInfo: null,
     wechar_user: { openid: '未获取上openid', session_key: '323232', unionid: '1232132' }
-
   }
 
 })
