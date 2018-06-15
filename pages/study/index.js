@@ -28,6 +28,7 @@ Page({
     src: '',
     srcCount: 0,
     catId: 0,
+    setType:'1',
     radioItems: [
       // { name: 'A:110', value: '0' },
       // { name: 'B:110', value: '1', checked: true },
@@ -412,6 +413,7 @@ var getQuestion = function (that,setType) {
           index: 0,
           indexQuest: res.data.list[0],
           setObj: res.data.data.obj,
+          setType: setType,
           hidStart: true,
           checkedValue: 'A'
         });
@@ -442,7 +444,7 @@ var submitQuestion = function (that) {
 
   var picServerUrl = that.data.src;
 
-
+  var setType=that.data.setType;
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
   var avgScore = 100 / totalNums;
@@ -450,6 +452,7 @@ var submitQuestion = function (that) {
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums / totalNums
   var costTime = 20 * 60 * 1000 - total_micro_second;
+ 
   costTime = parseInt(costTime / 1000);
   console.log(picServerUrl);
   wx.request({
@@ -470,7 +473,8 @@ var submitQuestion = function (that) {
       costTime: costTime,
       percentScore: percentScore,
       picUrl: picServerUrl,
-      catId: that.data.catId
+      catId: that.data.catId, 
+      setType:setType
     },
     success: function (res) {
       //提交做题日志
