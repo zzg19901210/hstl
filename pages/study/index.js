@@ -64,9 +64,12 @@ Page({
 
   },
   startKs() {
-    getQuestion(this);
+    getQuestion(this,1);
     takePhoto(this);
 
+  },startLx() {
+    getQuestion(this,2);
+    takePhoto(this);
   },
   error(e) {
     console.log(e.detail)
@@ -342,7 +345,7 @@ var upload = function (that, index) {
         });
 
         var leng = picUrl.length - 1;
-        console.log("图片总数为：" + leng + ",伤处总数为:" + srcCount);
+        console.log("图片总数为：" + leng + " 上传总数为:" + srcCount);
 
         if (srcCount > leng) {
           // wx.hideToast();  //隐藏Toast
@@ -376,7 +379,7 @@ var upload = function (that, index) {
 }
 
 //获取题目信息
-var getQuestion = function (that) {
+var getQuestion = function (that,setType) {
   wx.showLoading({
     title: '正在获取题目...'
   })
@@ -389,6 +392,7 @@ var getQuestion = function (that) {
     data: {
       nums: 10,
       type: 1,
+      setType: setType,
       workType: 0,
       departmentId: 0,
       catId: that.data.catId,

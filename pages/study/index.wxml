@@ -16,10 +16,12 @@
 <view class='start-ks' hidden='{{hidStart}}'>
   <view class='hr'></view>
   <button class='btn-startKs' bindtap="startKs">开始考试</button>
+  <button class='btn-startLx' bindtap="startLx">答题练习</button>
   <view class="ranking">
     <button class="btn-ranking" bindtap="ranking">
       排行榜
     </button>
+  
   </view>
 </view>
 <view class='body-context' hidden='{{!hidStart}}'>

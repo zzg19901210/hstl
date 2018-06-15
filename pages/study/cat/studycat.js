@@ -35,7 +35,6 @@ Page({
     loadContxt(this);
   },
   onPullDownRefresh: function () {
-
     var date = new Date();
     this.setData({
       refreshTime: date.toLocaleTimeString(),
@@ -114,6 +113,7 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
+      type:'1',
       enterUserId: app.globalData.myGlobalUserId
     },
     success: function (res) {

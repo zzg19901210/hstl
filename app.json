@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/study/index",
     "pages/examination/kk/kk",
     "pages/multiroom/room/room",
     "pages/multiroom/roomlist/roomlist",
@@ -11,7 +12,6 @@
     "pages/achievement/context/context",
     "pages/examination/construction/index",
     "pages/examination/construction/success/success",
-    "pages/study/index",
     "pages/home/home",
     "pages/study/cat/studycat",
     "pages/user/index",
@@ -51,7 +51,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3c9ae8",
     "navigationBarTitleText": "首页",
-    "navigationBarTextStyle": "#fffff"
+    "navigationBarTextStyle": "#fffff",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#a9b7b7",

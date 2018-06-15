@@ -68,7 +68,7 @@ Page({
     loadContxt(this);
   },
   onPullDownRefresh: function () {
-    
+    console.log("下拉刷新");
     var date = new Date();
     this.setData({
       refreshTime: date.toLocaleTimeString(),
