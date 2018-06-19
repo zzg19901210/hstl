@@ -18,6 +18,7 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
+    setType:'1',
     requestUrl:zj_context_url,
     type:'1',
     list: [
@@ -45,11 +46,14 @@ Page({
    */
   onLoad: function (options) {
     var title ="职教-我的成绩";
+    
     if(options.cjlx=="1"){
+      var setType = options.setType;
       title = "职教-我的成绩";
       this.setData({
         requestUrl: zj_context_url,
-        type:'1'
+        type:'1',
+        setType: setType
       });
     }else{
       title = "施工-我的成绩";
@@ -147,7 +151,8 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
-      enterUserId: app.globalData.myGlobalUserId
+      enterUserId: app.globalData.myGlobalUserId,
+      setType:that.data.setType
     },
     success: function (res) {
       //console.info(that.data.list);

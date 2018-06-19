@@ -33,7 +33,7 @@ Page({
       },
       {
         name: '成绩查看',
-        url: '/pages/achievement/index?cjlx=1',
+        url: '/pages/achievement/index?cjlx=1&setType=1',
         icon: '/images/home_icon/zx.png'
       },
       {
