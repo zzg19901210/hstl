@@ -71,19 +71,21 @@ var saveSubmit = function (that) {
     success: function (res) {
       // console.log(res);
       if ("200" == res.statusCode){
-        wx.navigateBack(1);
-
+      
         wx.showModal({
           title: '提示',
           content: '回复成功',
-          showCancel: false
+          showCancel: false,
+          success: function (res) {
+            wx.navigateBack(1);
+          }
         });
       }
-      wx.showModal({
-        title: '提示',
-        content: '回复失败:错误代码 ' + res.statusCode,
-        showCancel: false
-      })
+      // wx.showModal({
+      //   title: '提示',
+      //   content: '回复失败:错误代码 ' + res.statusCode,
+      //   showCancel: false
+      // })
       return ;
     },
     fail: function (e) {

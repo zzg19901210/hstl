@@ -27,7 +27,9 @@ Page({
     }]
 
   },
-
+  onReady:function(){
+    // loadContxt(this);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -44,6 +46,9 @@ Page({
     //   hideHeader: false,
     //   currentPage: 1
     // });
+    // loadContxt(this);
+  },
+  onShow:function(e){
     loadContxt(this);
   },
   onPullDownRefresh: function () {

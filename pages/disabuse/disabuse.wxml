@@ -30,5 +30,5 @@
   <text>{{refreshTime}}</text>
 </view>
 <view class='btn-add'>
-    <button class="weui-btn" type="primary" bindtap='onAdd'>提问</button>
+    <button class="weui-btn" style='background-color: #3c9ae8;' type="primary" bindtap='onAdd'>提问</button>
 </view>

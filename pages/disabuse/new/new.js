@@ -148,19 +148,23 @@ var saveSubmit = function (that) {
       bodyDsec: that.data.context,
       picUrl: that.data.files.toString(),
       status: '1',
-      workType: app.globalData.myGlobalUserId,
+      workType: app.globalData.myUserInfo.workType,
       userId: app.globalData.myGlobalUserId,
       departmentId: app.globalData.myUserInfo.departmentId
     },
     success: function (res) {
       // console.log(res);
-      wx.navigateBack(1);
+      
 
       wx.showModal({
         title: '提示',
         content: '添加成功',
-        showCancel: false
+        showCancel: false, 
+        success: function (res) {
+          wx.navigateBack(1);
+        }
       });
+     
     },
     fail: function (e) {
       console.log(e);
@@ -180,7 +184,7 @@ var yezheng=function (that){
   if (that.data.title.length < 1) {
     wx.showToast({
       title: '请输入问题描述',
-      duration: 1000,
+      duration: 2000,
       icon: 'none'
     });
     return true;
@@ -196,7 +200,7 @@ var yezheng=function (that){
   if (that.data.files.length < 1) {
     wx.showToast({
       title: '请选择图片介绍',
-      duration: 1000,
+      duration: 2000,
       icon: 'none'
     });
     return true;
