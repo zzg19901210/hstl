@@ -183,27 +183,27 @@ var saveSubmit = function (that) {
 var yezheng=function (that){
   if (that.data.title.length < 1) {
     wx.showToast({
-      title: '请输入问题描述',
+      title: '请输入问题标题',
       duration: 2000,
       icon: 'none'
     });
     return true;
   }
-  if(that.data.context.length<1){
-    wx.showToast({
-      title: '请输入问题描述',
-      duration:1000,
-      icon:'none'
-    });
-    return true;
-  }
-  if (that.data.files.length < 1) {
-    wx.showToast({
-      title: '请选择图片介绍',
-      duration: 2000,
-      icon: 'none'
-    });
-    return true;
-  }
+  // if(that.data.context.length<1){
+  //   wx.showToast({
+  //     title: '请输入问题描述',
+  //     duration:1000,
+  //     icon:'none'
+  //   });
+  //   return true;
+  // }
+  // if (that.data.files.length < 1) {
+  //   wx.showToast({
+  //     title: '请选择图片介绍',
+  //     duration: 2000,
+  //     icon: 'none'
+  //   });
+  //   return true;
+  // }
   return false;
 }
