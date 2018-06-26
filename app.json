@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/specialist/details/sp_details",
     "pages/study/index",
     "pages/examination/kk/kk",
     "pages/multiroom/room/room",

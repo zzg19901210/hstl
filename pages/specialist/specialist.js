@@ -17,15 +17,7 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
-    list: [{
-      id: 1,
-      headPortrait: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
-      nickname: '张三'
-    },{
-      id: 1,
-      headPortrait: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3993375852,282817372&fm=11&gp=0.jpg',
-      nickname: '张三'
-    }]
+    list: []
   },
 
   /**
@@ -44,6 +36,7 @@ Page({
     //   hideHeader: false,
     //   currentPage: 1
     // });
+    
     loadContxt(this);
   },
   onPullDownRefresh: function () {
@@ -119,7 +112,7 @@ var loadContxt = function (that) {
   wx.request({
     url: getSpecialistUrl,
     header: {
-      'context-type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
     data: {

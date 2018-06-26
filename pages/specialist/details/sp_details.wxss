@@ -1,0 +1,44 @@
+.header{
+  width: 100%;
+  height: 220rpx;
+  padding-top: 50rpx;
+  padding-left: 50rpx;
+  background-color: #3c9ae8;
+}
+.header >image{
+  float: left;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 75rpx;
+}
+.header .right-context{
+  width: 70%;
+  /* text-align: center; */
+  color: #fff;
+  height: 150rpx;
+  float: left;
+  line-height: 150rpx;
+}
+.text-big-font{
+  font-family: '微软雅黑';
+  color: #fff;
+  font-size: 40rpx;
+  line-height: 80rpx;
+}
+.nickname{
+  padding-right: 50rpx;
+  padding-left: 50rpx;
+}
+.ds-title{
+  font-size: 30rpx;
+  color: #000;
+}
+.ds-context{
+  margin-left: 15rpx;
+  padding-left: 15rpx;
+  color: #999;
+}
+.vw-context{
+  padding-left: 35rpx;
+  line-height: 60rpx;
+}

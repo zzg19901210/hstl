@@ -1,0 +1,50 @@
+<view class='header'>
+  <image class='left-image' src='{{myUserInfo.headPortrait}}'></image>
+  <view class='right-context'>
+    <text class='text-big-font nickname'>{{myUserInfo.nickname}}</text>
+    <text class='sex'>{{myUserInfo.sex}}</text>
+  </view>
+</view>
+
+<view class="page__bd">
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd ">基本信息</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">手机号</view>
+          <view class="weui-cell__ft">{{myUserInfo.phoneNo}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">所在部门</view>
+          <view class="weui-cell__ft">{{myUserInfo.departmentName}}</view>
+        </view>
+         <view class="weui-cell">
+          <view class="weui-cell__bd">职称</view>
+          <view class="weui-cell__ft">{{myUserInfo.job}}</view>
+        </view> 
+
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd ">
+      <text class='ds-title'>大师寄语</text>
+    </view>
+    <view class="weui-panel__bd vw-context">
+      <text class='ds-context'>{{myUserInfo.userDesc}}</text>
+    </view>
+  </view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd ">
+      <text class='ds-title'>获得荣誉</text>
+    </view>
+    <view class="weui-panel__bd">
+      <view class="weui-cell" wx:for="{{gainHonors}}" wx:for-item="items">
+        <view class="weui-cell__bd">{{items}}</view>
+      </view>
+      
+    </view>
+
+  </view>
+</view>

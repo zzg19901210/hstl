@@ -3,9 +3,9 @@
   <text>下拉刷新  </text>
   <text>{{refreshTime}}</text>
 </view>
- <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+ <scroll-view scroll-y="true" class="scoll-h" style='height:100%' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
   <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
-     <!-- <navigator url="/pages/disabuse/reply/reply?disabuseId={{cont.id}}">  -->
+      <navigator url="details/sp_details?userId={{cont.id}}">  
       <view class='item'>
         <view class='list_context'>
           <image src='{{cont.headPortrait}}'></image>
@@ -14,7 +14,7 @@
           </view>
         </view>
       </view>
-     <!-- </navigator>  -->
+      </navigator>  
   </block>
 </scroll-view> 
 <view class="body-view">
