@@ -37,3 +37,30 @@
   <text>{{loadMoreData}}</text>
   <text>{{refreshTime}}</text>
 </view>
+
+<view class="vw-ranking">
+  <button class="btn-ranking" bindtap="ranking">
+    <text class='iconfont icon-ranking'></text>
+  </button>
+</view>
+
+<view class="b1" catchtouchmove="true" hidden="{{hidRanking}}">
+  <view class='title'>职教成绩排行榜</view>
+  <view class='body-r'>
+
+     <scroll-view scroll-y style="height:790rpx;"> 
+      <block wx:for="{{listRanking}}" wx:for-item="obj" wx:key="*this">
+        <view class='ritem {{obj.itemrownum%2==0?"two":""}}'>
+          <text class='xh'>{{obj.itemrownum}}</text>
+          <image src='{{obj.head_portrait}}'></image>
+           <text class='nickname'>{{obj.nickname}}</text> 
+          <text class='scort'>{{obj.correct_score}}</text>
+        </view>
+      </block>
+     </scroll-view> 
+  </view>
+  <view class='footer'>
+    <button class='btn-fotter' bindtap='hidRanking'>←</button>
+    <button class='btn-fotter-right' bindtap='showHome'>返回首页</button>
+  </view>
+</view>

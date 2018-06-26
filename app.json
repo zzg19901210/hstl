@@ -46,7 +46,8 @@
     "pages/logs/logs",
     "pages/dz/dz",
     "pages/index/index",
-    "pages/user/opendata/opendata"
+    "pages/user/opendata/opendata",
+    "pages/achievement/lingdao/lingdao"
   ],
   "window": {
     "backgroundTextStyle": "light",

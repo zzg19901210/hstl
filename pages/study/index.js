@@ -11,11 +11,13 @@ const submitQuestionLogsUrl = app.globalData.serverUrl + "/app/service/appServic
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
+const findUserRankingListByCatId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByCatId.json";
 Page({
   data: {
     clock: date_format(total_micro_second),
     hidStart: false,
     hidRanking: true,
+    rankingType:1,
     list: [],
     index: 0,
     indexQuest: {},
@@ -241,6 +243,18 @@ Page({
       radioItems: radioItems,
       checkedValue: e.detail.value
     });
+  },clicktkph:function(e){
+    findUserRankingList(this, findUserRankingListByCatId);
+    console.log("点击了题库排行");
+    this.setData({
+      rankingType: 2
+    });
+  },clickzph: function (e) {
+    console.log("点击了总题库排行");
+    findUserRankingList(this, findUserRankingListUrl);
+    this.setData({
+      rankingType:1
+    });
   },
   ranking: function (e) {
     wx.setNavigationBarColor({
@@ -254,7 +268,7 @@ Page({
     this.setData({
       hidRanking: false
     });
-    findUserRankingList(this);
+    findUserRankingList(this, findUserRankingListUrl);
   },
   hidRanking: function (e) {
     this.setData({
@@ -630,21 +644,30 @@ function fill_zero_prefix(num) {
 
 
 //获取用户排行榜
-var findUserRankingList = function (that) {
+var findUserRankingList = function (that,uri) {
   wx.showLoading({
     title: '请稍等...'
   });
+
   wx.request({
-    url: findUserRankingListUrl,
+    url: uri,
     method: 'POST',
     header: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
+    data:{
+      catId: that.data.catId
+    },
     // data: that.data.answerList,
     success: function (res) {
       var tempDate = [];
-      var MyRanking = that.data.MyRanking;
+      var MyRanking= {
+        itemrownum: '无',
+        head_portrait: app.globalData.myUserInfo.headPortrait,
+        nickname: app.globalData.myUserInfo.nickname,
+        correct_score: 0
+      };
       var j = 1;
       for (var i = 0; i < res.data.rows.length; i++) {
         //处理排行信息

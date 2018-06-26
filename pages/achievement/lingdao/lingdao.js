@@ -1,9 +1,9 @@
-// pages/study/cat/studycat.js
+// pages/achievement/index.js
+
 const app = getApp();
-const questionCategoryUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findQuestionCategory.json";
+const zj_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListLindao.json";
 const page_size = 10;
-//获取排行榜
-const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
+
 Page({
   /**
    * 页面的初始数据
@@ -17,16 +17,12 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
-    hidRanking: true,
+    setType: '1',
+    requestUrl: zj_context_url,
+    type: '1',
     list: [
+     
     ]
-    , MyRanking: {
-      itemrownum: '暂无',
-      head_portrait: '',
-      nickname: '',
-      correct_score: 0
-    },
-    listRanking: []
 
   },
 
@@ -34,8 +30,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var title = "职教-我的成绩";
+
+    if ("1" == "1") {
+      var setType = options.setType;
+      title = "职教-考试成绩";
+      this.setData({
+        requestUrl: zj_context_url,
+        type: '1',
+        setType: setType
+      });
+    } else {
+      title = "施工-所有考试";
+      this.setData({
+        requestUrl: sg_context_url,
+        type: '2'
+      });
+    }
     wx.setNavigationBarTitle({
-      title: '在线考试-分类',
+      title: title,
       success: function (res) {
         // success
       }
@@ -44,6 +57,7 @@ Page({
     loadContxt(this);
   },
   onPullDownRefresh: function () {
+    console.log("下拉刷新");
     var date = new Date();
     this.setData({
       refreshTime: date.toLocaleTimeString(),
@@ -91,36 +105,6 @@ Page({
   },
   errorFunction: function (event) {
     console.log("进入小程序详情页");
-  }, ranking: function (e) {
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#000000',
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    })
-    this.setData({
-      hidRanking: false
-    });
-    findUserRankingList(this);
-  }, hidRanking: function (e) {
-    this.setData({
-      hidRanking: true
-    });
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#3c9ae8',
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    })
-  },
-  showHome: function (e) {
-    wx.switchTab({
-      url: '/pages/home/home'
-    })
   }
 })
 
@@ -144,7 +128,7 @@ var loadContxt = function (that) {
 
   var page = that.data.currentPage;
   wx.request({
-    url: questionCategoryUrl,
+    url: that.data.requestUrl,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
@@ -152,8 +136,8 @@ var loadContxt = function (that) {
     data: {
       limit: page_size,
       offset: page,
-      type: '1',
-      enterUserId: app.globalData.myGlobalUserId
+      enterUserId: app.globalData.myGlobalUserId,
+      setType: that.data.setType
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -199,72 +183,6 @@ var loadContxt = function (that) {
     },
     complete: function () {
       stopLoding(that); //隐藏Toast
-    }
-  });
-}
-//获取用户排行榜
-var findUserRankingList = function (that) {
-  wx.showLoading({
-    title: '请稍等...'
-  });
-
-  wx.request({
-    url: findUserRankingListUrl,
-    method: 'POST',
-    header: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json'
-    },
-    // data: that.data.answerList,
-    success: function (res) {
-      var tempDate = [];
-      var MyRanking = {
-        itemrownum: '无',
-        head_portrait: app.globalData.myUserInfo.headPortrait,
-        nickname: app.globalData.myUserInfo.nickname,
-        correct_score: 0
-      };
-      var j = 1;
-      for (var i = 0; i < res.data.rows.length; i++) {
-        //处理排行信息
-        var item = res.data.rows[i];
-        //判断是否是自己的排行信息
-        if (app.globalData.myGlobalUserId == res.data.rows[i].enter_user_id) {
-          item['itemrownum'] = j;
-          tempDate.push(item);
-          j++;
-          // MyRanking: {
-          //   itemrownum: '无',
-          //     head_portrait: app.globalData.myUserInfo.headPortrait,
-          //       nickname: app.globalData.myUserInfo.nickname,
-          //         correct_score: 0
-          // }
-          // that.setData({
-          //   MyRanking:item
-          // });
-          MyRanking = item;
-        } else {
-
-          item['itemrownum'] = j;
-          tempDate.push(item);
-          j++;
-        }
-
-      }
-      that.setData({
-        MyRanking: MyRanking,
-        listRanking: tempDate
-      });
-    }, fail: function (e) {
-      console.log(e);
-      wx.showModal({
-        title: '提示',
-        content: '获取排行榜信息错误',
-        showCancel: false
-      });
-    },
-    complete: function () {
-      wx.hideLoading();
     }
   });
 }

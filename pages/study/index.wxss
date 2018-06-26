@@ -1,5 +1,6 @@
 /* pages/splz/index.wxss */
 
+
 page {
   background: #ebebeb;
 }

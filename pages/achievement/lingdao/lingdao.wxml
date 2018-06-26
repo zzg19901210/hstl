@@ -1,0 +1,36 @@
+<view class="header" hidden="{{hideHeader}}">
+  <view class="weui-loading"></view>
+  <text>下拉刷新  </text>
+  <text>{{refreshTime}}</text>
+</view>
+ <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:for="{{list}}" wx:for-item="cont" wx:key="*this">
+     <navigator url="../context/context?setId={{cont.id}}&type={{type}}"> 
+      <view class='item'>
+        <view class='list_context'>
+
+          <text class='c_title' wx:if="{{type=='1'}}">{{cont.questionSetName}}</text>
+          <text class='c_title' wx:else>{{cont.questionTitle}}</text>
+          <view class='score'>
+            <text class='total'>错误分数：{{cont.errorScore}}分</text>
+            <text class='activity'>本次成绩：{{cont.correctScore}}分</text>
+          </view>
+          <view class='qurstion'>
+            <text class='total'>错误题数：{{cont.errorNums}}题</text>
+            <text class='correct'>正确题数量：{{cont.correctNums}}题</text>
+          </view>
+        </view>
+      </view>
+     </navigator> 
+  </block>
+</scroll-view> 
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<view class="bottom" hidden="{{hideBottom}}">
+  <view class="weui-loading" hidden='{{hideBottom_loading}}'></view>
+  <text>{{loadMoreData}}</text>
+  <text>{{refreshTime}}</text>
+</view>
