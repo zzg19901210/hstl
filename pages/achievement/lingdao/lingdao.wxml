@@ -11,13 +11,16 @@
 
           <text class='c_title' wx:if="{{type=='1'}}">{{cont.questionSetName}}</text>
           <text class='c_title' wx:else>{{cont.questionTitle}}</text>
+          <!-- <view class='vw-user'>
+            <text class='nickname'>考试人：{{cont.nickname}}</text>
+          </view> -->
           <view class='score'>
-            <text class='total'>错误分数：{{cont.errorScore}}分</text>
-            <text class='activity'>本次成绩：{{cont.correctScore}}分</text>
+            <text class='total'>本次成绩：{{cont.correctScore}}分</text>
+            <text class='activity'>正确题数量：{{cont.correctNums}}题</text>
           </view>
           <view class='qurstion'>
-            <text class='total'>错误题数：{{cont.errorNums}}题</text>
-            <text class='correct'>正确题数量：{{cont.correctNums}}题</text>
+            <text class='total'>考试人：{{cont.nickname}}</text>
+            <!-- <text class='correct'></text> -->
           </view>
         </view>
       </view>

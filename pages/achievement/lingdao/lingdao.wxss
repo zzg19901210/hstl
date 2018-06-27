@@ -11,7 +11,7 @@ page {
 
 .list_context {
   border-top: 1px solid #dfe6e9;
-  height: 160rpx;
+  /* height: 160rpx; */
   width: 93%;
   margin-left: 25rpx;
   padding-left: 15rpx;
@@ -30,7 +30,16 @@ page {
   text-overflow:ellipsis;
   word-break: break-all;
 }
-
+.list_context .user-vw {
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  line-height: 56rpx;
+  height: 56rpx;
+}
+.list_context .user-vw .nickname {
+  float: left;
+  width: 48%;
+}
 .list_context .score {
   padding-left: 10rpx;
   font-size: 25rpx;
