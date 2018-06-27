@@ -48,6 +48,9 @@ Page({
         var that = app;
         console.log(that_this.data.isFirst);
         if (!that_this.data.isFirst){
+          wx.showLoading({
+            title: '正在登录...',
+          })
           wx.request({
             url: app.globalData.serverUrl + '/app/wechartSns/login.json',
             header: {
@@ -106,6 +109,8 @@ Page({
               // wx.redirectTo({
               //   url: '../../pages/user/index',
               // });
+            },complete:function(e){
+              wx.hideLoading();
             }
           });
         }
