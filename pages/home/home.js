@@ -128,5 +128,11 @@ Page({
       }
     }.bind(this), 1000);
 
+  },onShareAppMessage: function (e) {
+    return {
+      title: this.data.title,
+      desc: '',
+      path: '/pages/welcome/welcome'
+    }
   }
 })

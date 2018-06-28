@@ -27,6 +27,13 @@ Page({
      */
     loadArch(this);
     
+  },onShareAppMessage:function(e){
+    return {
+      title: this.data.title,
+      desc: '',
+      path: '/pages/zj/arc_context/index?aId='+this.data.aId
+    }
+
   }
 })
 //加载文章详情页面

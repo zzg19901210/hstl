@@ -21,7 +21,15 @@ Page({
         // success
       }
     });
+    
     loadUserInfo(this,options.userId);
+  },onShareAppMessage:function(e){
+    return {
+      title: '专家详细信息',
+      desc: '',
+      path: '/pages/specialist/details/sp_details?userId=' + this.data.myUserInfo.id
+    }
+
   }
 });
 

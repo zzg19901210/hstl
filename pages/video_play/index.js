@@ -46,8 +46,12 @@ Page({
       vod_type: options.vod_type,
       type: options.ywType
     })
-    setVod(this);
+   
     load(this);
+    if (app.globalData.myGlobalUserId!=null){
+      setVod(this);
+    }
+   
     wx.setNavigationBarTitle({
       title: options.title,
       success: function (res) {
@@ -58,7 +62,15 @@ Page({
      this.setData({
        headPortrait:'/images/head.jpg'
      }) 
+  }, onShareAppMessage: function (e) {
+    var path = "/pages/video_play/index?ywType=" + this.data.ywType + "&vod_type=" + this.data.ywType + "&title=" + this.data.title + "&video_url=" + this.data.video_url + "&nickname=" + this.data.nickname + "&vodId=" + this.data.vodId + "&headPortrait=" + this.data.headPortrait ;
+    return {
+      title: this.data.title,
+      desc: '',
+      path: path
+    }
   }
+
 })
 //设置点播记录
 var setVod = function (that) {
