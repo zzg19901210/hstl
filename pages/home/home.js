@@ -104,6 +104,11 @@ Page({
               url: '/pages/achievement/lingdao/lingdao?cjlx=1&setType=1',
               icon: '/images/home_icon/zx.png'
             });
+            routers.push({
+              name: '我的上传',
+              url: '/pages/myupload/myupload',
+              icon: '/images/home_icon/zx.png'
+            });
           } else if ("6" == app.globalData.myUserInfo.roleId) {
             if ("1" == app.globalData.myUserInfo.userType) {
               routers.push({

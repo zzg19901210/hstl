@@ -1,0 +1,35 @@
+<!-- <view class="header" hidden="{{hideHeader}}">
+  <view>下拉刷新中……</view>
+  <view>{{refreshTime}}</view>
+</view> -->
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll">
+  <block wx:for="{{list}}" wx:for-item="arch" wx:key="*this">
+    <navigator url="/pages/video_play/index?ywType={{xxtype}}&vod_type={{ywType}}&title={{arch.title}}&video_url={{arch.palyUrl}}&nickname={{arch.nickname}}&vodId={{arch.id}}&headPortrait={{arch.headPortrait}}">
+      <!-- <view class='item' bindtap='btnItem' bindtap='btnItem' data-arch='{{arch}}'> -->
+      <view class='item'>
+        <view class="item-video" style='background-image:url({{arch.aliImageUrl}})'>
+          <view class='bg' style='background-image:url(../../images/bg.png)'>
+            <text class='title'>{{arch.title}}</text>
+            <view class='play'>
+              <image src="../../images/play.png"></image>
+            </view>
+          </view>
+        </view>
+        <view class='fotter'>
+          <image src='{{arch.headPortrait}}'></image>
+          <text class='nickname'>{{arch.nickname}}</text>
+          <text class='click'>{{arch.click}}次播放</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
+</scroll-view>
+<view class="body-view">
+  <loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>
+</view>
+<!-- <view class="bottom" hidden="{{hideBottom}}">
+  <view>{{loadMoreData}}</view>
+  <view>{{refreshTime}}</view>
+</view> -->

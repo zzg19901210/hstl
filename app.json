@@ -47,7 +47,8 @@
     "pages/dz/dz",
     "pages/index/index",
     "pages/user/opendata/opendata",
-    "pages/achievement/lingdao/lingdao"
+    "pages/achievement/lingdao/lingdao",
+    "pages/myupload/myupload"
   ],
   "window": {
     "backgroundTextStyle": "light",
