@@ -80,9 +80,9 @@ Page({
               } else {
                 app.globalData.myGlobalUserId = data.data.data.obj.id;
                 app.globalData.myUserInfo = data.data.data.obj;
-                // that_this.setData({
-                //   isFirst: true
-                // });
+                that_this.setData({
+                  isFirst: true
+                });
                 wx.switchTab({
                   url: '/pages/home/home',
                   success: function (e) {

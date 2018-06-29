@@ -60,6 +60,10 @@ Page({
         name: '专家信息',
         url: '/pages/specialist/specialist',
         icon: '/images/home_icon/zjjd.png'
+      },{
+        name: '我的上传',
+        url: '/pages/myupload/myupload',
+        icon: '/images/home_icon/myupload-icon.png'
       }
     ]
 
@@ -77,7 +81,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 10) {
+        if (routers.length < 11) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
@@ -102,13 +106,9 @@ Page({
             routers.push({
               name: '全部成绩',
               url: '/pages/achievement/lingdao/lingdao?cjlx=1&setType=1',
-              icon: '/images/home_icon/zx.png'
+              icon: '/images/home_icon/qbcj-icon.png'
             });
-            routers.push({
-              name: '我的上传',
-              url: '/pages/myupload/myupload',
-              icon: '/images/home_icon/zx.png'
-            });
+            
           } else if ("6" == app.globalData.myUserInfo.roleId) {
             if ("1" == app.globalData.myUserInfo.userType) {
               routers.push({
