@@ -23,8 +23,11 @@
           <!-- <view class='item'> -->
           <view class='item' bindtap='downloadFile' data-id="{{arch.id}}" data-title="{{arch.title}}" data-type="{{arch.arcType}}" data-enclosure="{{arch.enclosureUrl}}">
             <view class="item-ans">
-              <view class="avatar">
-                <image class="img" src="{{arch.picAliUrl}}" binderror='errorFunction'></image>
+              <view class="avatar" wx:if="{{arch.layout!=0}}">
+                <image class="img" src="{{arch.pic_ali[0]}}" binderror='errorFunction'></image>
+              </view>
+              <view class="avatar" wx:else>
+                <image class="img" src="http://nmtc.oss-cn-beijing.aliyuncs.com/images/s7jJHNHYGzm3Q83XisPfa8AkxPnH7Det.jpg" binderror='errorFunction'></image>
               </view>
               <view class="expertInfo">
                 <view class="name">{{arch.title}}</view>
