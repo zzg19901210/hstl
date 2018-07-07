@@ -85,17 +85,16 @@ App({
   globalData: {
     userInfo: null,
     // serverUrl:"https://www.beijiangci.cn/hstl",
-    serverUrl: "https://hhhtcz.isport.nm.cn",
-    // serverUrl: "http://127.0.0.1:8080",
+    // serverUrl: "https://hhhtcz.isport.nm.cn",
+    serverUrl: "http://127.0.0.1:8080",
     myGlobalUserId: null,
     myUserInfo: null,
-    wechar_user: { openid: '未获取上openid', session_key: '323232', unionid: '1232132' },
-    systemInfo: wx.getSystemInfoSync()
+    wechar_user: { 
+      openid: '未获取上openid', 
+      session_key: '323232', 
+      unionid: '1232132'
+     },   
+     systemInfo: wx.getSystemInfoSync()
   }
-
 })
-
-
-
-
 

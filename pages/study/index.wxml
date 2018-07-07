@@ -21,11 +21,14 @@
     <button class="btn-ranking" bindtap="ranking">
       排行榜
     </button>
-  
+
   </view>
 </view>
 <view class='body-context' hidden='{{!hidStart}}'>
-  <view class="weui-cells__title">{{index+1}}、{{indexQuest.questions}}</view>
+  <view class="weui-cells__title">{{index+1}}、{{indexQuest.questions}}
+    <text wx:if="{{indexQuest.question_lx==1}}">（单选题）</text>
+    <text wx:elif="{{indexQuest.question_lx==2}}">（多选题）</text>
+  </view>
   <view class="weui-cells weui-cells_after-title">
 
     <!-- <radio-group bindchange="radioChange">
@@ -37,9 +40,9 @@
         </view>
       </label>
     </radio-group> -->
-    <radio-group>
+    <radio-group wx:if="{{indexQuest.question_lx==1}}">
       <block wx:for="{{radioItems}}" wx:for-item="item" wx:key="*this">
-        <label class="weui-cell weui-check__label"  bindtap='next' id="{{item.value}}" data-checked="{{item.value}}">
+        <label class="weui-cell weui-check__label" bindtap='next' id="{{item.value}}" data-checked="{{item.value}}">
           <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
           <view class="weui-cell__bd">{{item.name}}</view>
           <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
@@ -48,9 +51,21 @@
         </label>
       </block>
     </radio-group>
+    <checkbox-group bindchange="checkboxChange" wx:elif="{{indexQuest.question_lx==2}}">
+      <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+        <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+        <view class="weui-cell__bd">{{item.name}}</view>
+      </label>
+    </checkbox-group>
   </view>
 </view>
 <button class='btn-default' bindtap="previous" hidden='{{!hidStart}}' wx:if="{{index>0}}">上一题</button>
+<button class='button' bindtap="next" wx:if="{{indexQuest.question_lx==2}}">下一题</button>
 
 <!-- <button class='button' bindtap="next" hidden='{{!hidStart}}' wx:if="{{index+1<list.length}}">下一题</button> -->
 <button class='button' bindtap="submitKs" hidden='{{!hidStart}}' wx:if="{{index+2>list.length}}">完成考试</button>
@@ -58,7 +73,7 @@
   <view class='title'>考试成绩排行榜</view>
   <view class='body'>
     <view class='group'>
-      <view class='btn {{rankingType==1?"activity":""}}'bindtap='clickzph'>总排行</view>
+      <view class='btn {{rankingType==1?"activity":""}}' bindtap='clickzph'>总排行</view>
       <view class='btn {{rankingType==2?"activity":""}}' bindtap='clicktkph'>题库排行</view>
     </view>
     <scroll-view scroll-y style="height: 590rpx;">

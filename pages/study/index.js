@@ -5,6 +5,7 @@ var total_micro_second = 20 * 60 * 1000;
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
 const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionsByNumAndTypeAndDepartmentId.json";
+// const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestionLx.json";
 //做题日志
 const submitQuestionLogsUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/submitQuestionLogs.json";
 // 成绩提交
@@ -37,6 +38,7 @@ Page({
       // { name: 'C:120', value: '2' },
       // { name: 'D:120', value: '3' },
     ],
+    hidenNext:true,
     listRanking: [],
     MyRanking: {
       itemrownum: '暂无',
@@ -79,8 +81,10 @@ Page({
   },
   next(e) {
     var cur_index = this.data.index;
-    // console.log(e.currentTarget.dataset.checked);
+    console.log(e.currentTarget.dataset.checked);
     var checkValue = e.currentTarget.dataset.checked;
+   
+    //判断是否是最后一道题，如果是最好一道题跳出
     if (cur_index + 1 >= this.data.list.length) {
       var radioItems = this.data.radioItems;
       for (var i = 0, len = radioItems.length; i < len; ++i) {
@@ -95,7 +99,7 @@ Page({
     wx.showLoading({
       title: '正在切换下一题',
     });
-
+    //判断是否拍照
     var tak = parseInt(this.data.list.length / 2);
     if (tak == cur_index) {
       takePhoto(this);
@@ -105,24 +109,39 @@ Page({
     var hideSubimt = true;
     //判断题目是否正确
     var isRight = 1;
-    if (this.data.indexQuest.answer == checkValue) {
-      cur_answerNums++;
-      console.log('回答正确！');
-      var isRight = 1;
-      // wx.showToast({
-      //   title: '回答正确',
-      //   icon: 'success',
-      //   duration: 2000
-      // })
-    } else {
-      var isRight = 2;
-      console.log("回答错误！")
-      // wx.showToast({
-      //   title: '回答错误：正确答案是' + this.data.indexQuest.answer,
-      //   icon: 'none',
-      //   duration: 2000
-      // })
+    if (this.data.indexQuest.question_lx=="2"){
+      checkValue = this.data.checkedValue;
+      if (this.data.indexQuest.answer == checkValue) {
+        cur_answerNums++;
+        console.log('回答正确！');
+        var isRight = 1;
+       
+      } else {
+        var isRight = 2;
+        console.log("回答错误！")
+       
+      }
+    }else{
+      if (this.data.indexQuest.answer == checkValue) {
+        cur_answerNums++;
+        console.log('回答正确！');
+        var isRight = 1;
+        // wx.showToast({
+        //   title: '回答正确',
+        //   icon: 'success',
+        //   duration: 2000
+        // })
+      } else {
+        var isRight = 2;
+        console.log("回答错误！")
+        // wx.showToast({
+        //   title: '回答错误：正确答案是' + this.data.indexQuest.answer,
+        //   icon: 'none',
+        //   duration: 2000
+        // })
+      }
     }
+    
     var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
       'correctAnswer': checkValue ,
@@ -155,7 +174,7 @@ Page({
       checkedValue: checkedValue
     });
     //重新组织题目
-    getChoice(this, checkedValue);
+    getChoice(this, checkedValue, this.data.indexQuest.question_lx);
     wx.hideLoading();
 
   },
@@ -188,7 +207,7 @@ Page({
       checkedValue: checkedValue
     });
     //重新组织题目
-    getChoice(this, checkedValue);
+    getChoice(this, checkedValue, this.data.indexQuest.question_lx);
 
   },
   submitKs: function (e) {
@@ -242,6 +261,34 @@ Page({
     this.setData({
       radioItems: radioItems,
       checkedValue: e.detail.value
+    });
+  },
+  checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+    var radioItems = this.data.radioItems, values = e.detail.value;
+    for (var i = 0, lenI = radioItems.length; i < lenI; ++i) {
+      radioItems[i].checked = false;
+
+      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (radioItems[i].value == values[j]) {
+          radioItems[i].checked = true;
+          break;
+        }
+      }
+    }
+    var checked="";
+    for (var f = 0; f < radioItems.length;f++){
+      if (radioItems[f].checked==true){
+        if(f==0){
+          checked = radioItems[f].value;
+        }else{
+          checked = checked+","+radioItems[f].value;
+        }
+      }
+    }
+    this.setData({
+      radioItems: radioItems,
+      checkedValue: checked
     });
   },clicktkph:function(e){
     findUserRankingList(this, findUserRankingListByCatId);
@@ -414,13 +461,18 @@ var getQuestion = function (that,setType) {
       isHide: 0
     },
     success: function (res) {
+      wx.showLoading({
+        title: '正在解析题目...',
+      });
       //console.info(that.data.list);
       if (res.data.status == "0") {
+        wx.hideLoading();
         wx.showModal({
           title: '提示',
           content: res.data.msg,
           showCancel: false
         })
+        
       } else {
         that.setData({
           list: res.data.list,
@@ -431,8 +483,9 @@ var getQuestion = function (that,setType) {
           hidStart: true,
           checkedValue: 'A'
         });
-        getChoice(that,'A');
+        getChoice(that, 'A', res.data.list[0].quesion_lx);
         count_down(that);
+        wx.hideLoading();
       }
 
     }, fail: function (e) {
@@ -555,8 +608,8 @@ var submitQuestionLogs = function (that, obj) {
 }
 
 // 获取答案列表
-var getChoice = function (that, checked) {
-
+var getChoice = function (that, checked,lx) {
+  console.log(lx);
   var tmp1 = {
     name:'A:'+that.data.indexQuest.choice_a,
     value: 'A'
@@ -582,17 +635,37 @@ var getChoice = function (that, checked) {
     }
     tmpRideo.push(tmp4);
   }
-  if ("A" == checked) {
-    tmp1.checked = true
-  } else if ("B" == checked) {
-    tmp2.checked = true
-  } else if ("C" == checked) {
-    tmp3.checked = true
-  } else if ("D" == checked) {
-    tmp4.checked = true
-  } else {
-    tmp1.checked = true
+  if("2"==lx){
+    var checks = checked.split(",");
+    for(var i=0;i<checks.length;i++){
+      console.log(checks[i]);
+      if ("A" == checks[i]) {
+        tmp1.checked = true
+      } else if ("B" == checks[i]) {
+        tmp2.checked = true
+      } else if ("C" == checks[i]) {
+        tmp3.checked = true
+      } else if ("D" == checks[i]) {
+        tmp4.checked = true
+      } else {
+        tmp1.checked = true
+      }
+    }
+    
+  }else{
+    if ("A" == checked) {
+      tmp1.checked = true
+    } else if ("B" == checked) {
+      tmp2.checked = true
+    } else if ("C" == checked) {
+      tmp3.checked = true
+    } else if ("D" == checked) {
+      tmp4.checked = true
+    } else {
+      tmp1.checked = true
+    }
   }
+  
   that.setData({
     radioItems: tmpRideo
   })
