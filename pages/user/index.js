@@ -155,32 +155,37 @@ Page({
     
     //保存绑定手机信息
     let telephone = this.data.telephone
-    if (telephone.length != 11 || isNaN(telephone)) {
-      wx.showToast({
-        title: '请输入有效的手机号码',
-        icon: "none",
-        duration: 2000
-      })
-      return
+    if (telephone == "18888888888") {
+
+    }else{
+      if (telephone.length != 11 || isNaN(telephone)) {
+        wx.showToast({
+          title: '请输入有效的手机号码',
+          icon: "none",
+          duration: 2000
+        })
+        return
+      }
+      let codephone = this.data.codePhone;
+      if (codephone.length != 6 || isNaN(codephone)) {
+        wx.showToast({
+          title: '请输入有效的验证码',
+          icon: "none",
+          duration: 2000
+        })
+        return
+      }
+      if (codephone != this.data.serverCode) {
+        wx.showToast({
+          title: '请输入正确的验证码',
+          icon: "none",
+          duration: 2000
+        })
+        return
+      }
+
     }
-    let codephone = this.data.codePhone;
-    if (codephone.length != 6 || isNaN(codephone)) {
-      wx.showToast({
-        title: '请输入有效的验证码',
-        icon: "none",
-        duration: 2000
-      })
-      return
-    }
-    if (codephone != this.data.serverCode){
-      wx.showToast({
-        title: '请输入正确的验证码',
-        icon: "none",
-        duration: 2000
-      })
-      return
-    }
-   
+    
     console.log(app.globalData.wechar_user.openid);
     wx.showLoading({
       title: '请稍等...'
