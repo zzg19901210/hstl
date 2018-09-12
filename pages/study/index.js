@@ -279,7 +279,7 @@ Page({
     var checked="";
     for (var f = 0; f < radioItems.length;f++){
       if (radioItems[f].checked==true){
-        if(f==0){
+        if(""==checked){
           checked = radioItems[f].value;
         }else{
           checked = checked+","+radioItems[f].value;
@@ -623,7 +623,7 @@ var getChoice = function (that, checked,lx) {
   tmpRideo.push(tmp2);
   if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
     var tmp3 = {
-      name: 'D:' +that.data.indexQuest.choice_c,
+      name: 'C:' +that.data.indexQuest.choice_c,
       value: 'C'
     }
     tmpRideo.push(tmp3);
