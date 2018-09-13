@@ -46,11 +46,11 @@ Page({
         url: '/pages/achievement/index?cjlx=2',
         icon: '/images/home_icon/sgcjcx.png'
       },
-      {
-        name: '我要直播',
-        url: '/pages/live_list/index',
-        icon: '/images/home_icon/zb.png'
-      },
+      // {
+      //   name: '我要直播',
+      //   url: '/pages/live_list/index',
+      //   icon: '/images/home_icon/zb.png'
+      // },
       {
         name: '答疑解惑',
         url: '/pages/disabuse/disabuse',
@@ -81,7 +81,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 11) {
+        if (routers.length < 10) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
