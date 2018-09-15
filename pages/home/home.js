@@ -16,11 +16,11 @@ Page({
       //   url: '../doubleroom/roomlist/roomlist',
       //   icon: '/images/home_icon/doubleroom.png'
       // },
-      {
-        name: '政治理论视频学习',
-        url: '/pages/video_list/index?ywType=2&type=2',
-        icon: '/images/home_icon/dz.png'
-      },
+      // {
+      //   name: '政治理论视频学习',
+      //   url: '/pages/video_list/index?ywType=2&type=2',
+      //   icon: '/images/home_icon/dz.png'
+      // },
       {
         name: '职教资料学习',
         url: '/pages/video_list/index?ywType=1&type=2',
@@ -81,18 +81,18 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 10) {
+        if (routers.length < 9) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
               url: '/pages/video_list/index?ywType=1&type=1',
               icon: '/images/home_icon/lz.png'
             });
-            routers.push({
-              name: '政治理论视频审录',
-              url: '/pages/video_list/index?ywType=2&type=1',
-              icon: '/images/home_icon/dzlz.png'
-            });
+            // routers.push({
+            //   name: '政治理论视频审录',
+            //   url: '/pages/video_list/index?ywType=2&type=1',
+            //   icon: '/images/home_icon/dzlz.png'
+            // });
             routers.push({
               name: '视频录制',
               url: '/pages/splz/index',

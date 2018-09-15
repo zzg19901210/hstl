@@ -68,12 +68,7 @@
         "pagePath": "pages/home/home",
         "text": "首页"
       },
-      {
-        "selectedIconPath": "images/nav_dz_pri.png",
-        "iconPath": "images/nav_dz.png",
-        "pagePath": "pages/dz/dz",
-        "text": "党政"
-      },
+      
       {
         "selectedIconPath": "images/nav_zj_pri.png",
         "iconPath": "images/nav_zj.png",
