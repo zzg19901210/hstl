@@ -13,7 +13,7 @@
           <view class='context'>
             <text class='title'>{{obj.title}}</text>
             <view class='body'>
-              <text>总题数量:{{obj.num}}</text>
+              <!-- <text>总题数量:{{obj.num}}</text> -->
               <text>题库时间:{{obj.createTime}}</text>
             </view>
 
