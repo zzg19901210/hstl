@@ -1,6 +1,6 @@
 
 const app = getApp()
-var total_micro_second = 20 * 60 * 1000;
+var total_micro_second = 30 * 60 * 1000;
 var sum_total_micro_second =30 * 60 * 1000;
 // 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
@@ -17,12 +17,13 @@ const achievementCountUrl = app.globalData.serverUrl + "/app/service/appServiceI
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
 const findUserRankingListByCatId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByCatId.json";
+var firstJump=false;
 Page({
   data: {
     clock: date_format(total_micro_second),
     hidStart: false,
     hidRanking: true,
-    rankingType:1,
+    rankingType:2,
     list: [],
     index: 0,
     indexQuest: {},
@@ -215,6 +216,10 @@ Page({
 
   },
   submitKs: function (e) {
+    if (firstJump){
+      return;
+    }
+    firstJump=true;
     wx.showLoading({
       title: '正在保存...',
     })
@@ -319,7 +324,10 @@ Page({
     this.setData({
       hidRanking: false
     });
-    findUserRankingList(this, findUserRankingListUrl);
+    findUserRankingList(this, findUserRankingListByCatId);
+    this.setData({
+      rankingType: 2
+    });
   },
   hidRanking: function (e) {
     this.setData({
@@ -389,6 +397,7 @@ var upload = function (that, index) {
             content: '上传失败',
             showCancel: false
           })
+          firstJump = false;
           return;
         }
         var data = JSON.parse(res.data);
@@ -427,7 +436,8 @@ var upload = function (that, index) {
           title: '提示',
           content: '上传失败',
           showCancel: false
-        })
+        });
+        firstJump = false;
         wx.hideLoading();
       },
       complete: function () {
