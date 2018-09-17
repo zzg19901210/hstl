@@ -740,7 +740,11 @@ function count_down(that) {
       clock: "已经截止"
     });
     //时间完成提交答案
-    submitQuestionLogs(that);
+    if(firstJump){
+      return;
+    }
+    firstJump=true;
+    submitQuestion(that);
     // timeout则跳出递归
     return;
   }

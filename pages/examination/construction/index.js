@@ -18,6 +18,7 @@ const submitAchievement = app.globalData.serverUrl + "/app/service/appWorkInterf
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appWorkInterface/findUserRankingList.json";
 
+var firstJump=false;
 
 Page({
 
@@ -256,6 +257,11 @@ Page({
 
   },
   submitKs: function (e) {
+    if (firstJump) {
+      return;
+    }
+    firstJump = true;
+
     takePhoto(this);
     wx.showLoading({
       title: '正在保存...',
@@ -423,7 +429,7 @@ var submitQuestion = function (that) {
   wx.showLoading({
     title: '正在提交成绩...'
   });
-
+ 
   var picServerUrl = that.data.src;
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
@@ -595,7 +601,11 @@ function count_down(that) {
       clock: "已经截止"
     });
     //时间完成提交答案
-    submitQuestionLogs(that);
+    if (firstJump){
+      return;
+    }
+    firstJump=true;
+    submitQuestion(that);
     // timeout则跳出递归
     return;
   }
@@ -715,6 +725,7 @@ var upload = function (that, index) {
             content: '上传失败',
             showCancel: false
           })
+          firstJump = false;
           return;
         }
         var data = JSON.parse(res.data);
@@ -753,7 +764,8 @@ var upload = function (that, index) {
           title: '提示',
           content: '上传失败',
           showCancel: false
-        })
+        });
+        firstJump = false;
         wx.hideLoading();
       },
       complete: function () {
