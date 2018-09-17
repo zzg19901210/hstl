@@ -10,6 +10,9 @@ const question_url = app.globalData.serverUrl + "/studyQuestionAction/getQuestio
 const submitQuestionLogsUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/submitQuestionLogs.json";
 // 成绩提交
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
+//获取考试答题次数
+const achievementCount = app.globalData.serverUrl + "/app/service/appServiceInterface/achievementCount.json";
+
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
 const findUserRankingListByCatId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByCatId.json";
