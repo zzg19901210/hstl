@@ -1,6 +1,7 @@
 
 const app = getApp()
 var total_micro_second = 20 * 60 * 1000;
+var sum_total_micro_second =30 * 60 * 1000;
 // 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
@@ -11,7 +12,7 @@ const submitQuestionLogsUrl = app.globalData.serverUrl + "/app/service/appServic
 // 成绩提交
 const submitAchievement = app.globalData.serverUrl + "/app/service/appServiceInterface/submitAchievement.json";
 //获取考试答题次数
-const achievementCount = app.globalData.serverUrl + "/app/service/appServiceInterface/achievementCount.json";
+const achievementCountUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/achievementCount.json";
 
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
@@ -72,8 +73,8 @@ Page({
 
   },
   startKs() {
-    getQuestion(this,1);
-    takePhoto(this);
+
+    getAachievementCount(this);
 
   },startLx() {
     getQuestion(this,2);
@@ -443,6 +444,46 @@ var upload = function (that, index) {
   }
 }
 
+
+var getAachievementCount=function (that){
+  wx.showLoading({
+    title: '正在出题...'
+  })
+  wx.request({
+    url: achievementCountUrl,
+    header: {
+      'context-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    data: {
+      catId: that.data.catId,
+      userId: app.globalData.myGlobalUserId
+    },
+    success: function (res) {
+      if (res.data.data.map.state=="1"){
+        getQuestion(that, 1);
+        takePhoto(that);
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '您已经2次考试机会已经用完！',
+          showCancel: false
+        });
+      }
+    }, fail: function (e) {
+      console.log(e);
+      wx.showModal({
+        title: '提示',
+        content: '获取答题次数失败',
+        showCancel: false
+      })
+    },
+    complete: function () {
+      wx.hideLoading();
+    }
+  });
+}
+
 //获取题目信息
 var getQuestion = function (that,setType) {
   wx.showLoading({
@@ -487,6 +528,9 @@ var getQuestion = function (that,setType) {
           checkedValue: 'A'
         });
         getChoice(that, 'A', res.data.list[0].quesion_lx);
+
+        total_micro_second = res.data.data.obj.timer*60*1000;
+        sum_total_micro_second = res.data.data.obj.timer * 60 * 1000;
         count_down(that);
         wx.hideLoading();
       }
@@ -521,7 +565,7 @@ var submitQuestion = function (that) {
   var correctScore = avgScore * that.data.answerNums;
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums / totalNums
-  var costTime = 20 * 60 * 1000 - total_micro_second;
+  var costTime = sum_total_micro_second - total_micro_second;
  
   costTime = parseInt(costTime / 1000);
   console.log(picServerUrl);
@@ -569,7 +613,7 @@ var submitQuestionLogs = function (that, obj) {
   wx.showLoading({
     title: '请稍等...'
   });
-  var costTime = 20 * 60 * 1000 - total_micro_second;
+  var costTime = sum_total_micro_second - total_micro_second;
   costTime = parseInt(costTime / 1000);
   var postData = that.data.answerList;
   var sumbitData = [];
