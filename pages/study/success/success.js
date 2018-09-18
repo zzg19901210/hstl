@@ -15,9 +15,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var avgScore = 100 / options.totalNums;
+    var avgScore = parseInt(100 / options.totalNums);
     var correctScore = avgScore * options.answerNums;
-
     this.setData({
       answerNums: options.answerNums,
       totalNums: options.totalNums,

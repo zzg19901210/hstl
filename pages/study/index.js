@@ -54,6 +54,7 @@ Page({
   },
   onLoad(options) {
     console.log(app.globalData.myUserInfo);
+    firstJump=false;
     this.setData({
       myUserInfo: app.globalData.myUserInfo,
       catId: options.catId,
@@ -587,9 +588,12 @@ var submitQuestion = function(that) {
   var setType = that.data.setType;
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
-  var avgScore = 100 / totalNums;
+  var avgScore = parseInt(100 / totalNums);
   var correctScore = avgScore * that.data.answerNums;
-  var errorScore = avgScore * errorNums;
+  if (correctScore>100){
+    correctScore=100;
+  }
+  var errorScore = 100 - correctScore;
   var percentScore = that.data.answerNums / totalNums
   var costTime = sum_total_micro_second - total_micro_second;
 
