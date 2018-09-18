@@ -1,7 +1,6 @@
-
 const app = getApp()
 var total_micro_second = 30 * 60 * 1000;
-var sum_total_micro_second =30 * 60 * 1000;
+var sum_total_micro_second = 30 * 60 * 1000;
 // 获取上传文件路径
 const upload_url = app.globalData.serverUrl + "/common/upload/up.json";
 //获取问题列表
@@ -17,13 +16,14 @@ const achievementCountUrl = app.globalData.serverUrl + "/app/service/appServiceI
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
 const findUserRankingListByCatId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByCatId.json";
-var firstJump=false;
+var firstJump = false;
+var timerOut;
 Page({
   data: {
     clock: date_format(total_micro_second),
     hidStart: false,
     hidRanking: true,
-    rankingType:2,
+    rankingType: 2,
     list: [],
     index: 0,
     indexQuest: {},
@@ -36,14 +36,14 @@ Page({
     src: '',
     srcCount: 0,
     catId: 0,
-    setType:'1',
+    setType: '1',
     radioItems: [
       // { name: 'A:110', value: '0' },
       // { name: 'B:110', value: '1', checked: true },
       // { name: 'C:120', value: '2' },
       // { name: 'D:120', value: '3' },
     ],
-    hidenNext:true,
+    hidenNext: true,
     listRanking: [],
     MyRanking: {
       itemrownum: '暂无',
@@ -66,7 +66,7 @@ Page({
     });
     wx.setNavigationBarTitle({
       title: options.title,
-      success: function (res) {
+      success: function(res) {
         // success
       }
     });
@@ -77,8 +77,9 @@ Page({
 
     getAachievementCount(this);
 
-  },startLx() {
-    getQuestion(this,2);
+  },
+  startLx() {
+    getQuestion(this, 2);
     takePhoto(this);
   },
   error(e) {
@@ -88,7 +89,7 @@ Page({
     var cur_index = this.data.index;
     console.log(e.currentTarget.dataset.checked);
     var checkValue = e.currentTarget.dataset.checked;
-   
+
     //判断是否是最后一道题，如果是最好一道题跳出
     if (cur_index + 1 >= this.data.list.length) {
       var radioItems = this.data.radioItems;
@@ -110,23 +111,23 @@ Page({
       takePhoto(this);
     }
     var cur_answerNums = this.data.answerNums;
-   
+
     var hideSubimt = true;
     //判断题目是否正确
     var isRight = 1;
-    if (this.data.indexQuest.question_lx=="2"){
+    if (this.data.indexQuest.question_lx == "2") {
       checkValue = this.data.checkedValue;
       if (this.data.indexQuest.answer == checkValue) {
         cur_answerNums++;
         console.log('回答正确！');
         var isRight = 1;
-       
+
       } else {
         var isRight = 2;
         console.log("回答错误！")
-       
+
       }
-    }else{
+    } else {
       if (this.data.indexQuest.answer == checkValue) {
         cur_answerNums++;
         console.log('回答正确！');
@@ -146,10 +147,10 @@ Page({
         // })
       }
     }
-    
+
     var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
-      'correctAnswer': checkValue ,
+      'correctAnswer': checkValue,
       'answer': this.data.indexQuest.answer,
       'questionContext': this.data.indexQuest.questions,
       'isRight': isRight,
@@ -183,7 +184,7 @@ Page({
     wx.hideLoading();
 
   },
-  previous: function (e) {
+  previous: function(e) {
 
     var cur_index = this.data.index;
     if (cur_index == 0) {
@@ -215,11 +216,11 @@ Page({
     getChoice(this, checkedValue, this.data.indexQuest.question_lx);
 
   },
-  submitKs: function (e) {
-    if (firstJump){
+  submitKs: function(e) {
+    if (firstJump) {
       return;
     }
-    firstJump=true;
+    firstJump = true;
     wx.showLoading({
       title: '正在保存...',
     })
@@ -258,9 +259,9 @@ Page({
     // console.log(answerList);
     console.log("完成考试！");
 
-    upload(this,0);
+    upload(this, 0);
   },
-  radioChange: function (e) {
+  radioChange: function(e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
 
     var radioItems = this.data.radioItems;
@@ -272,9 +273,10 @@ Page({
       checkedValue: e.detail.value
     });
   },
-  checkboxChange: function (e) {
+  checkboxChange: function(e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-    var radioItems = this.data.radioItems, values = e.detail.value;
+    var radioItems = this.data.radioItems,
+      values = e.detail.value;
     for (var i = 0, lenI = radioItems.length; i < lenI; ++i) {
       radioItems[i].checked = false;
 
@@ -285,13 +287,13 @@ Page({
         }
       }
     }
-    var checked="";
-    for (var f = 0; f < radioItems.length;f++){
-      if (radioItems[f].checked==true){
-        if(""==checked){
+    var checked = "";
+    for (var f = 0; f < radioItems.length; f++) {
+      if (radioItems[f].checked == true) {
+        if ("" == checked) {
           checked = radioItems[f].value;
-        }else{
-          checked = checked+","+radioItems[f].value;
+        } else {
+          checked = checked + "," + radioItems[f].value;
         }
       }
     }
@@ -299,20 +301,22 @@ Page({
       radioItems: radioItems,
       checkedValue: checked
     });
-  },clicktkph:function(e){
+  },
+  clicktkph: function(e) {
     findUserRankingList(this, findUserRankingListByCatId);
     console.log("点击了题库排行");
     this.setData({
       rankingType: 2
     });
-  },clickzph: function (e) {
+  },
+  clickzph: function(e) {
     console.log("点击了总题库排行");
     findUserRankingList(this, findUserRankingListUrl);
     this.setData({
-      rankingType:1
+      rankingType: 1
     });
   },
-  ranking: function (e) {
+  ranking: function(e) {
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#000000',
@@ -329,7 +333,7 @@ Page({
       rankingType: 2
     });
   },
-  hidRanking: function (e) {
+  hidRanking: function(e) {
     this.setData({
       hidRanking: true
     });
@@ -342,15 +346,22 @@ Page({
       }
     })
   },
-  showHome: function (e) {
+  showHome: function(e) {
     wx.switchTab({
       url: '/pages/home/home'
     })
+  },
+  onHide: function(e) {
+    console.log("隐藏页面");
+  },
+  onUnload: function(e) {
+    console.log("注销");
+    clearTimeout(timerOut);
   }
 })
 
 
-var takePhoto = function (that) {
+var takePhoto = function(that) {
   that.ctx.takePhoto({
     quality: 'high',
     success: (res) => {
@@ -365,7 +376,7 @@ var takePhoto = function (that) {
   })
 }
 
-var upload = function (that, index) {
+var upload = function(that, index) {
 
   var picUrl = that.data.files;
   if (picUrl.length > 0 && that.data.srcCount < picUrl.length) {
@@ -384,12 +395,15 @@ var upload = function (that, index) {
       url: upload_url,
       filePath: path,
       name: 'file',
-      header: { "Content-Type": "multipart/form-data", 'Accept': 'application/json' },
+      header: {
+        "Content-Type": "multipart/form-data",
+        'Accept': 'application/json'
+      },
       formData: {
         //和服务器约定的token, 一般也可以放在header中
         'session_token': wx.getStorageSync('session_token')
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         if (res.statusCode != 200) {
           wx.showModal({
@@ -430,7 +444,7 @@ var upload = function (that, index) {
         }
         // saveTouxiang();
       },
-      fail: function (e) {
+      fail: function(e) {
         console.log(e);
         wx.showModal({
           title: '提示',
@@ -440,7 +454,7 @@ var upload = function (that, index) {
         firstJump = false;
         wx.hideLoading();
       },
-      complete: function () {
+      complete: function() {
 
       }
     });
@@ -455,7 +469,7 @@ var upload = function (that, index) {
 }
 
 
-var getAachievementCount=function (that){
+var getAachievementCount = function(that) {
   wx.showLoading({
     title: '正在出题...'
   })
@@ -469,18 +483,19 @@ var getAachievementCount=function (that){
       catId: that.data.catId,
       userId: app.globalData.myGlobalUserId
     },
-    success: function (res) {
-      if (res.data.data.map.state=="1"){
+    success: function(res) {
+      if (res.data.data.map.state == "1") {
         getQuestion(that, 1);
         takePhoto(that);
-      }else{
+      } else {
         wx.showModal({
           title: '提示',
           content: '您已经2次考试机会已经用完！',
           showCancel: false
         });
       }
-    }, fail: function (e) {
+    },
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -488,14 +503,14 @@ var getAachievementCount=function (that){
         showCancel: false
       })
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading();
     }
   });
 }
 
 //获取题目信息
-var getQuestion = function (that,setType) {
+var getQuestion = function(that, setType) {
   wx.showLoading({
     title: '正在获取题目...'
   })
@@ -514,7 +529,7 @@ var getQuestion = function (that,setType) {
       catId: that.data.catId,
       isHide: 0
     },
-    success: function (res) {
+    success: function(res) {
       wx.showLoading({
         title: '正在解析题目...',
       });
@@ -526,7 +541,7 @@ var getQuestion = function (that,setType) {
           content: res.data.msg,
           showCancel: false
         })
-        
+
       } else {
         that.setData({
           list: res.data.list,
@@ -539,13 +554,14 @@ var getQuestion = function (that,setType) {
         });
         getChoice(that, 'A', res.data.list[0].quesion_lx);
 
-        total_micro_second = res.data.data.obj.timer*60*1000;
+        total_micro_second = res.data.data.obj.timer * 60 * 1000;
         sum_total_micro_second = res.data.data.obj.timer * 60 * 1000;
         count_down(that);
         wx.hideLoading();
       }
 
-    }, fail: function (e) {
+    },
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -553,7 +569,7 @@ var getQuestion = function (that,setType) {
         showCancel: false
       })
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading();
     }
   });
@@ -561,14 +577,14 @@ var getQuestion = function (that,setType) {
 
 
 //提交成绩信息
-var submitQuestion = function (that) {
+var submitQuestion = function(that) {
   wx.showLoading({
     title: '正在提交成绩...'
   });
 
   var picServerUrl = that.data.src;
 
-  var setType=that.data.setType;
+  var setType = that.data.setType;
   var totalNums = that.data.list.length;
   var errorNums = totalNums - that.data.answerNums;
   var avgScore = 100 / totalNums;
@@ -576,7 +592,7 @@ var submitQuestion = function (that) {
   var errorScore = avgScore * errorNums;
   var percentScore = that.data.answerNums / totalNums
   var costTime = sum_total_micro_second - total_micro_second;
- 
+
   costTime = parseInt(costTime / 1000);
   console.log(picServerUrl);
   wx.request({
@@ -597,13 +613,24 @@ var submitQuestion = function (that) {
       costTime: costTime,
       percentScore: percentScore,
       picUrl: picServerUrl,
-      catId: that.data.catId, 
-      setType:setType
+      catId: that.data.catId,
+      setType: setType
     },
-    success: function (res) {
+    success: function(res) {
       //提交做题日志
-      submitQuestionLogs(that, res.data.data.obj);
-    }, fail: function (e) {
+      if (res.statusCode == 200) {
+        submitQuestionLogs(that, res.data.data.obj);
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '提交成绩失败',
+          showCancel: false
+        });
+        wx.hideLoading();
+      }
+
+    },
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -612,14 +639,14 @@ var submitQuestion = function (that) {
       });
       wx.hideLoading();
     },
-    complete: function () {
-     
+    complete: function() {
+
     }
   });
 }
 
 //提交做题记录
-var submitQuestionLogs = function (that, obj) {
+var submitQuestionLogs = function(that, obj) {
   wx.showLoading({
     title: '请稍等...'
   });
@@ -640,17 +667,18 @@ var submitQuestionLogs = function (that, obj) {
     },
     method: 'POST',
     data: sumbitData,
-    success: function (res) {
+    success: function(res) {
       wx.showLoading({
         title: '正在计算成绩...'
       });
       wx.navigateTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime,
-        success: function (e) {
+        success: function(e) {
           wx.hideLoading();
         }
       })
-    }, fail: function (e) {
+    },
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -658,21 +686,21 @@ var submitQuestionLogs = function (that, obj) {
         showCancel: false
       });
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading();
     }
   });
 }
 
 // 获取答案列表
-var getChoice = function (that, checked,lx) {
+var getChoice = function(that, checked, lx) {
   console.log(lx);
   var tmp1 = {
-    name:'A:'+that.data.indexQuest.choice_a,
+    name: 'A:' + that.data.indexQuest.choice_a,
     value: 'A'
   }
   var tmp2 = {
-    name: 'B:' +that.data.indexQuest.choice_b,
+    name: 'B:' + that.data.indexQuest.choice_b,
     value: 'B'
   }
   var tmpRideo = [];
@@ -680,21 +708,21 @@ var getChoice = function (that, checked,lx) {
   tmpRideo.push(tmp2);
   if (null != that.data.indexQuest.choice_c && "" != that.data.indexQuest.choice_c) {
     var tmp3 = {
-      name: 'C:' +that.data.indexQuest.choice_c,
+      name: 'C:' + that.data.indexQuest.choice_c,
       value: 'C'
     }
     tmpRideo.push(tmp3);
   }
   if (null != that.data.indexQuest.choice_d && "" != that.data.indexQuest.choice_d) {
     var tmp4 = {
-      name: 'D:' +that.data.indexQuest.choice_d,
+      name: 'D:' + that.data.indexQuest.choice_d,
       value: 'D'
     }
     tmpRideo.push(tmp4);
   }
-  if("2"==lx){
+  if ("2" == lx) {
     var checks = checked.split(",");
-    for(var i=0;i<checks.length;i++){
+    for (var i = 0; i < checks.length; i++) {
       console.log(checks[i]);
       if ("A" == checks[i]) {
         tmp1.checked = true
@@ -708,8 +736,8 @@ var getChoice = function (that, checked,lx) {
         tmp1.checked = true
       }
     }
-    
-  }else{
+
+  } else {
     if ("A" == checked) {
       tmp1.checked = true
     } else if ("B" == checked) {
@@ -722,7 +750,7 @@ var getChoice = function (that, checked,lx) {
       tmp1.checked = true
     }
   }
-  
+
   that.setData({
     radioItems: tmpRideo
   })
@@ -740,15 +768,15 @@ function count_down(that) {
       clock: "已经截止"
     });
     //时间完成提交答案
-    if(firstJump){
+    if (firstJump) {
       return;
     }
-    firstJump=true;
+    firstJump = true;
     submitQuestion(that);
     // timeout则跳出递归
     return;
   }
-  setTimeout(function () {
+  timerOut = setTimeout(function() {
     // 放在最后--
     total_micro_second -= 1000;
     count_down(that);
@@ -764,7 +792,7 @@ function date_format(micro_second) {
   // 分钟位
   var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
   // 秒位
-  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));// equal to => var sec = second % 60;
+  var sec = fill_zero_prefix((second - hr * 3600 - min * 60)); // equal to => var sec = second % 60;
   // 毫秒位，保留2位
   var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
 
@@ -778,7 +806,7 @@ function fill_zero_prefix(num) {
 
 
 //获取用户排行榜
-var findUserRankingList = function (that,uri) {
+var findUserRankingList = function(that, uri) {
   wx.showLoading({
     title: '请稍等...'
   });
@@ -790,13 +818,13 @@ var findUserRankingList = function (that,uri) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
-    data:{
+    data: {
       catId: that.data.catId
     },
     // data: that.data.answerList,
-    success: function (res) {
+    success: function(res) {
       var tempDate = [];
-      var MyRanking= {
+      var MyRanking = {
         itemrownum: '无',
         head_portrait: app.globalData.myUserInfo.headPortrait,
         nickname: app.globalData.myUserInfo.nickname,
@@ -833,7 +861,8 @@ var findUserRankingList = function (that,uri) {
         MyRanking: MyRanking,
         listRanking: tempDate
       });
-    }, fail: function (e) {
+    },
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -841,7 +870,7 @@ var findUserRankingList = function (that,uri) {
         showCancel: false
       });
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading();
     }
   });
