@@ -1,12 +1,21 @@
 var app = getApp();
 Page({
   data: {
-    movies: [
-      { url: '/images/banner/a.jpg' },
-      { url: '/images/banner/b.jpg' },
-      { url: '/images/banner/c.jpg' },
-      { url: '/images/banner/e.jpg' },
-      { url: '/images/banner/d.jpg' }
+    movies: [{
+        url: '/images/banner/a.jpg'
+      },
+      {
+        url: '/images/banner/b.jpg'
+      },
+      {
+        url: '/images/banner/c.jpg'
+      },
+      {
+        url: '/images/banner/e.jpg'
+      },
+      {
+        url: '/images/banner/d.jpg'
+      }
     ],
     imageWidth: wx.getSystemInfoSync().windowWidth,
     routers: [
@@ -60,20 +69,25 @@ Page({
         name: '专家信息',
         url: '/pages/specialist/specialist',
         icon: '/images/home_icon/zjjd.png'
-      },{
+      }, {
         name: '我的上传',
         url: '/pages/myupload/myupload',
         icon: '/images/home_icon/myupload-icon.png'
+      }, {
+        name: '全部成绩',
+        url: '/pages/achievement/lingdao/lingdao?cjlx=1&setType=1',
+        icon: '/images/home_icon/qbcj-icon.png'
       }
     ]
 
-  }, onLoad: function () {
+  },
+  onLoad: function() {
 
     console.log(app.myUserInfo);
     wx.setNavigationBarTitle({
       title: '首页'
     })
-    var interval = setInterval(function () {
+    var interval = setInterval(function() {
       wx.showLoading({
         title: '正在加载...',
       });
@@ -81,7 +95,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 9) {
+        if (routers.length < 10) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',
@@ -103,12 +117,8 @@ Page({
               url: '../multiroom/roomlist/roomlist',
               icon: '/images/home_icon/multiroom.png'
             });
-            routers.push({
-              name: '全部成绩',
-              url: '/pages/achievement/lingdao/lingdao?cjlx=1&setType=1',
-              icon: '/images/home_icon/qbcj-icon.png'
-            });
-            
+
+
           } else if ("6" == app.globalData.myUserInfo.roleId) {
             if ("1" == app.globalData.myUserInfo.userType) {
               routers.push({
@@ -133,7 +143,8 @@ Page({
       }
     }.bind(this), 1000);
 
-  },onShareAppMessage: function (e) {
+  },
+  onShareAppMessage: function(e) {
     return {
       title: this.data.title,
       desc: '',

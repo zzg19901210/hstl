@@ -153,6 +153,20 @@
   font-size: 20rpx;
   color: #95a5a6;
 }
+.specialist .item .specImageslist{
+  width: 100%;
+  display: block;
+  padding-left: 130rpx;
+  height: 100%;
+  
+}
+.specialist .item .specImageslist >image{
+  width: 235rpx;
+  padding-right: 30rpx;
+  height: 235rpx;
+  float: left;
+  margin-bottom: 20rpx;
+}
 .btn-add{
   position: fixed;
   bottom: 10rpx;

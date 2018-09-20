@@ -18,7 +18,7 @@
   </view>
   <view class='imageslist'>
     <block wx:for="{{disabuseInfo.pic}}" wx:for-item="image" wx:key="*this">
-      <image src='{{image}}' bindtap='previewImage' id="{{image}}" ></image>
+      <image src='{{image}}' bindtap='previewImage' id="{{image}}"></image>
     </block>
   </view>
 </view>
@@ -38,13 +38,19 @@
     <view class='context'>
       {{user.context}}
     </view>
+    
+    <view class='specImageslist'>
+      <block wx:for="{{user.pic}}" wx:for-item="image" wx:key="*this">
+        <image src='{{image}}' bindtap='previewImageSpec' id="{{image}}"></image>
+      </block>
+    </view>
     <view class='createTime'>
       {{user.createTime}}
     </view>
   </view>
-  <view class='nonepinglun'  wx:if="{{userList.length <1 }}">暂无评论</view>
+  <view class='nonepinglun' wx:if="{{userList.length <1 }}">暂无评论</view>
 </view>
 
 <view class='btn-add' hidden='{{hidenReply}}'>
-    <button class="weui-btn" type="primary" bindtap='onAdd'>我要回复</button>
+  <button class="weui-btn" style='background-color: #3c9ae8;' type="primary" bindtap='onAdd'>我要回复</button>
 </view>
