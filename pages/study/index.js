@@ -823,17 +823,27 @@ var findUserRankingList = function(that, uri) {
       'Accept': 'application/json'
     },
     data: {
-      catId: that.data.catId
+      catId: that.data.catId,
+      userId: app.globalData.myUserInfo.id
     },
     // data: that.data.answerList,
     success: function(res) {
       var tempDate = [];
+    
       var MyRanking = {
         itemrownum: '无',
         head_portrait: app.globalData.myUserInfo.headPortrait,
         nickname: app.globalData.myUserInfo.nickname,
         correct_score: 0
       };
+      if(res.data.data.obj!=null){
+        var MyRanking = {
+          itemrownum: '无',
+          head_portrait: app.globalData.myUserInfo.headPortrait,
+          nickname: app.globalData.myUserInfo.nickname,
+          correct_score: res.data.data.obj.correct_score
+        };
+      }
       var j = 1;
       for (var i = 0; i < res.data.rows.length; i++) {
         //处理排行信息
