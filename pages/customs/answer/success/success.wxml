@@ -4,7 +4,7 @@
             <icon type="success" size="93"></icon>
         </view>
         <view class="weui-msg__text-area">
-            <view class="weui-msg__title">考试完成</view>
+            <view class="weui-msg__title">答题完成</view>
             <view class="weui-msg__desc"></view>
         </view>
         <view class="weui-form-preview">

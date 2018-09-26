@@ -96,6 +96,35 @@ Page({
     getChoice(this, checkedValue, this.data.indexQuest.questions_type);
 
   },
+  checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+    var radioItems = this.data.radioItems,
+      values = e.detail.value;
+    for (var i = 0, lenI = radioItems.length; i < lenI; ++i) {
+      radioItems[i].checked = false;
+
+      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (radioItems[i].value == values[j]) {
+          radioItems[i].checked = true;
+          break;
+        }
+      }
+    }
+    var checked = "";
+    for (var f = 0; f < radioItems.length; f++) {
+      if (radioItems[f].checked == true) {
+        if ("" == checked) {
+          checked = radioItems[f].value;
+        } else {
+          checked = checked + "," + radioItems[f].value;
+        }
+      }
+    }
+    this.setData({
+      radioItems: radioItems,
+      checkedValue: checked
+    });
+  },
   submitKs: function(e) {
     if (firstJump) {
       return;
@@ -213,11 +242,12 @@ Page({
     
     var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
-      'correctAnswer': checkValue,
-      'answer': this.data.indexQuest.answer,
+      'chooseAnswer': checkValue,
+      'correctAnswer': this.data.indexQuest.answer,
       'questionContext': this.data.indexQuest.questions,
-      'isRight': isRight,
-      'userId': app.globalData.myGlobalUserId
+      'status': isRight,
+      'userId': app.globalData.myGlobalUserId,
+      'customsId':1
       // 'setId': this.data.setObj.id
     }
     var tmpanswerList = this.data.answerList;
@@ -463,6 +493,7 @@ var submitQuestion = function (that) {
       percentScore: percentScore,
       catId: that.data.catId,
       totalNums: totalNums,
+      totalScore:100,
       isCustoms: isCustoms
 
     },
@@ -506,7 +537,7 @@ var submitQuestionLogs = function (that, obj) {
   var sumbitData = [];
   for (var i = 0; i < postData.length; i++) {
     var tmpdata = postData[i];
-    tmpdata.setLogId = obj.id;
+    tmpdata.achievementId = obj.id;
     sumbitData.push(tmpdata);
   }
   wx.request({

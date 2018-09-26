@@ -35,7 +35,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '答题练习-分类',
+      title: '知识竞赛-分类',
       success: function (res) {
         // success
       }

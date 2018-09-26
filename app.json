@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/home/home",
     "pages/customs/category/categor_list",
     "pages/customs/answer/answer",
-    "pages/welcome/welcome",
     "pages/specialist/details/sp_details",
     "pages/study/index",
     "pages/examination/kk/kk",

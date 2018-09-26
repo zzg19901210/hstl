@@ -24,7 +24,7 @@ Page({
       correctScore: correctScore
     })
     wx.setNavigationBarTitle({
-      title: '考试完成',
+      title: '答题完成',
       success: function (res) {
         // success
       }
