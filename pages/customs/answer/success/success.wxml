@@ -1,0 +1,42 @@
+<view class="page">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="success" size="93"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">考试完成</view>
+            <view class="weui-msg__desc"></view>
+        </view>
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">考试成绩</view>
+                    <view class="weui-form-preview__value_in-hd">{{correctScore}}分</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">总题数</view>
+                    <view class="weui-form-preview__value">{{totalNums}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">正确题数</view>
+                    <view class="weui-form-preview__value">{{answerNums}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">用时</view>
+                    <view class="weui-form-preview__value">{{costTime}} 秒</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator url="/pages/home/home" open-type="switchTab" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">返回首页</navigator>
+            </view>
+        </view>
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
+              
+                <view class="weui-footer__text">Copyright © 呼和浩特市车站</view>
+            </view>
+        </view>
+    </view>
+</view>

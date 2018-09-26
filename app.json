@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/customs/category/categor_list",
+    "pages/customs/answer/answer",
     "pages/welcome/welcome",
     "pages/specialist/details/sp_details",
     "pages/study/index",
@@ -13,7 +16,6 @@
     "pages/achievement/context/context",
     "pages/examination/construction/index",
     "pages/examination/construction/success/success",
-    "pages/home/home",
     "pages/study/cat/studycat",
     "pages/user/index",
     "pages/splz/index",
@@ -48,7 +50,8 @@
     "pages/index/index",
     "pages/user/opendata/opendata",
     "pages/achievement/lingdao/lingdao",
-    "pages/myupload/myupload"
+    "pages/myupload/myupload",
+    "pages/customs/answer/success/success"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -68,7 +71,6 @@
         "pagePath": "pages/home/home",
         "text": "首页"
       },
-      
       {
         "selectedIconPath": "images/nav_zj_pri.png",
         "iconPath": "images/nav_zj.png",

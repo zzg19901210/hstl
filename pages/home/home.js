@@ -55,6 +55,11 @@ Page({
         url: '/pages/achievement/index?cjlx=2',
         icon: '/images/home_icon/sgcjcx.png'
       },
+      {
+        name: '知识竞赛',
+        url: '/pages/customs/category/categor_list',
+        icon: '/images/home_icon/zsjs.png'
+      },
       // {
       //   name: '我要直播',
       //   url: '/pages/live_list/index',
@@ -95,7 +100,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 10) {
+        if (routers.length < 11) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',

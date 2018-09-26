@@ -363,6 +363,9 @@ Page({
 
 
 var takePhoto = function(that) {
+  if (null == that.ctx){
+    return;
+  }
   that.ctx.takePhoto({
     quality: 'high',
     success: (res) => {

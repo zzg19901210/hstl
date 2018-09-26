@@ -41,7 +41,7 @@
     
     <view class='specImageslist'>
       <block wx:for="{{user.pic}}" wx:for-item="image" wx:key="*this">
-        <image src='{{image}}' bindtap='previewImageSpec' id="{{image}}"></image>
+        <image src='{{image}}' bindtap='previewImageSpec'  data-obj="{{user}}"  id="{{image}}"></image>
       </block>
     </view>
     <view class='createTime'>

@@ -51,6 +51,7 @@ Page({
     })
   },
   previewImage: function (e) {
+   
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.disabuseInfo.pic // 需要预览的图片http链接列表
@@ -58,9 +59,10 @@ Page({
   }
   ,
   previewImageSpec: function (e) {
+    console.log(e.currentTarget.dataset.obj.pic);
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.disabuseInfo.pic // 需要预览的图片http链接列表
+      urls: e.currentTarget.dataset.obj.pic // 需要预览的图片http链接列表
     })
   }
 
