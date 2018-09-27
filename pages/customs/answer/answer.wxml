@@ -4,10 +4,10 @@
       <view>*本次挑战共50道题，总分100分</view>
       <view>*点选正确答案系统会自动跳转到下一题</view>
       <view>*已选择
-        <text class='text-title'>{{selectIndex}}</text>,其中有
-        <text class='text-title'>{{answerNums}}</text>道回答正确</view>
-
-
+        <text class='text-title'>{{selectIndex}}</text>题
+        <!-- ,其中有
+        <text class='text-title'>{{answerNums}}</text>道回答正确 -->
+        </view>
     </view>
   </view>
   <view class="page__bd">

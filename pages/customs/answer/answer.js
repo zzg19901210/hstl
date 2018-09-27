@@ -174,43 +174,6 @@ Page({
     var cur_index = this.data.index;
     console.log(e.currentTarget.dataset.checked);
     var checkValue = e.currentTarget.dataset.checked;
-    var cur_answerNums = this.data.answerNums;
-    //判断题目是否正确
-    var isRight = 1;
-    if (this.data.indexQuest.questions_type == "2") {
-      checkValue = this.data.checkedValue;
-      
-      if (this.data.indexQuest.answer == checkValue) {
-        cur_answerNums++;
-        console.log('回答正确！');
-        var isRight = 1;
-
-      } else {
-        var isRight = 2;
-        console.log("回答错误！")
-      }
-    } else {
-      if (this.data.indexQuest.answer == checkValue) {
-        
-        cur_answerNums++;
-        
-        console.log('回答正确！');
-        var isRight = 1;
-        // wx.showToast({
-        //   title: '回答正确',
-        //   icon: 'success',
-        //   duration: 2000
-        // })
-      } else {
-        var isRight = 2;
-        console.log("回答错误！")
-        // wx.showToast({
-        //   title: '回答错误：正确答案是' + this.data.indexQuest.answer,
-        //   icon: 'none',
-        //   duration: 2000
-        // })
-      }
-    }
     if (islastRigth){
       cur_answerNums = cur_answerNums-1;
       islastRigth = false;
@@ -228,8 +191,7 @@ Page({
       this.setData({
         radioItems: radioItems,
         checkedValue: checkValue,
-        selectIndex: this.data.list.length,
-        answerNums: cur_answerNums
+        selectIndex: this.data.list.length
       });
       return;
     }
@@ -237,7 +199,43 @@ Page({
       title: '正在切换下一题',
     });
 
-    
+    var cur_answerNums = this.data.answerNums;
+    //判断题目是否正确
+    var isRight = 1;
+    if (this.data.indexQuest.questions_type == "2") {
+      checkValue = this.data.checkedValue;
+
+      if (this.data.indexQuest.answer == checkValue) {
+        cur_answerNums++;
+        console.log('回答正确！');
+        var isRight = 1;
+
+      } else {
+        var isRight = 2;
+        console.log("回答错误！")
+      }
+    } else {
+      if (this.data.indexQuest.answer == checkValue) {
+
+        cur_answerNums++;
+
+        console.log('回答正确！');
+        var isRight = 1;
+        // wx.showToast({
+        //   title: '回答正确',
+        //   icon: 'success',
+        //   duration: 2000
+        // })
+      } else {
+        var isRight = 2;
+        console.log("回答错误！")
+        // wx.showToast({
+        //   title: '回答错误：正确答案是' + this.data.indexQuest.answer,
+        //   icon: 'none',
+        //   duration: 2000
+        // })
+      }
+    }
     var hideSubimt = true;
     
     var tmpAnswer = {
@@ -364,9 +362,9 @@ function count_down(that) {
   }
   timerOut = setTimeout(function() {
     // 放在最后--
-    total_micro_second -= 1000;
+    total_micro_second -= 5000;
     count_down(that);
-  }, 1000)
+  }, 5000)
 }
 
 // 时间格式化输出，如03:25:19 86。每10ms都会调用一次
