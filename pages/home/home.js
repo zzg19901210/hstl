@@ -60,6 +60,11 @@ Page({
         url: '/pages/customs/category/categor_list',
         icon: '/images/home_icon/zsjs.png'
       },
+      {
+        name: '知识竞赛成绩',
+        url: '/pages/achievement/index?cjlx=3',
+        icon: '/images/home_icon/sgcjcx.png'
+      },
       // {
       //   name: '我要直播',
       //   url: '/pages/live_list/index',

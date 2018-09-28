@@ -3,6 +3,9 @@
 const app = getApp();
 const sg_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListByWork.json";
 const zj_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListByZj.json";
+
+
+const zsjs_context_url = app.globalData.serverUrl + "/app/service/customs/getAchievementList.json";
 const page_size = 10;
 
 Page({
@@ -55,13 +58,20 @@ Page({
         type:'1',
         setType: setType
       });
-    }else{
+    } else if (options.cjlx == "2"){
       title = "施工-我的成绩";
       this.setData({
         requestUrl: sg_context_url,
         type: '2'
       });
+    } else {
+      title = "知识竞赛-我的成绩";
+      this.setData({
+        requestUrl: zsjs_context_url,
+        type: '2'
+      });
     }
+
     wx.setNavigationBarTitle({
       title: title,
       success: function (res) {
