@@ -68,7 +68,7 @@ Page({
       title = "知识竞赛-我的成绩";
       this.setData({
         requestUrl: zsjs_context_url,
-        type: '2'
+        type: '3'
       });
     }
 

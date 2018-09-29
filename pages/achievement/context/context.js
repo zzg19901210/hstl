@@ -2,6 +2,8 @@
 const app = getApp();
 const sg_context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/findAchievementListSg.json";
 const zj_context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/findAchievementListZj.json";
+
+const zsjs_context_url = app.globalData.serverUrl + "/app/service/customs/getAchievementListByDetails.json";
 Page({
 
   /**
@@ -14,6 +16,7 @@ Page({
     ],
     logSetId: 1,
     workSetsId:1,
+    achievementId:1,
     requestUrl: zj_context_url
   },
 
@@ -29,15 +32,26 @@ Page({
         requestUrl: zj_context_url,
         logSetId: setId,
         workSetsId: setId,
+        achievementId: setId,
         'type':1
       });
       tilte="职教考试-答题情况";
+    } else if ("3" == options.type) {
+      this.setData({
+        requestUrl: zsjs_context_url,
+        logSetId: setId,
+        workSetsId: setId,
+        achievementId: setId,
+        'type': 3
+      });
+      tilte = "知识竞赛-答题情况";
     }else{
       this.setData({
         requestUrl: sg_context_url,
         logSetId: setId,
         workSetsId: setId,
-        'type': 2
+        'type': 2,
+        achievementId:achievementId
       });
       tilte = "施工考试-答题情况";
     }
@@ -63,7 +77,8 @@ var loadContxt = function (that) {
     },
     data: {
       setLogId: that.data.logSetId,
-      workLogsId: that.data.workSetsId
+      workLogsId: that.data.workSetsId,
+      achievementId: that.data.achievementId
     },
     success: function (res) {
       console.info(that.data.list);
@@ -73,8 +88,23 @@ var loadContxt = function (that) {
           icon: 'none'
         });
       }else{
+        var list=[];
+        for (var i = 0; i < res.data.rows.length; i++) {
+          var tmpdata = res.data.rows[i];
+          var selects=[];
+          if(that.data.type=="2"){
+            selects = tmpdata.userSelect.split(",");
+          } else if (that.data.type == "3") {
+            selects = tmpdata.chooseAnswer.split(",");
+          } else  {
+            selects = tmpdata.correctAnswer.split(",");
+          }
+          tmpdata.selects = selects;
+          list.push(tmpdata);
+        }
+
         that.setData({
-          list: res.data.rows
+          list: list
         });
       }
     }, fail: function (e) {

@@ -63,7 +63,7 @@ Page({
       {
         name: '知识竞赛成绩',
         url: '/pages/achievement/index?cjlx=3',
-        icon: '/images/home_icon/sgcjcx.png'
+        icon: '/images/home_icon/zsjscj.png'
       },
       // {
       //   name: '我要直播',
@@ -105,7 +105,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 11) {
+        if (routers.length < 12) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',

@@ -148,8 +148,8 @@ Page({
 
       var tmpAnswer = {
         'questionId': this.data.indexQuest.id,
-        'correctAnswer': this.data.checkedValue,
-        'answer': this.data.indexQuest.answer,
+        'chooseAnswer': checkValue,
+        'correctAnswer': this.data.indexQuest.answer,
         'questionContext': this.data.indexQuest.questions,
         'isRight': isRight,
         'userId': app.globalData.myGlobalUserId,

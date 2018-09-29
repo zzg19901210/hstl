@@ -10,6 +10,7 @@
         <view class='list_context'>
 
           <text class='c_title' wx:if="{{type=='1'}}">{{cont.questionSetName}}</text>
+          <text class='c_title' wx:elif="{{type=='3'}}">{{cont.nickname}}-{{cont.createTime}}</text>
           <text class='c_title' wx:else>{{cont.questionTitle}}</text>
           <view class='score'>
             <text class='total'>错误分数：{{cont.errorScore}}分</text>
