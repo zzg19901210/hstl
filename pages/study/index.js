@@ -74,6 +74,10 @@ Page({
     this.ctx = wx.createCameraContext();
 
   },
+  onShow(e){
+    console.log("是否进行过考试："+firstJump);
+    // firstJump=false;
+  },
   startKs() {
 
     getAachievementCount(this);

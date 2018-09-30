@@ -62,6 +62,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    firstJump=firstJump;
     var totalTimer = options.timer;
     total_micro_second = totalTimer * 60 * 1000;
     this.ctx = wx.createCameraContext();
@@ -87,6 +88,9 @@ Page({
     // getWork(this);
     getQuestion(this);
 
+  },
+  onShow(e){
+    firstJump=false;
   },
   startKs: function (e) {
     // this.setData({
