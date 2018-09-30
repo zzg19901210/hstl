@@ -84,9 +84,14 @@ Page({
         url: '/pages/myupload/myupload',
         icon: '/images/home_icon/myupload-icon.png'
       }, {
-        name: '全部成绩',
+        name: '职教-全部成绩',
         url: '/pages/achievement/lingdao/lingdao?cjlx=1&setType=1',
         icon: '/images/home_icon/qbcj-icon.png'
+      }
+      , {
+        name: '施工-全部成绩',
+        url: '/pages/achievement/lingdao/lingdao?cjlx=2&setType=1',
+        icon: '/images/home_icon/sgkscj.png'
       }
     ]
 
@@ -105,7 +110,7 @@ Page({
 
       } else {
         var routers = this.data.routers;
-        if (routers.length < 12) {
+        if (routers.length < 13) {
           if ("1" == app.globalData.myUserInfo.roleId) {
             routers.push({
               name: '业务视频审录',

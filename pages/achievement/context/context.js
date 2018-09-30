@@ -51,7 +51,7 @@ Page({
         logSetId: setId,
         workSetsId: setId,
         'type': 2,
-        achievementId:achievementId
+        achievementId: setId
       });
       tilte = "施工考试-答题情况";
     }

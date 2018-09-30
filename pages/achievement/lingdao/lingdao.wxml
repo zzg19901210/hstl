@@ -19,8 +19,8 @@
             <text class='activity'>正确题数量：{{cont.correctNums}}题</text>
           </view>
           <view class='qurstion'>
-            <text class='total'>考试人：{{cont.nickname}}</text>
-            <!-- <text class='correct'></text> -->
+            <text class='total'>所在部门：{{cont.departmentName}}</text>
+            <text class='correct'>考试人:{{cont.nickname}}</text>
           </view>
         </view>
       </view>

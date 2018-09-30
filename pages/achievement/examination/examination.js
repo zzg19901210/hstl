@@ -1,8 +1,12 @@
-// pages/achievement/index.js
+//施工套题列表
 
 const app = getApp();
-const zj_context_url = app.globalData.serverUrl + "/app/service/appServiceInterface/getAchievementListLindao.json";
-const sg_context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/getAchievementListLindao.json";
+
+
+const context_url = app.globalData.serverUrl + "/app/service/appWorkInterface/workListAll.json";
+
+
+var cur_page = 1;
 const page_size = 10;
 
 Page({
@@ -18,11 +22,24 @@ Page({
     allPages: '',    // 总页数
     currentPage: 1,  // 当前页数  默认是1
     loadMoreData: '加载更多……',
-    setType: '1',
-    requestUrl: zj_context_url,
-    type: '1',
+    hidRanking: true,
     list: [
-     
+      //   {
+      //   title: '2018-3-12',
+      //   titleDesc: '20:14',
+      //   totalScore: '100',
+      //   activityScore: '60',
+      //   totalQuestion: '50',
+      //   correctQurstion: '10'
+      // },
+      //  {
+      //   title: '2018-3-15',
+      //   titleDesc: '20:14',
+      //   totalScore: '100',
+      //   activityScore: '60',
+      //   totalQuestion: '50',
+      //   correctQurstion: '10'
+      // }
     ]
 
   },
@@ -31,34 +48,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var title = "职教-我的成绩";
-
-    if (options.cjlx == "1") {
-      var setType = options.setType;
-      title = "职教-考试成绩";
-      this.setData({
-        requestUrl: zj_context_url,
-        type: '1',
-        setType: setType
-      });
-    } else {
-      title = "施工-所有考试";
-      this.setData({
-        requestUrl: sg_context_url,
-        type: '2'
-      });
-    }
     wx.setNavigationBarTitle({
-      title: title,
+      title: "施工考试-所有成绩",
       success: function (res) {
         // success
       }
     });
-
+    // var date = new Date();
+    // this.setData({
+    //   refreshTime: date.toLocaleTimeString(),
+    //   hideHeader: false,
+    //   currentPage: 1
+    // });
     loadContxt(this);
   },
   onPullDownRefresh: function () {
-    console.log("下拉刷新");
+
     var date = new Date();
     this.setData({
       refreshTime: date.toLocaleTimeString(),
@@ -83,7 +88,7 @@ Page({
       currentPage: tempCurrentPage,
       hideBottom: false
     })
-    loadContxt(this);
+    loadContxt(this, cur_page);
 
   },
   scroll: function (event) {
@@ -126,24 +131,21 @@ var loadding = function (that) {
 
 var loadContxt = function (that) {
   loadding(that);
-
-  var departmentId = app.globalData.myUserInfo.departmentId
-  if (app.globalData.myUserInfo.roleId=1){
-    departmentId=0;
-  }
+  // var departmentId = app.globalData.myUserInfo.departmentId;
+  // if (app.globalData.myUserInfo.roleId == 7 || app.globalData.myUserInfo.roleId == 1) {
+  //   departmentId = "";
+  // }
   var page = that.data.currentPage;
   wx.request({
-    url: that.data.requestUrl,
+    url: context_url,
     header: {
       'context-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     },
     data: {
       limit: page_size,
-      offset: page,
-      enterUserId: app.globalData.myGlobalUserId,
-      departmentId: departmentId ,
-      setType: that.data.setType
+      offset: page
+      // departmentId: departmentId
     },
     success: function (res) {
       //console.info(that.data.list);
@@ -179,16 +181,6 @@ var loadContxt = function (that) {
         stopLoding(that);
       }
 
-    }, fail: function (e) {
-      console.log(e);
-      wx.showModal({
-        title: '提示',
-        content: '加载失败',
-        showCancel: false
-      })
-    },
-    complete: function () {
-      stopLoding(that); //隐藏Toast
     }
   });
 }

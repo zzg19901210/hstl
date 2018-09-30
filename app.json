@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/achievement/examination/examination",
     "pages/home/home",
     "pages/customs/category/categor_list",
     "pages/customs/answer/answer",
@@ -51,7 +52,8 @@
     "pages/user/opendata/opendata",
     "pages/achievement/lingdao/lingdao",
     "pages/myupload/myupload",
-    "pages/customs/answer/success/success"
+    "pages/customs/answer/success/success",
+    "pages/achievement/examination/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

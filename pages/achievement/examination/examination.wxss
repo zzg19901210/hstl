@@ -1,0 +1,61 @@
+/* pages/achievement/examination/examination.wxss *//* pages/achievement/index.wxss */
+@import '/style/loading.wxss';
+
+
+page{
+  background-color: #ecf0f1;
+}
+.item{
+  background-color: #ffffff;
+}
+.list_context{
+
+  border-top: 1px solid #dfe6e9;
+  height: 160rpx;
+  width: 93%;
+  margin-left: 25rpx;
+  padding-left: 15rpx;
+}
+.list_context  .c_title{
+  width: 100%;
+  display: block;
+  line-height: 60rpx;
+  height: 60rpx;
+  font-size: 30rpx;
+}
+.list_context .score {
+  padding-left: 10rpx;
+  font-size: 25rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  color: #95a5a6;
+}
+.list_context .score .total{
+  float: left;
+  width: 46%;
+}
+.list_context .qurstion {
+  padding-left: 10rpx;
+  font-size: 25rpx;
+  line-height: 50rpx;
+  height: 60rpx;
+  color: #95a5a6;
+}
+.list_context .qurstion .total{
+  float: left;
+  width: 45%;
+}
+
+.scoll-h {
+  height: 100%;
+}
+.ranking .btn-ranking {
+  background: rgba(83, 92, 104, 0.9);
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  border-radius: 50rpx;
+}
