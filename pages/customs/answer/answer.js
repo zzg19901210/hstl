@@ -9,8 +9,8 @@ const submitCustomsUserLogs = app.globalData.serverUrl + "/app/service/customs/s
 
 var timerOut;
 
-var isLast=false;
-var islastRigth=false;
+var isLast = false;
+var islastRigth = false;
 var firstJump = false;
 Page({
 
@@ -21,7 +21,7 @@ Page({
     indexQuest: {},
     list: [],
     index: 0,
-    selectIndex:0,
+    selectIndex: 0,
     catId: 1,
     answerNums: 0,
     answerList: [],
@@ -42,15 +42,15 @@ Page({
    */
   onLoad: function(options) {
     firstJump = false;
-    if (null != options.catId && "undefined" != options.catId){
+    if (null != options.catId && "undefined" != options.catId) {
       this.setData({
         catId: options.catId,
       });
     }
-    
+
     wx.setNavigationBarTitle({
       title: options.title,
-      success: function (res) {
+      success: function(res) {
         // success
       }
     });
@@ -74,7 +74,7 @@ Page({
     var tmpAnswer = this.data.answerList[cur_index];
     //获取上一题
     var previousQuest = this.data.list[cur_index];
-    var checkedValue = tmpAnswer.correctAnswer;
+    var checkedValue = tmpAnswer.chooseAnswer;
 
     var cur_answerNums = this.data.answerNums;
     if (cur_answerNums > 0) {
@@ -93,10 +93,10 @@ Page({
       checkedValue: checkedValue
     });
     //重新组织题目
-    getChoice(this, checkedValue, this.data.indexQuest.questions_type);
+    getChoice(this, checkedValue,     this.data.indexQuest.questions_type);
 
   },
-  checkboxChange: function (e) {
+  checkboxChange: function(e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     var radioItems = this.data.radioItems,
       values = e.detail.value;
@@ -133,7 +133,7 @@ Page({
     wx.showLoading({
       title: '正在保存...',
     });
-    
+
     var isRight = 1;
     if (cur_index != this.data.list.length) {
       var cur_index = this.data.list.length;
@@ -148,10 +148,10 @@ Page({
 
       var tmpAnswer = {
         'questionId': this.data.indexQuest.id,
-        'chooseAnswer': checkValue,
+        'chooseAnswer': this.data.checkedValue,
         'correctAnswer': this.data.indexQuest.answer,
         'questionContext': this.data.indexQuest.questions,
-        'isRight': isRight,
+        'status': isRight,
         'userId': app.globalData.myGlobalUserId,
         // 'setId': this.data.setObj.id
       }
@@ -174,20 +174,20 @@ Page({
     var cur_index = this.data.index;
     console.log(e.currentTarget.dataset.checked);
     var checkValue = e.currentTarget.dataset.checked;
-    if (islastRigth){
-      cur_answerNums = cur_answerNums-1;
+    if (islastRigth) {
+      cur_answerNums = cur_answerNums - 1;
       islastRigth = false;
     }
     //判断是否是最后一道题，如果是最好一道题跳出
     if (cur_index + 1 >= this.data.list.length) {
       var radioItems = this.data.radioItems;
-      isLast=true;
-      if (isRight==1){
-        islastRigth=true;
+      isLast = true;
+      if (isRight == 1) {
+        islastRigth = true;
       }
       for (var i = 0, len = radioItems.length; i < len; ++i) {
         radioItems[i].checked = radioItems[i].value == checkValue;
-      }      
+      }
       this.setData({
         radioItems: radioItems,
         checkedValue: checkValue,
@@ -237,7 +237,7 @@ Page({
       }
     }
     var hideSubimt = true;
-    
+
     var tmpAnswer = {
       'questionId': this.data.indexQuest.id,
       'chooseAnswer': checkValue,
@@ -245,7 +245,7 @@ Page({
       'questionContext': this.data.indexQuest.questions,
       'status': isRight,
       'userId': app.globalData.myGlobalUserId,
-      'customsId':1
+      'customsId': 1
       // 'setId': this.data.setObj.id
     }
     var tmpanswerList = this.data.answerList;
@@ -381,7 +381,7 @@ function date_format(micro_second) {
   var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
 
   // return hr + ":" + min + ":" + sec + " " + micro_sec;
-  return hr + ":" + min + ":" + sec ;
+  return hr + ":" + min + ":" + sec;
 }
 
 // 位数不足补零
@@ -451,7 +451,7 @@ var getQuestion = function(that) {
 }
 
 //提交成绩信息
-var submitQuestion = function (that) {
+var submitQuestion = function(that) {
   wx.showLoading({
     title: '正在提交成绩...'
   });
@@ -467,9 +467,9 @@ var submitQuestion = function (that) {
   var errorScore = 100 - correctScore;
   var percentScore = that.data.answerNums / totalNums
   var costTime = sum_total_micro_second - total_micro_second;
-  var isCustoms=0;
-  if (correctScore>80){
-    isCustoms=1;
+  var isCustoms = 0;
+  if (correctScore > 80) {
+    isCustoms = 1;
   }
   costTime = parseInt(costTime / 1000);
   wx.request({
@@ -491,11 +491,11 @@ var submitQuestion = function (that) {
       percentScore: percentScore,
       catId: that.data.catId,
       totalNums: totalNums,
-      totalScore:100,
+      totalScore: 100,
       isCustoms: isCustoms
 
     },
-    success: function (res) {
+    success: function(res) {
       //提交做题日志
       if (res.statusCode == 200) {
         submitQuestionLogs(that, res.data.data.obj);
@@ -509,7 +509,7 @@ var submitQuestion = function (that) {
       }
 
     },
-    fail: function (e) {
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -518,14 +518,14 @@ var submitQuestion = function (that) {
       });
       wx.hideLoading();
     },
-    complete: function () {
+    complete: function() {
 
     }
   });
 }
 
 //提交做题记录
-var submitQuestionLogs = function (that, obj) {
+var submitQuestionLogs = function(that, obj) {
   wx.showLoading({
     title: '请稍等...'
   });
@@ -546,18 +546,18 @@ var submitQuestionLogs = function (that, obj) {
     },
     method: 'POST',
     data: sumbitData,
-    success: function (res) {
+    success: function(res) {
       wx.showLoading({
         title: '正在计算成绩...'
       });
       wx.navigateTo({
         url: 'success/success?answerNums=' + that.data.answerNums + '&totalNums=' + that.data.list.length + '&costTime=' + costTime,
-        success: function (e) {
+        success: function(e) {
           wx.hideLoading();
         }
       })
     },
-    fail: function (e) {
+    fail: function(e) {
       console.log(e);
       wx.showModal({
         title: '提示',
@@ -565,7 +565,7 @@ var submitQuestionLogs = function (that, obj) {
         showCancel: false
       });
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading();
     }
   });
