@@ -36,6 +36,7 @@ page{
   color: #7f8c8d;
   font-size: 35rpx;
   padding-top: 15rpx;
+  line-height: 75rpx;
 }
 
 .header .timer >image {

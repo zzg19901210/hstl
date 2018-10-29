@@ -540,7 +540,9 @@ function date_format(micro_second) {
   // 毫秒位，保留2位
   var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
 
-  return hr + ":" + min + ":" + sec + " " + micro_sec;
+  // return hr + ":" + min + ":" + sec + " " + micro_sec;
+
+  return hr + ":" + min + ":" + sec + " " ;
 }
 
 // 位数不足补零
@@ -615,9 +617,9 @@ function count_down(that) {
   }
   setTimeout(function () {
     // 放在最后--
-    total_micro_second -= 10;
+    total_micro_second -= 1000;
     count_down(that);
-  }, 10)
+  }, 1000)
 }
 
 
