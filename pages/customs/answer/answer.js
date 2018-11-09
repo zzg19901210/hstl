@@ -402,7 +402,7 @@ var getQuestion = function(that) {
       'Accept': 'application/json'
     },
     data: {
-      questionNum: 50,
+      questionNum: 20,
       customsId: 1,
       catId: that.data.catId
     },

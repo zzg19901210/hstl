@@ -1,7 +1,7 @@
 <view class='page'>
   <view class='examInfo'>
     <view class='tipMessageWrapper'>
-      <view>*本次挑战共50道题，总分100分</view>
+      <view>*本次挑战共{{list.length}}道题，总分100分</view>
       <view>*点选正确答案系统会自动跳转到下一题</view>
       <view>*已选择
         <text class='text-title'>{{selectIndex}}</text>题
