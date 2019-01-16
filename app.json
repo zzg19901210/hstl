@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/welcome/welcome",
+    "pages/user/index",
     "pages/achievement/examination/examination",
     "pages/home/home",
     "pages/customs/category/categor_list",
@@ -18,7 +19,6 @@
     "pages/examination/construction/index",
     "pages/examination/construction/success/success",
     "pages/study/cat/studycat",
-    "pages/user/index",
     "pages/splz/index",
     "pages/main/main",
     "pages/study/success/success",

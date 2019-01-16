@@ -15,14 +15,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var avgScore = parseInt(100 / options.totalNums);
-    var correctScore = avgScore * options.answerNums;
+    
+    var totalNums = parseInt(options.totalNums);
+    var answerNum = parseInt(options.answerNums);
+
+    if (answerNum > totalNums) {
+      answerNum = totalNums;
+    }
+    var avgScore = parseInt(100 / totalNums);
+    var correctScore = avgScore * answerNum;
+    if (correctScore > 100) {
+      correctScore = 100;
+    }
     this.setData({
-      answerNums: options.answerNums,
-      totalNums: options.totalNums,
+      answerNums: answerNum,
+      totalNums: totalNums,
       costTime: options.costTime,
       correctScore: correctScore
-    })
+    });
     wx.setNavigationBarTitle({
       title: '答题完成',
       success: function (res) {

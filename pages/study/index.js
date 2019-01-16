@@ -16,6 +16,8 @@ const achievementCountUrl = app.globalData.serverUrl + "/app/service/appServiceI
 //获取排行榜
 const findUserRankingListUrl = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingList.json";
 const findUserRankingListByCatId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByCatId.json";
+
+const findUserRankingListByDepId = app.globalData.serverUrl + "/app/service/appServiceInterface/findUserRankingListByDepId.json";
 var firstJump = false;
 var timerOut;
 Page({
@@ -253,7 +255,9 @@ Page({
       }
       var tmpanswerList = this.data.answerList;
       tmpanswerList.push(tmpAnswer);
-
+      if (cur_answerNums > this.data.list.length){
+        cur_answerNums=this.data.list.length;
+      }
       this.setData({
         // index: cur_index,
         answerNums: cur_answerNums,
@@ -315,8 +319,8 @@ Page({
     });
   },
   clickzph: function(e) {
-    console.log("点击了总题库排行");
-    findUserRankingList(this, findUserRankingListUrl);
+    console.log("点击了部门排行");
+    findUserRankingList(this, findUserRankingListByDepId);
     this.setData({
       rankingType: 1
     });
@@ -831,7 +835,8 @@ var findUserRankingList = function(that, uri) {
     },
     data: {
       catId: that.data.catId,
-      userId: app.globalData.myUserInfo.id
+      userId: app.globalData.myUserInfo.id,
+      departmentId: app.globalData.myUserInfo.departmentId
     },
     // data: that.data.answerList,
     success: function(res) {

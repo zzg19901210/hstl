@@ -157,7 +157,9 @@ Page({
       }
       var tmpanswerList = this.data.answerList;
       tmpanswerList.push(tmpAnswer);
-
+      if (cur_answerNums > this.data.list.length){
+        cur_answerNums=this.data.list.length;
+      }
       this.setData({
         // index: cur_index,
         answerNums: cur_answerNums,

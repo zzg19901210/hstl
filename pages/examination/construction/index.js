@@ -294,6 +294,9 @@ Page({
       var tmpanswerList = this.data.answerList;
       tmpanswerList.push(tmpAnswer);
 
+      if(cur_answerNums>this.data.list.size){
+        cur_answerNums = this.data.list.size;
+      }
       this.setData({
         // index: cur_index,
         answerNums: cur_answerNums,

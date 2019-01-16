@@ -74,7 +74,7 @@
   <view class='body'>
     <view class='group'>
       <view class='btn {{rankingType==2?"activity":""}}' bindtap='clicktkph'>题库排行</view>
-      <view class='btn {{rankingType==1?"activity":""}}' bindtap='clickzph'>总排行</view>
+      <view class='btn {{rankingType==1?"activity":""}}' bindtap='clickzph'>部门排行</view>
     </view>
     <scroll-view scroll-y style="height: 590rpx;">
       <block wx:for="{{listRanking}}" wx:for-item="obj" wx:key="*this">
