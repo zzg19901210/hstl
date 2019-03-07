@@ -496,7 +496,7 @@ var getAachievementCount = function(that) {
       userId: app.globalData.myGlobalUserId
     },
     success: function(res) {
-      if (res.data.data.map.state == "1") {
+      if (res.data.data.map.state == "2") {
         getQuestion(that, 1);
         takePhoto(that);
       } else {
@@ -511,7 +511,7 @@ var getAachievementCount = function(that) {
       console.log(e);
       wx.showModal({
         title: '提示',
-        content: '获取答题次数失败',
+        content: '验证信息失败',
         showCancel: false
       })
     },
