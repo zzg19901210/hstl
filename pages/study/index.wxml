@@ -5,7 +5,10 @@
   </view>
   <view class='timer'>
     <view>总题数：{{list.length}}</view>
-    <view>已选择：{{index+1}}</view>
+    
+    <view wx:if="{{!hidStart}}">已选择：{{index}}</view>
+   
+    <view wx:else >已选择：{{index+1}}</view>
     <view wx:if="{{setType==2}}">回答正确：{{answerNums}}</view>
     <view>{{clock}}</view>
   </view>

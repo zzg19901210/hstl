@@ -502,7 +502,7 @@ var getAachievementCount = function(that) {
       } else {
         wx.showModal({
           title: '提示',
-          content: '您已经2次考试机会已经用完！',
+          content: res.data.data.map.msg,
           showCancel: false
         });
       }

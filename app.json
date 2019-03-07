@@ -59,7 +59,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#3c9ae8",
     "navigationBarTitleText": "首页",
-    "navigationBarTextStyle": "#fffff",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
   },
   "tabBar": {
